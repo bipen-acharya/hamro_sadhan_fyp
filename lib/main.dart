@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hamro_sadhan/log_in_screen.dart';
 import 'package:hamro_sadhan/register_screen.dart';
-import 'package:hamro_sadhan/splash_screen.dart';
+
+import 'log_in_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const RegisterPage(),
+      home:  const RegisterPage(),
     );
   }
 }

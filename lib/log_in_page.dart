@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hamro_sadhan/password_filed_input.dart';
 
+
 import 'colors.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+class LogInScreen extends StatelessWidget {
+ const LogInScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -15,14 +17,14 @@ class RegisterPage extends StatelessWidget {
             clipper: CustomClipPath(),
             child: Container(
               color: const Color.fromRGBO(220, 20, 60, 1),
-              height: 300,
+              height: 350,
               width: double.infinity,
               child: const Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: 130),
+                    padding: EdgeInsets.only(bottom: 60),
                     child: Text(
-                      "Sign Up",
+                      "LogIn",
                       style: TextStyle(
                         fontSize: 24,
                         color: Colors.white,
@@ -33,7 +35,7 @@ class RegisterPage extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 30,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -44,43 +46,21 @@ class RegisterPage extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(width: 3, color: Colors.amber),
                 ),
-                labelText: 'Name',
-                hintText: 'Enter Your Name',
+                labelText: 'Email/Username',
+                hintText: 'Enter Your Username',
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.mail, size: 24),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(width: 3, color: Colors.amber),
-                ),
-                labelText: 'Email',
-                hintText: 'Enter Your EMail',
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.phone, size: 24),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(width: 3, color: Colors.amber),
-                ),
-                labelText: 'Phone',
-                hintText: 'Enter Your Phone number',
-              ),
-            ),
-          ),
-          const PasswordField(),
           const PasswordField(),
           const SizedBox(
-            height: 20,
+            height: 3,
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {},
+              child: const Text("Forgot Password ?"),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -92,7 +72,7 @@ class RegisterPage extends StatelessWidget {
                 backgroundColor: const Color.fromRGBO(16, 69, 115, 1)),
             onPressed: () {},
             child: Text(
-              "Create account",
+              "Sign up",
               style: theme.textTheme.bodyLarge!.copyWith(
                 fontSize: 20,
                 color: AppColors.secondaryColor,
@@ -103,7 +83,7 @@ class RegisterPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextButton(
               onPressed: () {},
-              child: const Text("Login Account ?"),
+              child: const Text("Create Account ?"),
             ),
           ),
         ],
@@ -120,19 +100,24 @@ class CustomClipPath extends CustomClipper<Path> {
 
     final path_0 = Path();
     // Path path_0 = Path();
-    path_0.moveTo(size.width * 0.6619160, size.height * 0.6963985);
-    path_0.cubicTo(size.width * 0.3966310, size.height * 0.6099502,
-        size.width * 0.1101036, size.height * 0.8627778, 0, size.height);
+    path_0.moveTo(size.width * 0.3137761, size.height * 0.8625090);
+    path_0.cubicTo(
+        size.width * 0.1454081,
+        size.height * 0.6710422,
+        size.width * 0.03443868,
+        size.height * 0.6231747,
+        0,
+        size.height * 0.6231747);
     path_0.lineTo(0, 0);
     path_0.lineTo(size.width, 0);
-    path_0.lineTo(size.width * 1.078880, size.height * 0.4961686);
+    path_0.lineTo(size.width, size.height * 0.9558343);
     path_0.cubicTo(
-        size.width * 1.076723,
-        size.height * 0.6391073,
-        size.width * 0.9272010,
-        size.height * 0.7828467,
-        size.width * 0.6619160,
-        size.height * 0.6963985);
+        size.width * 0.8414122,
+        size.height * 1.004506,
+        size.width * 0.4821425,
+        size.height * 1.053979,
+        size.width * 0.3137761,
+        size.height * 0.8625090);
     path_0.close();
 
     return path_0;
