@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hamro_sadhan/register_screen.dart';
+import 'package:get/get.dart';
+import 'package:hamro_sadhan/utils/theme.dart';
+import 'package:hamro_sadhan/views/cart_screen.dart';
+import 'package:hamro_sadhan/views/dash_screen.dart';
+import 'package:hamro_sadhan/views/auth/log_in_page.dart';
+import 'package:hamro_sadhan/views/profile_page.dart';
+import 'package:hamro_sadhan/views/auth/register_screen.dart';
+import 'package:hamro_sadhan/views/search_Page.dart';
 
-import 'log_in_page.dart';
+import 'package:hamro_sadhan/views/splash_screen.dart';
+import 'package:hamro_sadhan/views/statement_page.dart';
+
+import 'controllers/core_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +23,74 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return GetMaterialApp(
+      title: 'Hamro Sadhan',
+      theme: basicTheme(),
+      initialRoute: SplashScreen.routeName,
+      // home: const SplashScreen(),
+      initialBinding: BindingsBuilder(
+        () {
+          Get.put(CoreController());
+        },
       ),
-      home:  const RegisterPage(),
+
+      getPages: [
+        GetPage(
+          name: SplashScreen.routeName,
+          page: () => const SplashScreen(),
+        ),
+        GetPage(
+          name: LogInScreen.routeName,
+          page: () => LogInScreen(),
+          // binding: BindingsBuilder(
+          //     (() => Get.lazyPut(() => LoginScreenController()))),
+        ),
+        GetPage(
+          name: RegisterPage.routeName,
+          page: () => RegisterPage(),
+          // binding:
+          //     BindingsBuilder((() => Get.lazyPut(() => SignupController()))),
+        ),
+        GetPage(
+          name: DashScreen.routeName,
+          page: () => DashScreen(),
+          // binding: BindingsBuilder((() {
+          //   Get.lazyPut(() => DashScreenController());
+          //   Get.lazyPut(() => WishlistController());
+          //   Get.lazyPut(() => HomeViewController());
+          //   Get.lazyPut(() => CategoryViewController());
+          //   Get.lazyPut(() => CartController());
+          //   Get.lazyPut(() => ProfileController());
+          // })),
+        ),
+        GetPage(
+          name: SearchPage.routeName,
+          page: () => CartScreen(),
+          // binding: BindingsBuilder(
+          //   (() => Get.lazyPut(
+          //         () => ProductScreenController(),
+          //       )),
+          // ),
+        ),
+        GetPage(
+          name: StatementPage.routeName,
+          page: () => StatementPage(),
+          // binding: BindingsBuilder(
+          //   (() => Get.lazyPut(
+          //         () => ProductDetailController(),
+          //       )),
+          // ),
+        ),
+        GetPage(
+          name: StatementPage.routeName,
+          page: () => ProfilePage(),
+          // binding: BindingsBuilder(
+          //   (() => Get.lazyPut(
+          //         () => ProductDetailController(),
+          //       )),
+          // ),
+        ),
+      ],
     );
   }
 }
