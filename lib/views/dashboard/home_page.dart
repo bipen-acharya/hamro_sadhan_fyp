@@ -3,8 +3,9 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
-import '../controllers/dash_screen_controller.dart';
-import '../utils/colors.dart';
+import '../../controllers/dash_screen_controller.dart';
+import '../../utils/colors.dart';
+
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});

@@ -1,117 +1,176 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/views/dash_screen.dart';
-import 'package:hamro_sadhan/views/password_filed_input.dart';
+import 'package:hamro_sadhan/views/auth/login_screen.dart';
 
+import '../../controllers/register_controller.dart';
 import '../../utils/colors.dart';
+import '../../utils/image_paths.dart';
+import '../../utils/validators.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/custom_text_field.dart';
 
 class RegisterPage extends StatelessWidget {
   static const routeName = "/register";
-  const RegisterPage({super.key});
+  final c = Get.put(RegisterController());
+  RegisterPage({super.key});
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Scaffold(
-      body: Column(
-        children: [
-          ClipPath(
-            clipper: CustomClipPath(),
-            child: Container(
-              color: const Color.fromRGBO(220, 20, 60, 1),
-              height: 300,
-              width: double.infinity,
-              child: const Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 130),
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            ClipPath(
+              clipper: CustomClipPath(),
+              child: Container(
+                color: const Color.fromRGBO(220, 20, 60, 1),
+                height: 300,
+                width: double.infinity,
+                child: const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 130),
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )),
+              ),
+            ),
+            Form(
+              key: c.formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const CustomTextField(
+                      prefixIcon: Icon(
+                        Icons.person,
+                        size: 20,
+                      ),
+                      validator: Validators.checkFieldEmpty,
+                      hint: "Username ",
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(
+                      height: 13,
+                    ),
+                    const CustomTextField(
+                      prefixIcon: Icon(
+                        Icons.email_outlined,
+                        size: 20,
+                      ),
+                      validator: Validators.checkEmailField,
+                      hint: "Email ",
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(
+                      height: 13,
+                    ),
+                    const CustomTextField(
+                      prefixIcon: Icon(
+                        Icons.phone,
+                        size: 20,
+                      ),
+                      validator: Validators.checkPhoneField,
+                      hint: "Phone Number",
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(
+                      height: 13,
+                    ),
+                    Obx(
+                      (() => CustomTextField(
+                            // controller: c.passwordTextController,
+                            validator: Validators.checkPasswordField,
+                            prefixIcon: const Icon(
+                              Icons.lock_outline,
+                              size: 16,
+                            ),
+                            suffixIcon: InkWell(
+                              onTap: c.onEyeClick,
+                              child: SvgPicture.asset(
+                                c.passwordObscure.value
+                                    ? ImagePath.EYE
+                                    : ImagePath.EYE_OFF,
+                                color: AppColors.textColor,
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ),
+                            obscure: c.passwordObscure.value,
+                            hint: "Password",
+                            textInputAction: TextInputAction.next,
+                            textInputType: TextInputType.emailAddress,
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 13,
+                    ),
+                    Obx(
+                      (() => CustomTextField(
+                            // controller: c.passwordTextController,
+                            validator: Validators.checkPasswordField,
+                            prefixIcon: const Icon(
+                              Icons.lock_outline,
+                              size: 16,
+                            ),
+                            suffixIcon: InkWell(
+                              onTap: c.onEyeClick,
+                              child: SvgPicture.asset(
+                                c.passwordObscure.value
+                                    ? ImagePath.EYE
+                                    : ImagePath.EYE_OFF,
+                                color: AppColors.textColor,
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ),
+                            obscure: c.passwordObscure.value,
+                            hint: "Confirm Password",
+                            textInputAction: TextInputAction.next,
+                            textInputType: TextInputType.emailAddress,
+                          )),
+                    ),
+                    const SizedBox(
+                      height: 23,
+                    ),
+                    CustomElevatedButton(
+                      buttonText: "Register",
+                      onTap: c.submit,
+                      style: theme.textTheme.bodyLarge!.copyWith(
+                        fontSize: 20,
+                        color: AppColors.textColorAccent,
                       ),
                     ),
-                  )),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.person, size: 24),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(width: 3, color: Colors.amber),
+                    const SizedBox(
+                      height: 13,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextButton(
+                        onPressed: () {
+                          Get.toNamed(LogInScreen.routeName);
+                        },
+                        child: const Text("Already Account"),
+                      ),
+                    ),
+                  ],
                 ),
-                labelText: 'Name',
-                hintText: 'Enter Your Name',
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.mail, size: 24),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(width: 3, color: Colors.amber),
-                ),
-                labelText: 'Email',
-                hintText: 'Enter Your EMail',
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.phone, size: 24),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(width: 3, color: Colors.amber),
-                ),
-                labelText: 'Phone',
-                hintText: 'Enter Your Phone number',
-              ),
-            ),
-          ),
-          const PasswordField(),
-          const PasswordField(),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                minimumSize: const Size(400, 50),
-                maximumSize: const Size(500, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                backgroundColor: const Color.fromRGBO(16, 69, 115, 1)),
-            onPressed: () {
-              Get.toNamed(DashScreen.routeName);
-            },
-            child: Text(
-              "Create account",
-              style: theme.textTheme.bodyLarge!.copyWith(
-                fontSize: 20,
-                color: AppColors.secondaryColor,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-              onPressed: () {},
-              child: const Text("Login Account ?"),
-            ),
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

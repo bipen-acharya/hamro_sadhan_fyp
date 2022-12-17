@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/utils/theme.dart';
-import 'package:hamro_sadhan/views/cart_screen.dart';
-import 'package:hamro_sadhan/views/dash_screen.dart';
-import 'package:hamro_sadhan/views/auth/log_in_page.dart';
-import 'package:hamro_sadhan/views/profile_page.dart';
+import 'package:hamro_sadhan/views/dashboard/cart_screen.dart';
+import 'package:hamro_sadhan/views/dashboard/dash_screen.dart';
+import 'package:hamro_sadhan/views/dashboard/profile_page.dart';
+import 'package:hamro_sadhan/views/dashboard/search_Page.dart';
+import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
-import 'package:hamro_sadhan/views/search_Page.dart';
-
 import 'package:hamro_sadhan/views/splash_screen.dart';
-import 'package:hamro_sadhan/views/statement_page.dart';
-
 import 'controllers/core_controller.dart';
+import 'views/auth/login_screen.dart';
 
 void main() {
   runApp(const MyApp());

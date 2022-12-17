@@ -3,14 +3,13 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../controllers/dash_screen_controller.dart';
+import '../../utils/colors.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
 import 'search_Page.dart';
 import 'statement_page.dart';
 
-import '../controllers/core_controller.dart';
-import '../controllers/dash_screen_controller.dart';
-import '../utils/colors.dart';
 
 class DashScreen extends StatelessWidget {
   static const routeName = '/dash-screen';

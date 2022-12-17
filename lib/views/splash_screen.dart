@@ -5,7 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../controllers/core_controller.dart';
-import 'auth/log_in_page.dart';
+import 'auth/login_screen.dart';
+
 
 class SplashScreen extends StatelessWidget {
   static const routeName = "/";
@@ -34,11 +35,6 @@ class SplashScreen extends StatelessWidget {
             height: double.infinity,
             allowDrawingOutsideViewBox: true,
           ),
-          // Center(
-          //   child: const CircularProgressIndicator(
-
-          //   ),
-          // ),
         ]),
       ),
     );

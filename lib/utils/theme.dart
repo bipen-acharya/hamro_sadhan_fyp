@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 ThemeData basicTheme() {
-  TextTheme _basicTextTheme() {
+  TextTheme basicTextTheme() {
     return ThemeData.light()
         .textTheme
         .copyWith(
           titleLarge: const TextStyle(
               fontFamily: "ZillaSlab",
-              fontWeight: FontWeight.w700,
-              fontSize: 20),
+              fontWeight: FontWeight.w600,
+              fontSize: 16),
           titleMedium: const TextStyle(
               fontFamily: "ZillaSlab",
-              fontWeight: FontWeight.w700,
-              fontSize: 18),
+              fontWeight: FontWeight.w400,
+              fontSize: 15),
           titleSmall: const TextStyle(
               fontFamily: "ZillaSlab",
               fontWeight: FontWeight.w700,
@@ -39,7 +39,7 @@ ThemeData basicTheme() {
   }
 
   return ThemeData.light().copyWith(
-      textTheme: _basicTextTheme(),
+      textTheme: basicTextTheme(),
       colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: AppColors.primaryColor,
           secondary: AppColors.secondaryColor,
