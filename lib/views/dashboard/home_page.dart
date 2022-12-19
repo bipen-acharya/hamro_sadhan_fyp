@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../../controllers/dash_screen_controller.dart';
 import '../../utils/colors.dart';
 
-
 class Homepage extends StatelessWidget {
   Homepage({super.key});
   final c = Get.put(DashScreenController());
@@ -16,21 +15,21 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           elevation: 0.6,
-          backgroundColor: Color.fromARGB(255, 121, 181, 241),
+          backgroundColor: const Color.fromARGB(255, 121, 181, 241),
           iconTheme: const IconThemeData.fallback(),
-          title: Text("data")),
+          title: const Text("data")),
       drawer: Drawer(
         child: ListView(
           children: [
             DrawerHeader(
               child: Column(
-                children: [
+                children: const [
                   SizedBox(
                       height: 90,
                       width: 90,
                       child: ClipRRect(
-                          borderRadius: BorderRadius.circular(45),
-                          child: Text("HelLo unsused Page")
+                          // borderRadius: BorderRadius.circular(45),
+                          child: Text("Welcome")
                           // CachedNetworkImage(
                           //   fit: BoxFit.cover,
                           //   imageUrl:
@@ -43,7 +42,7 @@ class Homepage extends StatelessWidget {
                           //   ),
                           // ),
                           )),
-                  const SizedBox(
+                  SizedBox(
                     height: 12,
                   ),
                   // Text(
@@ -54,8 +53,8 @@ class Homepage extends StatelessWidget {
               ),
             ),
             buildDarwerItem(Icons.home_outlined, "Home", 0),
-            buildDarwerItem(Icons.dashboard_outlined, "Category", 1),
-            buildDarwerItem(Icons.shopping_cart_outlined, "Cart", 2),
+            buildDarwerItem(Icons.search, "Search", 1),
+            buildDarwerItem(Icons.history, "History", 2),
             // buildDarwerItem(Icons.favorite_border_outlined, "Wishlist", 3),
             buildDarwerItem(Icons.person_outline, "Profile", 3),
             const SizedBox(
@@ -64,7 +63,7 @@ class Homepage extends StatelessWidget {
           ],
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           "Home Page",
           style: TextStyle(fontSize: 54),

@@ -52,8 +52,9 @@ class RegisterPage extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    const CustomTextField(
-                      prefixIcon: Icon(
+                    CustomTextField(
+                      controller: c.usernameController,
+                      prefixIcon: const Icon(
                         Icons.person,
                         size: 20,
                       ),
@@ -65,8 +66,9 @@ class RegisterPage extends StatelessWidget {
                     const SizedBox(
                       height: 13,
                     ),
-                    const CustomTextField(
-                      prefixIcon: Icon(
+                    CustomTextField(
+                      controller: c.emailController,
+                      prefixIcon: const Icon(
                         Icons.email_outlined,
                         size: 20,
                       ),
@@ -78,8 +80,9 @@ class RegisterPage extends StatelessWidget {
                     const SizedBox(
                       height: 13,
                     ),
-                    const CustomTextField(
-                      prefixIcon: Icon(
+                    CustomTextField(
+                      controller: c.phoneNumberController,
+                      prefixIcon: const Icon(
                         Icons.phone,
                         size: 20,
                       ),
@@ -93,7 +96,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                     Obx(
                       (() => CustomTextField(
-                            // controller: c.passwordTextController,
+                            controller: c.passwordController,
                             validator: Validators.checkPasswordField,
                             prefixIcon: const Icon(
                               Icons.lock_outline,
@@ -120,7 +123,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                     Obx(
                       (() => CustomTextField(
-                            // controller: c.passwordTextController,
+                            controller: c.confirmPasswordController,
                             validator: Validators.checkPasswordField,
                             prefixIcon: const Icon(
                               Icons.lock_outline,
@@ -179,8 +182,6 @@ class RegisterPage extends StatelessWidget {
 class CustomClipPath extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    double h = size.height;
-    double w = size.width;
 
     final path_0 = Path();
     // Path path_0 = Path();

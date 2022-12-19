@@ -14,6 +14,7 @@ class LogInScreen extends StatelessWidget {
   LogInScreen({super.key});
 
   final c = Get.put(LoginController());
+  // final controller = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +53,9 @@ class LogInScreen extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    const CustomTextField(
-                      prefixIcon: Icon(
+                    CustomTextField(
+                      controller: c.emailTextController,
+                      prefixIcon: const Icon(
                         Icons.email_outlined,
                         size: 20,
                       ),
@@ -67,7 +69,7 @@ class LogInScreen extends StatelessWidget {
                     ),
                     Obx(
                       (() => CustomTextField(
-                            // controller: c.passwordTextController,
+                            controller: c.passwordTextController,
                             validator: Validators.checkPasswordField,
                             prefixIcon: const Icon(
                               Icons.lock_outline,
@@ -111,6 +113,7 @@ class LogInScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: TextButton(
                         onPressed: () {
+                          
                           Get.toNamed(RegisterPage.routeName);
                         },
                         child: const Text("Create Account ?"),

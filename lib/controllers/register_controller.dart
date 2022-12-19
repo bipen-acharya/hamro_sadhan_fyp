@@ -2,23 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 
+import '../repo/auth_repo.dart';
 import '../widgets/custom_snackbar.dart';
 
 class RegisterController extends GetxController {
   var formKey = GlobalKey<FormState>();
-
-  // Rx<File?> image = Rxn<File?>();
 
   SimpleFontelicoProgressDialog loading = SimpleFontelicoProgressDialog(
       context: Get.context, barrierDimisable: false);
 
   var passwordObscure = true.obs;
   var confirmPasswordObscure = false.obs;
-  // var selectedGender = "Male".obs;
 
   var usernameController = TextEditingController();
-  // var firstNameController = TextEditingController();
-  // var lastNameController = TextEditingController();
   var emailController = TextEditingController();
   var phoneNumberController = TextEditingController();
   var passwordController = TextEditingController();
@@ -32,18 +28,6 @@ class RegisterController extends GetxController {
     confirmPasswordObscure.value = !confirmPasswordObscure.value;
   }
 
-  // void getImage() async {
-  //   final pickedImage = await picker.pickImage(
-  //       source: ImageSource.gallery,
-  //       imageQuality: 40,
-  //       maxHeight: 500,
-  //       maxWidth: 500);
-
-  //   if (pickedImage != null) {
-  //     image.value = File(pickedImage.path);
-  //   }
-  // }
-
   void submit() async {
     if (formKey.currentState!.validate()) {
       if (passwordController.text != confirmPasswordController.text) {
@@ -56,26 +40,23 @@ class RegisterController extends GetxController {
       //     final bytes = File(image.value!.path).readAsBytesSync();
       //     base64Image = base64Encode(bytes);
       //   }
-      //   User user = User(
-      //     username: usernameController.text,
-      //     email: emailController.text,
-      //     phone: phoneNumberController.text,
-      //     name: "${firstNameController.text} ${lastNameController.text}",
-      //     gender: selectedGender.value,
-      //   );
-      //   await AuthRepo.signup(
-      //       user: user,
-      //       password: passwordController.text,
-      //       image: base64Image,
-      //       onSuccess: () {
-      //         loading.hide();
-      //         Get.back();
-      //         CustomSnackBar.success(title: "Sign up succesful");
-      //       },
-      //       onError: (message) {
-      //         loading.hide();
-      //         CustomSnackBar.error(title: "Signup", message: message);
-      //       });
+      // User user = User(success: success, data: data, message: message)
+      await AuthRepo.registerUser(
+        confirmPassword: confirmPasswordController.text,
+        email: emailController.text,
+        phoneNumber: phoneNumberController.text,
+        username: usernameController.text,
+        password: passwordController.text,
+        onSuccess: (user) {
+          loading.hide();
+          Get.back();
+          CustomSnackBar.success(title: "Sign up succesful");
+        },
+        onError: (message) {
+          loading.hide();
+          CustomSnackBar.error(title: "Signup", message: message);
+        },
+      );
     }
   }
 }

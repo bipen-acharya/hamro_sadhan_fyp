@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 
+import '../repo/auth_repo.dart';
 import '../views/dashboard/dash_screen.dart';
+import '../widgets/custom_snackbar.dart';
 
 class LoginController extends GetxController {
   var formKey = GlobalKey<FormState>();
@@ -17,24 +21,27 @@ class LoginController extends GetxController {
     passwordObscure.value = !passwordObscure.value;
   }
 
-  void onSubmit() {
+  void onSubmit() async {
+    log("on submit ma aayo ");
     if (formKey.currentState!.validate()) {
-      Get.offAllNamed(DashScreen.routeName);
-      // loading.show(message: "logging....");
-      // await AuthRepo.loginUser(
-      //   email: emailTextController.text,
-      //   password: passwordTextController.text,
-      //   onSuccess: () {
-      //     Get.offAllNamed(DashScreen.routeName);
-      //     CustomSnackBar.success(
-      //         title: "Login Successful", message: "Logged in succesfully");
-      //   },
-      //   onError: (message) {
-      //     loading.hide();
-      //     CustomSnackBar.error(message: message, title: "Login");
-      //   },
-      // );
+      log("validate vayaena");
+    }
+    {
+      await AuthRepo.loginUser(
+        
+        email: emailTextController.text,
+        password: passwordTextController.text,
+        onSuccess: () {
+          log("sucess vayo");
+          Get.offAllNamed(DashScreen.routeName);
+          CustomSnackBar.success(
+              title: "Login Successful", message: "Logged in succesfully");
+        },
+        onError: (message) {
+          loading.hide();
+          CustomSnackBar.error(message: message, title: "Login");
+        },
+      );
     }
   }
-  
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/controllers/login_controller.dart';
 import 'package:hamro_sadhan/utils/theme.dart';
 import 'package:hamro_sadhan/views/dashboard/cart_screen.dart';
 import 'package:hamro_sadhan/views/dashboard/dash_screen.dart';
@@ -9,7 +10,9 @@ import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
 import 'package:hamro_sadhan/views/splash_screen.dart';
 import 'controllers/core_controller.dart';
+import 'controllers/dash_screen_controller.dart';
 import 'views/auth/login_screen.dart';
+import '../../controllers/register_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: true,
       title: 'Hamro Sadhan',
       theme: basicTheme(),
       initialRoute: SplashScreen.routeName,
@@ -40,26 +44,26 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: LogInScreen.routeName,
           page: () => LogInScreen(),
-          // binding: BindingsBuilder(
-          //     (() => Get.lazyPut(() => LoginScreenController()))),
+          binding:
+              BindingsBuilder((() => Get.lazyPut(() => LoginController()))),
         ),
         GetPage(
           name: RegisterPage.routeName,
           page: () => RegisterPage(),
-          // binding:
-          //     BindingsBuilder((() => Get.lazyPut(() => SignupController()))),
+          binding:
+              BindingsBuilder((() => Get.lazyPut(() => RegisterController()))),
         ),
         GetPage(
           name: DashScreen.routeName,
           page: () => DashScreen(),
-          // binding: BindingsBuilder((() {
-          //   Get.lazyPut(() => DashScreenController());
-          //   Get.lazyPut(() => WishlistController());
-          //   Get.lazyPut(() => HomeViewController());
-          //   Get.lazyPut(() => CategoryViewController());
-          //   Get.lazyPut(() => CartController());
-          //   Get.lazyPut(() => ProfileController());
-          // })),
+          binding: BindingsBuilder((() {
+            Get.lazyPut(() => DashScreenController());
+            // Get.lazyPut(() => WishlistController());
+            // Get.lazyPut(() => HomeViewController());
+            // Get.lazyPut(() => CategoryViewController());
+            // Get.lazyPut(() => CartController());
+            // Get.lazyPut(() => ProfileController());
+          })),
         ),
         GetPage(
           name: SearchPage.routeName,

@@ -5,11 +5,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../controllers/dash_screen_controller.dart';
 import '../../utils/colors.dart';
+import 'cart_screen.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
 import 'search_Page.dart';
 import 'statement_page.dart';
-
 
 class DashScreen extends StatelessWidget {
   static const routeName = '/dash-screen';
@@ -21,20 +21,17 @@ class DashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final pages = [
       Homepage(),
-      ProfilePage(),
       SearchPage(),
-      // StatementPage(),
-      Homepage(),
+      CartScreen(),
+      ProfilePage(),
     ];
     var size = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     return Scaffold(
-      
       body: Obx(() => pages[c.currentIndex.value]),
-      bottomNavigationBar: 
-      Obx(
+      bottomNavigationBar: Obx(
         () => BottomNavigationBar(
-          backgroundColor: AppColors.secondaryColor,
+          backgroundColor: AppColors.primaryColor,
           selectedIconTheme:
               const IconThemeData(color: AppColors.tertiaryColor),
           selectedItemColor: AppColors.tertiaryColor,
@@ -44,10 +41,9 @@ class DashScreen extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.dashboard_outlined), label: "Category"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart_outlined), label: "Cart"),
+                icon: Icon(Icons.chat_bubble_rounded), label: "history"),
             // BottomNavigationBarItem(
             //     icon: Icon(Icons.favorite_border_outlined), label: "Wishlist"),
             BottomNavigationBarItem(
@@ -57,6 +53,4 @@ class DashScreen extends StatelessWidget {
       ),
     );
   }
-
-  
 }
