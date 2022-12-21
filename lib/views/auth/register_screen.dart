@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/auth/login_screen.dart';
 
-import '../../controllers/register_controller.dart';
+import '../../controllers/auth/register_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/image_paths.dart';
 import '../../utils/validators.dart';
@@ -141,7 +141,7 @@ class RegisterPage extends StatelessWidget {
                             ),
                             obscure: c.passwordObscure.value,
                             hint: "Confirm Password",
-                            textInputAction: TextInputAction.next,
+                            textInputAction: TextInputAction.done,
                             textInputType: TextInputType.emailAddress,
                           )),
                     ),
@@ -182,7 +182,6 @@ class RegisterPage extends StatelessWidget {
 class CustomClipPath extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-
     final path_0 = Path();
     // Path path_0 = Path();
     path_0.moveTo(size.width * 0.6619160, size.height * 0.6963985);

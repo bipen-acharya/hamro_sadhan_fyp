@@ -8,7 +8,7 @@ class AuthRepo {
   static Future<void> loginUser({
     required String email,
     required String password,
-    required onSuccess,
+    required Function(User) onSuccess,
     required Function(String) onError,
   }) async {
     // print(email);
@@ -30,11 +30,10 @@ class AuthRepo {
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       print(response.body);
-      onSuccess();
+      onSuccess(userFromJson(response.body));
     } else {
-      // var responseBody = jsonDecode(response.body);
-      // onError(responseBody["data"]);
-      onError("Something went wrong");
+      log(response.body);
+      print(response.body);
     }
   }
 

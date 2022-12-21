@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:regexpattern/regexpattern.dart';
+
 class Validators {
   static String? checkFieldEmpty(String? fieldContent) {
     if (fieldContent!.isEmpty) {
@@ -19,10 +21,13 @@ class Validators {
   }
 
   static String? checkPasswordField(String? fieldContent) {
+    //  String s;
     if (fieldContent!.isEmpty) {
       return 'This field is required';
     } else if (fieldContent.length < 6) {
       return 'The password should be at least 6 digits';
+    } else if (!RegExp(RegexPattern.passwordNormal1).hasMatch(fieldContent)) {
+      return 'Password must contain at least one special character';
     }
     return null;
   }

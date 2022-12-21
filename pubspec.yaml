@@ -40,6 +40,8 @@ dependencies:
   get: ^4.6.5
   simple_fontellico_progress_dialog: ^0.2.1
   http: ^0.13.5
+  regexpattern: ^2.1.0
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
+    - assets/Users/icon/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

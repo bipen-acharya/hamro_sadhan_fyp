@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/dash_screen_controller.dart';
+import '../../controllers/home_controller.dart';
 import '../../utils/colors.dart';
 
 class Homepage extends StatelessWidget {
@@ -15,54 +14,57 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           elevation: 0.6,
-          backgroundColor: const Color.fromARGB(255, 121, 181, 241),
+          backgroundColor: AppColors.primaryColor,
           iconTheme: const IconThemeData.fallback(),
           title: const Text("data")),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: Column(
-                children: const [
-                  SizedBox(
-                      height: 90,
-                      width: 90,
-                      child: ClipRRect(
-                          // borderRadius: BorderRadius.circular(45),
-                          child: Text("Welcome")
-                          // CachedNetworkImage(
-                          //   fit: BoxFit.cover,
-                          //   imageUrl:
-                          //       coreController.currentUser.value?.imageUrl ?? "",
-                          //   placeholder: (context, url) =>
-                          //       const Center(child: CircularProgressIndicator()),
-                          //   errorWidget: (context, url, error) => Image.asset(
-                          //     ImagePath.AVATAR_UPLOAD,
-                          //     fit: BoxFit.cover,
-                          //   ),
-                          // ),
-                          )),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  // Text(
-                  //   "Hello, ${coreController.currentUser.value!.name?.capitalize}",
-                  //   style: theme.textTheme.bodyLarge!.copyWith(fontSize: 20),
-                  // )
-                ],
+      drawer: GetX<HomeController>(builder: (contoller) {
+        return Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: Column(
+                  children: [
+                    SizedBox(
+                        height: 90,
+                        width: 90,
+                        child: ClipRRect(
+                            // borderRadius: BorderRadius.circular(45),
+                            child:
+                                Text(contoller.getuser()?.data.user.name ?? "")
+                            // CachedNetworkImage(
+                            //   fit: BoxFit.cover,
+                            //   imageUrl:
+                            //       coreController.currentUser.value?.imageUrl ?? "",
+                            //   placeholder: (context, url) =>
+                            //       const Center(child: CircularProgressIndicator()),
+                            //   errorWidget: (context, url, error) => Image.asset(
+                            //     ImagePath.AVATAR_UPLOAD,
+                            //     fit: BoxFit.cover,
+                            //   ),
+                            // ),
+                            )),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    // Text(
+                    //   "Hello, ${coreController.currentUser.value!.name?.capitalize}",
+                    //   style: theme.textTheme.bodyLarge!.copyWith(fontSize: 20),
+                    // )
+                  ],
+                ),
               ),
-            ),
-            buildDarwerItem(Icons.home_outlined, "Home", 0),
-            buildDarwerItem(Icons.search, "Search", 1),
-            buildDarwerItem(Icons.history, "History", 2),
-            // buildDarwerItem(Icons.favorite_border_outlined, "Wishlist", 3),
-            buildDarwerItem(Icons.person_outline, "Profile", 3),
-            const SizedBox(
-              height: 8,
-            )
-          ],
-        ),
-      ),
+              buildDarwerItem(Icons.home_outlined, "Home", 0),
+              buildDarwerItem(Icons.search, "Search", 1),
+              buildDarwerItem(Icons.history, "History", 2),
+              // buildDarwerItem(Icons.favorite_border_outlined, "Wishlist", 3),
+              buildDarwerItem(Icons.person_outline, "Profile", 3),
+              const SizedBox(
+                height: 8,
+              )
+            ],
+          ),
+        );
+      }),
       body: const Center(
         child: Text(
           "Home Page",

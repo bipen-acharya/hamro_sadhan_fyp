@@ -12,3 +12,14 @@ class ImagePath {
       "assets/images/upload_placeholder.jpg";
   static const String AVATAR_UPLOAD = "assets/images/avatar_placeholder.jpg";
 }
+
+// profile screen icons image path
+class ProfileScreenIcon {
+  static const basePath = "assets/Users";
+  static const help = "assets/Users/icon/help.svg";
+  static const logout = "$basePath/icon/logout.svg";
+  static const moon = "$basePath/icon/moon.svg";
+  static const password = "$basePath/icon/password.svg";
+  static const star = "$basePath/icon/star.svg";
+  static const setting = "$basePath/icon/setting.svg";
+}

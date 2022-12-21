@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
 import '../../controllers/dash_screen_controller.dart';
 import '../../utils/colors.dart';
-import 'cart_screen.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
-import 'search_Page.dart';
-import 'statement_page.dart';
+import 'search_page.dart';
 
 class DashScreen extends StatelessWidget {
   static const routeName = '/dash-screen';
@@ -21,17 +17,18 @@ class DashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final pages = [
       Homepage(),
-      SearchPage(),
-      CartScreen(),
-      ProfilePage(),
+      const SearchPage(),
+      const StatementPage(),
+       ProfilePage(),
     ];
-    var size = MediaQuery.of(context).size;
-    var theme = Theme.of(context);
     return Scaffold(
       body: Obx(() => pages[c.currentIndex.value]),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           backgroundColor: AppColors.primaryColor,
+          unselectedIconTheme:
+              const IconThemeData(color: AppColors.borderColor),
+          unselectedItemColor: AppColors.borderColor,
           selectedIconTheme:
               const IconThemeData(color: AppColors.tertiaryColor),
           selectedItemColor: AppColors.tertiaryColor,
@@ -44,8 +41,6 @@ class DashScreen extends StatelessWidget {
             BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.chat_bubble_rounded), label: "history"),
-            // BottomNavigationBarItem(
-            //     icon: Icon(Icons.favorite_border_outlined), label: "Wishlist"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline), label: "Profile"),
           ],

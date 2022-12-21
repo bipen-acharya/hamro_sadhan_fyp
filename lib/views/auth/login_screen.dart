@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
-import '../../controllers/login_controller.dart';
+import '../../controllers/auth/login_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/image_paths.dart';
 import '../../utils/validators.dart';
@@ -13,8 +13,7 @@ class LogInScreen extends StatelessWidget {
   static const routeName = "/login";
   LogInScreen({super.key});
 
-  final c = Get.put(LoginController());
-  // final controller = Get.find<LoginController>();
+  final c = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +55,7 @@ class LogInScreen extends StatelessWidget {
                     CustomTextField(
                       controller: c.emailTextController,
                       prefixIcon: const Icon(
-                        Icons.email_outlined,
+                        Icons.person,
                         size: 20,
                       ),
                       validator: Validators.checkEmailField,
@@ -70,7 +69,7 @@ class LogInScreen extends StatelessWidget {
                     Obx(
                       (() => CustomTextField(
                             controller: c.passwordTextController,
-                            validator: Validators.checkPasswordField,
+                            // validator: Validators.checkPasswordField,
                             prefixIcon: const Icon(
                               Icons.lock_outline,
                               size: 16,
@@ -113,7 +112,6 @@ class LogInScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: TextButton(
                         onPressed: () {
-                          
                           Get.toNamed(RegisterPage.routeName);
                         },
                         child: const Text("Create Account ?"),
