@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/auth/login_screen.dart';
-
 import '../../controllers/auth/register_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/image_paths.dart';
@@ -44,7 +43,7 @@ class RegisterPage extends StatelessWidget {
               ),
             ),
             Form(
-              key: c.formKey,
+              key: c.registerFormKey,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -130,16 +129,16 @@ class RegisterPage extends StatelessWidget {
                               size: 16,
                             ),
                             suffixIcon: InkWell(
-                              onTap: c.onEyeClick,
+                              onTap: c.onConfirmEyeClick,
                               child: SvgPicture.asset(
-                                c.passwordObscure.value
+                                c.confirmPasswordObscure.value
                                     ? ImagePath.EYE
                                     : ImagePath.EYE_OFF,
                                 color: AppColors.textColor,
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
-                            obscure: c.passwordObscure.value,
+                            obscure: c.confirmPasswordObscure.value,
                             hint: "Confirm Password",
                             textInputAction: TextInputAction.done,
                             textInputType: TextInputType.emailAddress,
@@ -159,19 +158,19 @@ class RegisterPage extends StatelessWidget {
                     const SizedBox(
                       height: 13,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        onPressed: () {
-                          Get.toNamed(LogInScreen.routeName);
-                        },
-                        child: const Text("Already Account"),
-                      ),
-                    ),
                   ],
                 ),
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextButton(
+                onPressed: () {
+                  Get.toNamed(LogInScreen.routeName);
+                },
+                child: const Text("Already Account"),
+              ),
+            ),
           ],
         ),
       ),

@@ -25,6 +25,7 @@ class LoginController extends GetxController {
   void onSubmit() async {
     log("on submit ma aayo ");
     if (formKey.currentState!.validate()) {
+      print("validate vayo");
       await AuthRepo.loginUser(
         email: emailTextController.text,
         password: passwordTextController.text,

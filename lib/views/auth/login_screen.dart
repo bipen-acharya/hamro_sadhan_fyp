@@ -15,6 +15,10 @@ class LogInScreen extends StatelessWidget {
 
   final c = Get.find<LoginController>();
 
+//  var emailTextController =
+//       TextEditingController(text: 'bipinacharya703@gmail.com');
+
+//   var passwordTextController = TextEditingController(text: 'Bipin@123');
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -53,6 +57,8 @@ class LogInScreen extends StatelessWidget {
                       height: 30,
                     ),
                     CustomTextField(
+                   
+                   
                       controller: c.emailTextController,
                       prefixIcon: const Icon(
                         Icons.person,
@@ -68,6 +74,7 @@ class LogInScreen extends StatelessWidget {
                     ),
                     Obx(
                       (() => CustomTextField(
+                            // initial: "Bipin@123",
                             controller: c.passwordTextController,
                             // validator: Validators.checkPasswordField,
                             prefixIcon: const Icon(
@@ -84,6 +91,7 @@ class LogInScreen extends StatelessWidget {
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
+
                             obscure: c.passwordObscure.value,
                             hint: "Password",
                             textInputAction: TextInputAction.next,
@@ -108,19 +116,19 @@ class LogInScreen extends StatelessWidget {
                         color: AppColors.textColorAccent,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextButton(
-                        onPressed: () {
-                          Get.toNamed(RegisterPage.routeName);
-                        },
-                        child: const Text("Create Account ?"),
-                      ),
-                    ),
                   ],
                 ),
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextButton(
+                onPressed: () {
+                  Get.toNamed(RegisterPage.routeName);
+                },
+                child: const Text("Create Account ?"),
+              ),
+            ),
           ],
         ),
       ),
@@ -131,9 +139,6 @@ class LogInScreen extends StatelessWidget {
 class CustomClipPath extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    double h = size.height;
-    double w = size.width;
-
     final path_0 = Path();
     // Path path_0 = Path();
     path_0.moveTo(size.width * 0.3137761, size.height * 0.8625090);

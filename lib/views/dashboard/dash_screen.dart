@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
 import '../../controllers/dash_screen_controller.dart';
+import '../../controllers/home_controller.dart';
 import '../../utils/colors.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
@@ -19,9 +20,10 @@ class DashScreen extends StatelessWidget {
       Homepage(),
       const SearchPage(),
       const StatementPage(),
-       ProfilePage(),
+      ProfilePage(),
     ];
     return Scaffold(
+      // appBar: 
       body: Obx(() => pages[c.currentIndex.value]),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
@@ -45,6 +47,31 @@ class DashScreen extends StatelessWidget {
                 icon: Icon(Icons.person_outline), label: "Profile"),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildDarwerItem(IconData iconData, String title, int index) {
+    return Container(
+      margin: const EdgeInsets.only(top: 4),
+      child: Column(
+        children: [
+          ListTile(
+            onTap: () {
+              c.currentIndex.value = index;
+              Get.back();
+            },
+            leading: Icon(
+              iconData,
+              color: AppColors.textColor,
+            ),
+            title: Text(title),
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          const Divider()
+        ],
       ),
     );
   }

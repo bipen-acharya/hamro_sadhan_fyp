@@ -18,7 +18,7 @@ ThemeData basicTheme() {
           titleSmall: const TextStyle(
               fontFamily: "ZillaSlab",
               fontWeight: FontWeight.w700,
-              fontSize: 16),
+              fontSize: 14),
           bodyLarge: const TextStyle(
               fontFamily: "ZillaSlab",
               fontWeight: FontWeight.w500,
@@ -26,11 +26,11 @@ ThemeData basicTheme() {
           bodyMedium: const TextStyle(
               fontFamily: "ZillaSlab",
               fontWeight: FontWeight.w400,
-              fontSize: 16),
+              fontSize: 15),
           bodySmall: const TextStyle(
               fontFamily: "ZillaSlab",
               fontWeight: FontWeight.w300,
-              fontSize: 16),
+              fontSize: 13),
         )
         .apply(
             bodyColor: AppColors.textColor,

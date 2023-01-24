@@ -6,10 +6,12 @@ import 'package:hamro_sadhan/controllers/home_controller.dart';
 import 'package:hamro_sadhan/controllers/search_controller.dart';
 import 'package:hamro_sadhan/controllers/splash_screen_controller.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
+import 'package:hamro_sadhan/views/single_vehicle.dart';
 
 import '../controllers/auth/login_controller.dart';
 import '../controllers/dash_screen_controller.dart';
 import '../controllers/profile_controller.dart';
+import '../controllers/single_page_controller.dart';
 import '../views/auth/login_screen.dart';
 import '../views/dashboard/dash_screen.dart';
 import '../views/splash_screen.dart';
@@ -43,8 +45,8 @@ var userPages = [
         Get.lazyPut(() => ProfileController());
       },) ),
     
-    //  GetPage(
-    //   name: Billing.routeName,
-    //   page: (() => Billing()),
-    //   binding: BindingsBuilder(() => Get.lazyPut(() => BillingController()))),
+     GetPage(
+      name: SinglePage.routeName,
+      page: (() => const SinglePage()),
+      binding: BindingsBuilder(() => Get.lazyPut(() => SinglePageController()))),
 ];

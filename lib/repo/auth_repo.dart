@@ -11,8 +11,7 @@ class AuthRepo {
     required Function(User) onSuccess,
     required Function(String) onError,
   }) async {
-    // print(email);
-    // print(password);
+    log("yhea samma aayo ");
     var headers = {
       "Accept": "application/json",
       "Content-Type": "application/json",
@@ -27,13 +26,28 @@ class AuthRepo {
         ),
         headers: headers,
         body: body);
-
+    log(email.toString());
+    log("data gayo");
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      print(response.body);
       onSuccess(userFromJson(response.body));
-    } else {
       log(response.body);
-      print(response.body);
+      log("response aayaena");
+    } else {
+      var responseBody = jsonDecode(response.body);
+      final data = responseBody['data'];
+      print(responseBody.toString());
+      final error = data['error'];
+
+      log(response.body);
+      // print(responseBody);
+      // log(responseBody["data"]);
+      log("message aayo error ko");
+      log(error);
+      onError(error.toString());
+      log(response.body);
+      // onError("Something went wrong");
+      // log(response.body);
+
     }
   }
 
@@ -56,6 +70,7 @@ class AuthRepo {
       'phone_number': phoneNumber,
       'confirm_password': confirmPassword,
       'name': username,
+      'type': 'user',
     });
     http.Response response = await http.post(
         Uri.parse(
@@ -68,8 +83,16 @@ class AuthRepo {
       print(response.body);
       onSuccess(userFromJson(response.body));
     } else {
-      log(response.body);
-      print(response.body);
+      var responseBody = jsonDecode(response.body);
+      final data = responseBody['data'];
+      if (data.containsKey('phone_number')) {
+        final phoneNumberError = data['phone_number'][0];
+        return onError(phoneNumberError.toString());
+      }
+      if (data.containsKey('email')) {
+        final emailError = data['email'][0];
+        return onError(emailError.toString());
+      }
     }
   }
 }
