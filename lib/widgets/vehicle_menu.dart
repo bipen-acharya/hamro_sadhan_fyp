@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/colors.dart';
+
 class VehicleMenuCard extends StatelessWidget {
   const VehicleMenuCard({
     Key? key,
@@ -38,7 +40,14 @@ class VehicleMenuCard extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            Text(name),
+            Text(
+              name,
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+                color: AppColors.primaryColor,
+              ),
+            ),
           ],
         ),
       ),

@@ -25,6 +25,16 @@ class ProfileScreenIcon {
   static const setting = "$basePath/icon/setting.svg";
 }
 
+class UserImages {
+  static const basePath = "assets/Users";
+  static const maskGroup = "assets/Users/icon/maskGroup.svg";
+  static const petrol = "$basePath/icon/petrol.svg";
+  static const seat = "$basePath/icon/seat.svg";
+  static const speed = "$basePath/icon/speed.svg";
+  static const call = "$basePath/icon/call.svg";
+  static const logo = "assets/logo2.svg";
+}
+
 class VehiclesImages {
   static const basePath = "assets/images";
   static const scooter = "$basePath/scooter.png";

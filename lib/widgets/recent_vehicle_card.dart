@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/utils/colors.dart';
 
 class RecentVehicleCard extends StatelessWidget {
   const RecentVehicleCard({
@@ -53,12 +53,26 @@ class RecentVehicleCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                    width: Get.width / 4,
-                    child: const Text("Detail of the vehicle")),
+                  width: Get.width / 4,
+                  child: const Text(
+                    "Honda Dio",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   width: 7,
                 ),
-                const Text("2500/day"),
+                const Text(
+                  "2500/day",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
               ],
             )
           ],
@@ -67,5 +81,3 @@ class RecentVehicleCard extends StatelessWidget {
     );
   }
 }
-
-
