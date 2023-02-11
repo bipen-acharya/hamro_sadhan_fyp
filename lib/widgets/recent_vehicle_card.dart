@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
 
 class RecentVehicleCard extends StatelessWidget {
@@ -9,74 +8,75 @@ class RecentVehicleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20, bottom: 13),
-      child: Container(
-        height: 158,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(9),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(4, 4),
-              blurRadius: 9,
-              color: const Color(0xFF494949).withOpacity(0.1),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(9)),
-                width: Get.width / 2.2,
-                // color: Colors.amber,
-                height: 102,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
-                  child: Image.network(
-                    "https://picsum.photos/200/200",
-                    fit: BoxFit.fill,
-                  ),
-                )
-                // Image.asset(
-                //   VehiclesImages.carSample1,
-                //   fit: BoxFit.fill,
-                // ),
+    return Container(
+      height: 95,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(9),
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(4, 4),
+            blurRadius: 9,
+            color: const Color(0xFF494949).withOpacity(0.1),
+          ),
+        ],
+      ),
+      child: Column(
+        // mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(9)),
+              width: double.infinity,
+              // color: Colors.amber,
+              height: 100,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
+                child: Image.network(
+                  "https://dalamancarrentals.com/arayuz/assets/img/car-rent-news/h_3_730x485.png?.1638283284",
+                  fit: BoxFit.fill,
                 ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
+              )
+              // Image.asset(
+              //   VehiclesImages.carSample1,
+              //   fit: BoxFit.fill,
+              // ),
+              ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 6),
+            child: Column(
               children: [
-                SizedBox(
-                  width: Get.width / 4,
-                  child: const Text(
-                    "Honda Dio",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 7,
-                ),
                 const Text(
-                  "2500/day",
+                  "Honda Dio s jhhajksjhd hjadj asd",
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.primaryColor,
                   ),
+                ),
+                Row(
+                  children: const [
+                    Icon(Icons.money_rounded),
+                    Text(
+                      "2500/day",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ],
                 ),
               ],
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

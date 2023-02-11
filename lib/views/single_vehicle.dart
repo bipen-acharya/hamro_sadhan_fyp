@@ -121,7 +121,7 @@ class SinglePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 7,
+                    height: 10,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -142,7 +142,7 @@ class SinglePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 27,
+                    height: 30,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
@@ -208,7 +208,7 @@ class SinglePage extends StatelessWidget {
                           width: 50,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color.fromARGB(230, 241, 240, 240),
+                            color: const Color.fromARGB(230, 241, 240, 240),
                           ),
                           child: SvgPicture.asset(
                             UserImages.call,
@@ -221,7 +221,7 @@ class SinglePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 40,
                   )
                 ],
               ),
@@ -230,17 +230,17 @@ class SinglePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color.fromARGB(230, 241, 240, 240),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(4, 4),
-              blurRadius: 9,
-              color: const Color(0xFF494949).withOpacity(0.4),
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     offset: const Offset(4, 4),
+          //     blurRadius: 9,
+          //     color: const Color(0xFF494949).withOpacity(0.4),
+          //   ),
+          // ],
         ),
-        height: 79,
+        height: 90,
         width: MediaQuery.of(context).size.width,
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(

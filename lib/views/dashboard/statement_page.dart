@@ -25,7 +25,7 @@ class StatementPage extends StatelessWidget {
           centerTitle: false,
         ),
         body: SizedBox(
-          height: MediaQuery.of(context).size.height - 208,
+          // height: MediaQuery.of(context).size.height - 208,
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: 15,

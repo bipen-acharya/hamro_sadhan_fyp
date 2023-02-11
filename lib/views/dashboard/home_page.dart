@@ -1,6 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:hamro_sadhan/views/explore_vehicle.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 
 import '../../controllers/dash_screen_controller.dart';
@@ -9,183 +12,153 @@ import '../../utils/colors.dart';
 import '../../utils/image_paths.dart';
 import '../../widgets/all_vehicle_card.dart';
 import '../../widgets/recent_vehicle_card.dart';
+import '../../widgets/search.dart';
 import '../../widgets/vehicle_menu.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
   final c = Get.put(DashScreenController());
 
+  final con = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
     return Scaffold(
-      appBar: AppBar(
-        // leading: SvgPicture.asset(
-        //   UserImages.logo,
-        //   height: 20,
-        //   width: 20,
-        // ),
-        elevation: 5,
-        shadowColor: const Color(0xFF494949).withOpacity(0.06),
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
-        title: Align(
-          alignment: Alignment.centerLeft,
-          child: Row(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // SvgPicture.asset(
-              //   UserImages.logo,
-              //   height: 40,
-              //   width: 40,
-              // ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 20,
+                  horizontal: 25,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Good Morning!",
+                            style: theme.textTheme.titleMedium),
+                        Text("Bipin Acharya",
+                            style: theme.textTheme.titleLarge!.copyWith(
+                                fontSize: 19, color: AppColors.primaryColor)),
+                      ],
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.network(
+                        "https://picsum.photos/100/100",
+                        fit: BoxFit.cover,
+                        height: 50,
+                        width: 50,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 0,
+                  bottom: 25,
+                  left: 20,
+                  right: 20,
+                ),
+                child: CustomTextField(
+                  onTap: () {
+                    showSearch(
+                      context: context,
+                      delegate: MySearchDelegate(),
+                    );
+                  },
+                  readOnly: true,
+                  hint: "Search ",
+                  prefixIcon: const Icon(Icons.search, size: 30),
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: const [
+                    VehicleMenuCard(
+                        image: VehiclesImages.scooter, name: 'Scooter'),
+                    VehicleMenuCard(image: VehiclesImages.bike, name: 'Bike'),
+                    VehicleMenuCard(image: VehiclesImages.cycle, name: 'Cycle'),
+                    VehicleMenuCard(image: VehiclesImages.car, name: 'Car'),
+                    VehicleMenuCard(
+                        image: VehiclesImages.scooter, name: 'Scooter'),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 7,
+              ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Good Morning", style: theme.textTheme.titleLarge),
-                  Text(
-                    "Bipin",
-                    style: theme.textTheme.titleSmall!.copyWith(
-                      fontWeight: FontWeight.w500,
+                  CarouselSlider(
+                    items: con.imageSliders,
+                    carouselController: con.controller,
+                    options: CarouselOptions(
+                        autoPlay: true,
+                        enlargeCenterPage: true,
+                        aspectRatio: 2.5,
+                        onPageChanged: (index, reason) {
+                          con.current.value = index;
+                        }),
+                  ),
+                  Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: con.imgList.asMap().entries.map((entry) {
+                        return GestureDetector(
+                          onTap: () => con.controller.animateToPage(entry.key),
+                          child: Container(
+                            width: 5,
+                            height: 5,
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 4.0),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: (Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black)
+                                    .withOpacity(con.current.value == entry.key
+                                        ? 0.9
+                                        : 0.4)),
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Rent Vehicles", style: theme.textTheme.titleLarge),
+                    TextButton(
+                        onPressed: () => Get.to(() =>  ExplorePage()),
+                        child: Text("See More",
+                            style: theme.textTheme.bodyMedium)),
+                  ],
+                ),
+              ),
+              ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 16,
+                itemBuilder: (context, index) {
+                  return const ViewAllVehicleCard();
+                },
+              ),
             ],
           ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20, bottom: 10),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Image.network(
-                "https://picsum.photos/100/100",
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ],
-      ),
-      // drawer: GetX<HomeController>(
-      //   builder: (contoller) {
-      //     return Drawer(
-      //       backgroundColor: Colors.amber,
-      //       child: ListView(
-      //         children: [
-      //           DrawerHeader(
-      //             child: Column(
-      //               children: [
-      //                 SizedBox(
-      //                   height: 90,
-      //                   width: 90,
-      //                   child: ClipRRect(
-      //                       // borderRadius: BorderRadius.circular(45),
-      //                       child:
-      //                           Text(contoller.getuser()?.data.user.name ?? "")
-      //                       // CachedNetworkImage(
-      //                       //   fit: BoxFit.cover,
-      //                       //   imageUrl:
-      //                       //       coreController.currentUser.value?.imageUrl ?? "",
-      //                       //   placeholder: (context, url) =>
-      //                       //       const Center(child: CircularProgressIndicator()),
-      //                       //   errorWidget: (context, url, error) => Image.asset(
-      //                       //     ImagePath.AVATAR_UPLOAD,
-      //                       //     fit: BoxFit.cover,
-      //                       //   ),
-      //                       // ),
-      //                       ),
-      //                 ),
-      //                 const SizedBox(
-      //                   height: 12,
-      //                 ),
-      //                 // Text(
-      //                 //   "Hello, ${coreController.currentUser.value!.name?.capitalize}",
-      //                 //   style: theme.textTheme.bodyLarge!.copyWith(fontSize: 20),
-      //                 // )
-      //               ],
-      //             ),
-      //           ),
-      //           buildDarwerItem(Icons.home_outlined, "Home", 0),
-      //           buildDarwerItem(Icons.search, "Search", 1),
-      //           buildDarwerItem(Icons.history, "History", 2),
-      //           // buildDarwerItem(Icons.favorite_border_outlined, "Wishlist", 3),
-      //           buildDarwerItem(Icons.person_outline, "Profile", 3),
-      //           const SizedBox(
-      //             height: 8,
-      //           )
-      //         ],
-      //       ),
-      //     );
-      //   },
-      // ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(
-                top: 20,
-                right: 25,
-                left: 25,
-                bottom: 20,
-              ),
-              child: CustomTextField(
-                readOnly: true,
-                hint: "Search ",
-                prefixIcon: Icon(Icons.search, size: 30),
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: const [
-                  VehicleMenuCard(
-                      image: VehiclesImages.scooter, name: 'Scooter'),
-                  VehicleMenuCard(image: VehiclesImages.bike, name: 'Bike'),
-                  VehicleMenuCard(image: VehiclesImages.cycle, name: 'Cycle'),
-                  VehicleMenuCard(image: VehiclesImages.car, name: 'Car'),
-                  VehicleMenuCard(
-                      image: VehiclesImages.scooter, name: 'Scooter'),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 22,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25),
-              child: Text("Recents", style: theme.textTheme.titleLarge),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 162,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 15,
-                itemBuilder: (BuildContext context, int index) =>
-                    const RecentVehicleCard(),
-              ),
-            ),
-            const SizedBox(
-              height: 14,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 25),
-              child: Text("View All", style: theme.textTheme.titleLarge),
-            ),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 16,
-              itemBuilder: (context, index) {
-                return const ViewAllVehicleCard();
-              },
-            ),
-          ],
         ),
       ),
     );

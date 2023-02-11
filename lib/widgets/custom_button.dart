@@ -9,7 +9,7 @@ class CustomElevatedButton extends StatelessWidget {
     Key? key,
     required this.onTap,
     required this.buttonText,
-    required TextStyle style,
+ TextStyle ? style,
   }) : super(key: key);
 
   @override

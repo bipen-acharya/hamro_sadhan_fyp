@@ -82,7 +82,7 @@ class ProfilePage extends StatelessWidget {
                     );
                   }),
                   CustomProfileMenu(
-                    onTap: () {},
+                    onTap: c.changePassword,
                     iocnData: ProfileScreenIcon.password,
                     label: "Change Password",
                   ),
