@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 import '../../controllers/auth/login_controller.dart';
@@ -15,6 +16,7 @@ class LogInScreen extends StatelessWidget {
 
   final c = Get.find<LoginController>();
 
+  var keys = GlobalKey<FormState>();
 //  var emailTextController =
 //       TextEditingController(text: 'bipinacharya703@gmail.com');
 
@@ -48,7 +50,7 @@ class LogInScreen extends StatelessWidget {
               ),
             ),
             Form(
-              key: c.formKey,
+              key: keys,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -57,14 +59,19 @@ class LogInScreen extends StatelessWidget {
                       height: 30,
                     ),
                     CustomTextField(
-                   
-                   
                       controller: c.emailTextController,
                       prefixIcon: const Icon(
                         Icons.person,
                         size: 20,
                       ),
-                      validator: Validators.checkEmailField,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'This field is required';
+                        } else if (!GetUtils.isEmail(value)) {
+                          return 'Invalid email address';
+                        }
+                        return null;
+                      },
                       hint: "Username/Email ",
                       textInputAction: TextInputAction.next,
                       textInputType: TextInputType.emailAddress,
@@ -74,9 +81,15 @@ class LogInScreen extends StatelessWidget {
                     ),
                     Obx(
                       (() => CustomTextField(
-                            // initial: "Bipin@123",
                             controller: c.passwordTextController,
-                            // validator: Validators.checkPasswordField,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'This field is required';
+                              } else if (value.length < 8) {
+                                return "Password must be at least 8 characters";
+                              }
+                              return null;
+                            },
                             prefixIcon: const Icon(
                               Icons.lock_outline,
                               size: 16,
@@ -91,10 +104,9 @@ class LogInScreen extends StatelessWidget {
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
-
                             obscure: c.passwordObscure.value,
                             hint: "Password",
-                            textInputAction: TextInputAction.next,
+                            textInputAction: TextInputAction.done,
                             textInputType: TextInputType.emailAddress,
                           )),
                     ),
@@ -110,7 +122,11 @@ class LogInScreen extends StatelessWidget {
                     ),
                     CustomElevatedButton(
                       buttonText: "Login",
-                      onTap: c.onSubmit,
+                      onTap: () async {
+                        if (keys.currentState!.validate()) {
+                          c.onSubmit();
+                        }
+                      },
                       style: theme.textTheme.bodyLarge!.copyWith(
                         fontSize: 20,
                         color: AppColors.textColorAccent,
@@ -125,6 +141,7 @@ class LogInScreen extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   Get.toNamed(RegisterPage.routeName);
+                  // Get.off(() => RegisterPage());
                 },
                 child: const Text("Create Account ?"),
               ),

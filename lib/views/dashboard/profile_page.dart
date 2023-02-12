@@ -3,6 +3,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/home_controller.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
+import 'package:hamro_sadhan/views/edit_profile.dart';
 
 import '../../controllers/core_controller.dart';
 import '../../controllers/profile_controller.dart';
@@ -44,7 +45,9 @@ class ProfilePage extends StatelessWidget {
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor),
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() =>  EditProfile());
+                },
                 child: Text("Edit Profile",
                     style: theme.textTheme.bodyLarge!.copyWith(
                       color: AppColors.borderColor,

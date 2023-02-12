@@ -6,11 +6,8 @@ import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 
 class ProfileController extends GetxController {
-
-
   changePassword() {
     showModalBottomSheet(
-
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(45.0),
@@ -20,8 +17,7 @@ class ProfileController extends GetxController {
       context: Get.context!,
       builder: ((context) {
         var theme = Theme.of(context);
-        return 
-        Padding(
+        return Padding(
           padding: EdgeInsets.only(
               top: 20,
               right: 20,
@@ -85,8 +81,7 @@ class ProfileController extends GetxController {
             ],
           ),
         );
-      }
-      ),
+      }),
     );
   }
 }

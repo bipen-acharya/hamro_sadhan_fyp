@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/home_controller.dart';
@@ -10,7 +8,7 @@ import '../../views/dashboard/dash_screen.dart';
 import '../../widgets/custom_snackbar.dart';
 
 class LoginController extends GetxController {
-  var formKey = GlobalKey<FormState>();
+  // var formKey = GlobalKey<FormState>();
   var passwordObscure = true.obs;
   SimpleFontelicoProgressDialog loading = SimpleFontelicoProgressDialog(
       context: Get.context!, barrierDimisable: false);
@@ -23,7 +21,7 @@ class LoginController extends GetxController {
   }
 
   void onSubmit() async {
-    if (formKey.currentState!.validate()) {
+  
       await AuthRepo.loginUser(
         email: emailTextController.text,
         password: passwordTextController.text,
@@ -38,6 +36,6 @@ class LoginController extends GetxController {
           CustomSnackBar.error(message: message, title: "Login");
         },
       );
-    }
+    
   }
 }
