@@ -1,11 +1,11 @@
-class AccessToken {
+class Accesstoken {
   String? accessToken;
   String? tokenType;
   String? expiresAt;
 
-  AccessToken({this.accessToken, this.tokenType, this.expiresAt});
+  Accesstoken({this.accessToken, this.tokenType, this.expiresAt});
 
-  AccessToken.fromJson(Map<String, dynamic> json) {
+  Accesstoken.fromJson(Map<String, dynamic> json) {
     accessToken = json['access_token'];
     tokenType = json['token_type'];
     expiresAt = json['expires_at'];

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 
+import '../../models/user_model.dart';
 import '../../repo/auth_repo.dart';
 import '../../widgets/custom_snackbar.dart';
 
@@ -34,13 +35,16 @@ class RegisterController extends GetxController {
         CustomSnackBar.info(
             title: "Invalid Password", message: "Password do not match!!!");
       }
-      await AuthRepo.registerUser(
-        confirmPassword: confirmPasswordController.text,
+      loading.show(message: "signing up ...");
+      User user = User(
+        name: usernameController.text,
         email: emailController.text,
         phoneNumber: phoneNumberController.text,
-        username: usernameController.text,
+      );
+      await AuthRepo.registerUser(
+        user: user,
         password: passwordController.text,
-        onSuccess: (user) {
+        onSuccess: () {
           loading.hide();
           Get.back();
           CustomSnackBar.success(title: "Sign up succesful");

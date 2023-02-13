@@ -3,8 +3,6 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/home_controller.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
-import 'package:hamro_sadhan/views/edit_profile.dart';
-
 import '../../controllers/core_controller.dart';
 import '../../controllers/profile_controller.dart';
 import '../../utils/image_paths.dart';
@@ -33,20 +31,21 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
           ),
-          Obx(
-            (() => Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Text(controllerHome.getuser()?.data.user.name ?? "",
-                      style: theme.textTheme.bodyLarge),
-                )),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(
+                // controllerHome.getuser()?.data.user.name ?? ""
+                "Bipin",
+                style: theme.textTheme.bodyLarge),
           ),
+
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor),
                 onPressed: () {
-                  Get.to(() =>  EditProfile());
+                  // Get.to(() =>  EditProfile());
                 },
                 child: Text("Edit Profile",
                     style: theme.textTheme.bodyLarge!.copyWith(
@@ -105,7 +104,9 @@ class ProfilePage extends StatelessWidget {
                     label: "Settings",
                   ),
                   CustomProfileMenu(
-                    onTap: () {},
+                    onTap: () {
+                      controller.logOut();
+                    },
                     iocnData: ProfileScreenIcon.logout,
                     label: "Logout",
                   ),

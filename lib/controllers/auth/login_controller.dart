@@ -21,12 +21,12 @@ class LoginController extends GetxController {
   }
 
   void onSubmit() async {
-  
+        loading.show(message: "loggin in ..");
       await AuthRepo.loginUser(
         email: emailTextController.text,
         password: passwordTextController.text,
-        onSuccess: (user) {
-          homeController.setUser(user);
+        onSuccess: () {
+          // homeController.setUser(user);
           Get.offAllNamed(DashScreen.routeName);
           CustomSnackBar.success(
               title: "Login Successful", message: "Logged in succesfully");
