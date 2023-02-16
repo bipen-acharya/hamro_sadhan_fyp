@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/utils/image_paths.dart';
+import 'package:hamro_sadhan/views/billing_screen.dart';
 
 import '../utils/colors.dart';
 
@@ -272,7 +273,8 @@ class SinglePage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
-              onPressed: () {},
+              onPressed: 
+               () => Get.to(() =>  BillingScreen()),
               child: Text(
                 'Rent Now',
                 style: theme.textTheme.titleLarge!.copyWith(

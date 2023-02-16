@@ -61,7 +61,7 @@ class EditProfile extends StatelessWidget {
             const SizedBox(
               height: 32,
             ),
-            CustomTextField(
+            const CustomTextField(
               border: Colors.grey,
               // initial: c.getuser()?.data.user.name ?? "",
               hint: "Email",
@@ -69,7 +69,7 @@ class EditProfile extends StatelessWidget {
             const SizedBox(
               height: 17,
             ),
-            CustomTextField(
+            const CustomTextField(
               border: Colors.grey,
               // initial: c.getuser()?.data.user.email ?? "",
               hint: "Email",
@@ -77,7 +77,7 @@ class EditProfile extends StatelessWidget {
             const SizedBox(
               height: 17,
             ),
-            CustomTextField(
+            const CustomTextField(
               border: Colors.grey,
               // initial: c.getuser()?.data.user.phoneNumber ?? "",
               hint: "Email",

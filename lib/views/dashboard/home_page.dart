@@ -19,6 +19,8 @@ class Homepage extends StatelessWidget {
   Homepage({super.key});
   final c = Get.put(DashScreenController());
 
+var current_index = 0.obs;
+
   final con = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {

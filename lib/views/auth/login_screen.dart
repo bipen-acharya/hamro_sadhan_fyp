@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 import '../../controllers/auth/login_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/image_paths.dart';
-import '../../utils/validators.dart';
 import '../../widgets/custom_button.dart';
 
 class LogInScreen extends StatelessWidget {
-  static const routeName = "/login";
+ 
   LogInScreen({super.key});
-
+ static const routeName = "/login";
   final c = Get.find<LoginController>();
 
   var keys = GlobalKey<FormState>();

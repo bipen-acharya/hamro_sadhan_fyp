@@ -10,6 +10,7 @@ class AppColors {
   static const textColorAccent = Color(0xFFFFFFFF);
   static const hintTextColor = Color(0xFF7D7D7D);
   static const errorColor = Color(0XFFC1272D);
+  static const extraWhiteColor = Color.fromARGB(255, 255, 255, 255);
   static final shimmerBase = Colors.grey.withOpacity(0.40);
   static const Color shimmerHighlight = Color(0xFFE1E1E1);
 

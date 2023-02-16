@@ -17,7 +17,7 @@ ThemeData basicTheme() {
               fontSize: 15),
           titleSmall: const TextStyle(
               fontFamily: "ZillaSlab",
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w500,
               fontSize: 14),
           bodyLarge: const TextStyle(
               fontFamily: "ZillaSlab",

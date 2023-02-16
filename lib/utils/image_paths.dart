@@ -33,6 +33,9 @@ class UserImages {
   static const speed = "$basePath/icon/speed.svg";
   static const call = "$basePath/icon/call.svg";
   static const logo = "assets/logo2.svg";
+  static const ime = "$basePath/icon/ime_pay.png";
+  static const esewa = "$basePath/icon/eshewa.png";
+  static const khalti = "$basePath/icon/khalti.png";
 }
 
 class VehiclesImages {
