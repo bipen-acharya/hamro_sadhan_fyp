@@ -1,20 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../utils/colors.dart';
+import '../utils/image_paths.dart';
 import '../widgets/custom_button.dart';
 
 class SearchController extends GetxController {
   final RxList<bool> isExpanded1 = RxList.generate(3, (index) => false);
-  final RxList<bool> checkboxValues = RxList.filled(5, false);
+  final RxList<bool> checkboxTypeValues = RxList.filled(5, false);
+  final RxList<bool> checkboxSortByValues = RxList.filled(2, false);
+  final RxList<bool> checkboxSeatValues = RxList.filled(5, false);
 
-  updateCheckboxValue(int panelIndex, int checkboxIndex, bool value) {
+  updateTypeCheckboxValue(int panelIndex, int checkboxIndex, bool value) {
     // setState(() {
-    for (int i = 0; i < checkboxValues.length; i++) {
+    for (int i = 0; i < checkboxTypeValues.length; i++) {
       if (i == checkboxIndex) {
-        checkboxValues[i] = value;
+        checkboxTypeValues[i] = value;
       } else {
-        checkboxValues[i] = false;
+        checkboxTypeValues[i] = false;
+      }
+    }
+    // });
+  }
+
+  updateSeatCheckBoxValue(int panelIndex, int checkboxIndex, bool value) {
+    // setState(() {
+    for (int i = 0; i < checkboxSeatValues.length; i++) {
+      if (i == checkboxIndex) {
+        checkboxSeatValues[i] = value;
+      } else {
+        checkboxSeatValues[i] = false;
+      }
+    }
+    // });
+  }
+
+  updateSortByCheckboxValue(int panelIndex, int checkboxIndex, bool value) {
+    // setState(() {
+    for (int i = 0; i < checkboxSortByValues.length; i++) {
+      if (i == checkboxIndex) {
+        checkboxSortByValues[i] = value;
+      } else {
+        checkboxSortByValues[i] = false;
       }
     }
     // });
@@ -33,180 +61,251 @@ class SearchController extends GetxController {
       builder: ((context) {
         final theme =
             Theme.of(context).copyWith(dividerColor: Colors.transparent);
-        return Padding(
-          padding: EdgeInsets.only(
-              top: 0,
-              // right: 20,
-              // left: 20,
-              bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Obx(
-            () => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(
-                  height: 15,
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+                top: 0,
+                // right: 20,
+                // left: 20,
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Obx(
+              () => Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 22,
                 ),
-                Container(
-                  height: 5,
-                  width: 105,
-                  decoration: BoxDecoration(
-                    color: AppColors.borderColor,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.cancel)),
-                    const Text("Filter By"),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        "Clear All",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color.fromARGB(255, 255, 0, 51)),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      height: 5,
+                      width: 105,
+                      decoration: BoxDecoration(
+                        color: AppColors.borderColor,
+                        borderRadius: BorderRadius.circular(100),
                       ),
                     ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    ExpansionPanelList(
-                      elevation: 0,
-                      expansionCallback: (panelIndex, isExpanded) {
-                        // setState(() {
-                        isExpanded1[panelIndex] = !isExpanded;
-                        // });
-                      },
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ExpansionPanel(
-                          backgroundColor: AppColors.backGroundColor,
-                          headerBuilder: (context, isExpanded) {
-                            return const ListTile(
-                              title: Text('Name'),
-                            );
-                          },
-                          body: Column(
-                            children: const [
-                              Text('John Doe'),
-                            ],
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: SvgPicture.asset(UserImages.cancel)),
+                        const Text(
+                          "Filter By",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
-                          isExpanded: isExpanded1[0],
                         ),
-                        ExpansionPanel(
-                          backgroundColor: AppColors.backGroundColor,
-                          headerBuilder: (context, isExpanded) {
-                            return const ListTile(
-                              title: Text('Age'),
-                            );
-                          },
-                          body: Column(
-                            children: const [
-                              Text('25'),
-                            ],
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "Clear All",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 255, 0, 51)),
                           ),
-                          isExpanded: isExpanded1[1],
-                        ),
-                        ExpansionPanel(
-                          backgroundColor: AppColors.backGroundColor,
-                          headerBuilder: (context, isExpanded) {
-                            return const ListTile(
-                              title: Text('Age'),
-                            );
-                          },
-                          body: Column(
-                            children: [
-                              CheckboxListTile(
-                                activeColor: AppColors.primaryColor,
-                                title: const Text('Option 1'),
-                                value: checkboxValues[0],
-                                onChanged: (value) {
-                                  updateCheckboxValue(2, 0, value!);
-                                },
-                              ),
-                              CheckboxListTile(
-                                activeColor: AppColors.primaryColor,
-                                title: const Text('Option 2'),
-                                value: checkboxValues[1],
-                                onChanged: (value) {
-                                  updateCheckboxValue(2, 1, value!);
-                                },
-                              ),
-                              CheckboxListTile(
-                                activeColor: AppColors.primaryColor,
-                                title: const Text('Option 3'),
-                                value: checkboxValues[2],
-                                onChanged: (value) {
-                                  updateCheckboxValue(2, 2, value!);
-                                },
-                              ),
-                              CheckboxListTile(
-                                activeColor: AppColors.primaryColor,
-                                title: const Text('Option 4'),
-                                value: checkboxValues[3],
-                                onChanged: (value) {
-                                  updateCheckboxValue(2, 3, value!);
-                                },
-                              ),
-                              CheckboxListTile(
-                                activeColor: AppColors.primaryColor,
-                                title: const Text('Option 5'),
-                                value: checkboxValues[4],
-                                onChanged: (value) {
-                                  updateCheckboxValue(2, 4, value!);
-                                },
-                              ),
-                            ],
-                          ),
-                          isExpanded: isExpanded1[2],
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        List<String> selectedOptions = [];
-                        for (int i = 0; i < checkboxValues.length; i++) {
-                          if (checkboxValues[i]) {
-                            selectedOptions.add('Option ${i + 1}');
-                          }
-                        }
+                    Column(
+                      children: [
+                        ExpansionPanelList(
+                          dividerColor: Colors.transparent,
+                          elevation: 0,
+                          expansionCallback: (panelIndex, isExpanded) {
+                            // setState(() {
+                            isExpanded1[panelIndex] = !isExpanded;
+                            // });
+                          },
+                          children: [
+                            ExpansionPanel(
+                              backgroundColor: AppColors.backGroundColor,
+                              headerBuilder: (context, isExpanded) {
+                                return ListTile(
+                                  title: titileText('Sort by'),
+                                );
+                              },
+                              body: Column(
+                                children: [
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title:
+                                        optionText('Price ( in descending )'),
+                                    value: checkboxSortByValues[0],
+                                    onChanged: (value) {
+                                      updateSortByCheckboxValue(2, 0, value!);
+                                    },
+                                  ),
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('Price (in ascending )'),
+                                    value: checkboxSortByValues[1],
+                                    onChanged: (value) {
+                                      updateSortByCheckboxValue(2, 1, value!);
+                                    },
+                                  ),
+                                ],
+                              ),
+                              isExpanded: isExpanded1[0],
+                            ),
+                            ExpansionPanel(
+                              backgroundColor: AppColors.backGroundColor,
+                              headerBuilder: (context, isExpanded) {
+                                return ListTile(
+                                  title: titileText('No. of Seat'),
+                                );
+                              },
+                              body: Column(
+                                children: [
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('2'),
+                                    value: checkboxSeatValues[0],
+                                    onChanged: (value) {
+                                      updateSeatCheckBoxValue(2, 0, value!);
+                                    },
+                                  ),
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('4'),
+                                    value: checkboxSeatValues[1],
+                                    onChanged: (value) {
+                                      updateSeatCheckBoxValue(2, 1, value!);
+                                    },
+                                  ),
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('5'),
+                                    value: checkboxSeatValues[2],
+                                    onChanged: (value) {
+                                      updateSeatCheckBoxValue(2, 2, value!);
+                                    },
+                                  ),
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('6'),
+                                    value: checkboxSeatValues[3],
+                                    onChanged: (value) {
+                                      updateSeatCheckBoxValue(2, 3, value!);
+                                    },
+                                  ),
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('More than 6'),
+                                    value: checkboxSeatValues[4],
+                                    onChanged: (value) {
+                                      updateSeatCheckBoxValue(2, 4, value!);
+                                    },
+                                  ),
+                                ],
+                              ),
+                              isExpanded: isExpanded1[1],
+                            ),
+                            ExpansionPanel(
+                              backgroundColor: AppColors.backGroundColor,
+                              headerBuilder: (context, isExpanded) {
+                                return ListTile(
+                                  title: titileText('Type'),
+                                );
+                              },
+                              body: Column(
+                                children: [
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('All'),
+                                    value: checkboxTypeValues[0],
+                                    onChanged: (value) {
+                                      updateTypeCheckboxValue(2, 0, value!);
+                                    },
+                                  ),
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('Bike'),
+                                    value: checkboxTypeValues[1],
+                                    onChanged: (value) {
+                                      updateTypeCheckboxValue(2, 1, value!);
+                                    },
+                                  ),
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('Scooter'),
+                                    value: checkboxTypeValues[2],
+                                    onChanged: (value) {
+                                      updateTypeCheckboxValue(2, 2, value!);
+                                    },
+                                  ),
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('Car'),
+                                    value: checkboxTypeValues[3],
+                                    onChanged: (value) {
+                                      updateTypeCheckboxValue(2, 3, value!);
+                                    },
+                                  ),
+                                  CheckboxListTile(
+                                    activeColor: AppColors.primaryColor,
+                                    title: optionText('Jeep'),
+                                    value: checkboxTypeValues[4],
+                                    onChanged: (value) {
+                                      updateTypeCheckboxValue(2, 4, value!);
+                                    },
+                                  ),
+                                ],
+                              ),
+                              isExpanded: isExpanded1[2],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16.0),
+                        CustomElevatedButton(
+                          onTap: () {
+                            List<String> selectedOptions = [];
+                            for (int i = 0;
+                                i < checkboxTypeValues.length;
+                                i++) {
+                              if (checkboxTypeValues[i]) {
+                                selectedOptions.add('Option ${i + 1}');
+                              }
+                            }
 
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Selected Options'),
-                              content: Text(selectedOptions.join(', ')),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('OK'),
-                                ),
-                              ],
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Selected Options'),
+                                  content: Text(selectedOptions.join(', ')),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           },
-                        );
-                      },
-                      child: const Text('Submit'),
+                          buttonText: 'Submit',
+                        ),
+                        const SizedBox(
+                          height: 27,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                CustomElevatedButton(onTap: () {}, buttonText: "Confirm"),
-                const SizedBox(
-                  height: 28,
-                ),
-              ],
+              ),
             ),
           ),
         );
@@ -215,4 +314,20 @@ class SearchController extends GetxController {
   }
 }
 
-class _checkboxValues {}
+titileText(String text) {
+  return Text(
+    text,
+    style: const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+    ),
+  );
+}
+
+optionText(String text) {
+  return Text(
+    text,
+    style: const TextStyle(
+        fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey),
+  );
+}

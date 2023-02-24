@@ -16,7 +16,6 @@ class Homepage extends StatelessWidget {
   Homepage({super.key});
   final c = Get.put(DashScreenController());
 
-// var currentIndex = 0.obs;
 
   final con = Get.find<HomeController>();
   @override
@@ -153,7 +152,7 @@ class Homepage extends StatelessWidget {
                   children: [
                     Text("Rent Vehicles", style: theme.textTheme.titleLarge),
                     TextButton(
-                        onPressed: () => Get.to(() => ExplorePage()),
+                        onPressed: () => Get.to(() => const ExplorePage()),
                         child: Text("See More",
                             style: theme.textTheme.bodyMedium)),
                   ],

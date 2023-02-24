@@ -5,13 +5,6 @@ class ImagePath {
 
   static const String EYE = "assets/icons/eye.svg";
   static const String EYE_OFF = "assets/icons/eye_off.svg";
-  // static const String ADD_TO_CART = "assets/images/add_to_cart.svg";
-  // static const String NO_ADDRESS = "assets/images/globe.svg";
-  // static const String NO_PRODUCTS = "assets/images/no_products.svg";
-  // static const String WISHLIST = "assets/images/wishlist.svg";
-  // static const String PLACEHOLDER_UPLOAD =
-  //     "assets/images/upload_placeholder.jpg";
-  // static const String AVATAR_UPLOAD = "assets/images/avatar_placeholder.jpg";
 }
 
 // profile screen icons image path
@@ -36,6 +29,7 @@ class UserImages {
   static const ime = "$basePath/icon/ime_pay.png";
   static const esewa = "$basePath/icon/eshewa.png";
   static const khalti = "$basePath/icon/khalti.png";
+  static const cancel = "$basePath/icon/cross.svg";
 }
 
 class VehiclesImages {
