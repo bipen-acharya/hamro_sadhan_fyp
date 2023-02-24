@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:hamro_sadhan/views/explore_vehicle.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 
@@ -11,7 +9,6 @@ import '../../controllers/home_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/image_paths.dart';
 import '../../widgets/all_vehicle_card.dart';
-import '../../widgets/recent_vehicle_card.dart';
 import '../../widgets/search.dart';
 import '../../widgets/vehicle_menu.dart';
 
@@ -19,11 +16,23 @@ class Homepage extends StatelessWidget {
   Homepage({super.key});
   final c = Get.put(DashScreenController());
 
-var current_index = 0.obs;
+// var currentIndex = 0.obs;
 
   final con = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
+    var hour = DateTime.now().hour;
+    String greeting;
+    if (hour <= 12) {
+      greeting = ('Good Morning');
+    } else if ((hour > 12) && (hour <= 16)) {
+      greeting = ('Good Afternoon');
+    } else if ((hour > 16) && (hour < 20)) {
+      greeting = ('Good Evening');
+    } else {
+      greeting = ('Good Night');
+    }
+
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
     return Scaffold(
@@ -43,8 +52,7 @@ var current_index = 0.obs;
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Good Morning!",
-                            style: theme.textTheme.titleMedium),
+                        Text(greeting, style: theme.textTheme.titleMedium),
                         Text("Bipin Acharya",
                             style: theme.textTheme.titleLarge!.copyWith(
                                 fontSize: 19, color: AppColors.primaryColor)),
@@ -145,7 +153,7 @@ var current_index = 0.obs;
                   children: [
                     Text("Rent Vehicles", style: theme.textTheme.titleLarge),
                     TextButton(
-                        onPressed: () => Get.to(() =>  ExplorePage()),
+                        onPressed: () => Get.to(() => ExplorePage()),
                         child: Text("See More",
                             style: theme.textTheme.bodyMedium)),
                   ],
@@ -162,31 +170,6 @@ var current_index = 0.obs;
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildDarwerItem(IconData iconData, String title, int index) {
-    return Container(
-      margin: const EdgeInsets.only(top: 4),
-      child: Column(
-        children: [
-          ListTile(
-            onTap: () {
-              c.currentIndex.value = index;
-              Get.back();
-            },
-            leading: Icon(
-              iconData,
-              color: AppColors.textColor,
-            ),
-            title: Text(title),
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          const Divider()
-        ],
       ),
     );
   }

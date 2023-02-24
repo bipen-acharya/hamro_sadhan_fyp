@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/controllers/history_controller.dart';
 import 'package:hamro_sadhan/widgets/history_card.dart';
 
 class StatementPage extends StatelessWidget {
-  const StatementPage({super.key});
+   StatementPage({super.key});
   static const routeName = "/statement";
+
+  final con = Get.find<HistoryController>();
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);

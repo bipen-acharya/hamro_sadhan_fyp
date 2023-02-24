@@ -12,9 +12,23 @@ class HomeController extends GetxController {
     return user.value;
   }
 
+
+ TimeOfDay now = TimeOfDay.now();
+
+  String greeting() {
+  var hour = DateTime.now().hour;
+  if (hour < 12) {
+    return 'Morning';
+  }
+  if (hour < 17) {
+    return 'Afternoon';
+  }
+  return 'Evening';
+}
   void setUser(User user) {
     this.user.value = user;
   }
+
 
   final List<String> imgList = [
     'https://www.yelkenrentacar.com/dosya/2789/manset/1-2-slider_777.webp',

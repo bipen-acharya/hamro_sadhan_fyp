@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/dashboard/dash_screen.dart';
 import '../controllers/core_controller.dart';
-import '../controllers/splash_screen_controller.dart';
 import 'auth/login_screen.dart';
 
 class SplashScreen extends StatelessWidget {

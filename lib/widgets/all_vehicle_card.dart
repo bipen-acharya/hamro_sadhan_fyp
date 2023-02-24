@@ -14,7 +14,7 @@ class ViewAllVehicleCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
       child: InkWell(
-        onTap: () => Get.to(() => const SinglePage()),
+        // onTap: () => Get.to(() => const SinglePage()),
         child: Container(
           width: double.infinity,
           height: 128,
@@ -69,7 +69,7 @@ class ViewAllVehicleCard extends StatelessWidget {
                       height: 4,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Get.to(() => const SinglePage()),
                       child: const Text("Rent Now"),
                     ),
                   ],

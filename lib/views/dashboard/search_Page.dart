@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hamro_sadhan/controllers/search_controller.dart';
 
 import '../../widgets/search.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+  SearchPage({super.key});
   static const routeName = "/search";
+
+  final c = Get.find<SearchController>();
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -61,9 +66,7 @@ class SearchPage extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () {
-                // Get.to(() => const FilterScreen());
-              },
+              onTap: c.advanceSearch,
               child: Padding(
                 padding: const EdgeInsets.only(left: 15.0),
                 child: Container(

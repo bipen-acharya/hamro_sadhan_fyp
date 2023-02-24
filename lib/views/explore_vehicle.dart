@@ -4,14 +4,7 @@ import 'package:get/get.dart';
 import '../widgets/recent_vehicle_card.dart';
 
 class ExplorePage extends StatelessWidget {
-  ExplorePage({super.key});
-
-  List<String> images = [
-    "https://static.javatpoint.com/tutorial/flutter/images/flutter-logo.png",
-    "https://static.javatpoint.com/tutorial/flutter/images/flutter-logo.png",
-    "https://static.javatpoint.com/tutorial/flutter/images/flutter-logo.png",
-    "https://static.javatpoint.com/tutorial/flutter/images/flutter-logo.png"
-  ];
+  const ExplorePage({super.key});
 
   @override
   Widget build(BuildContext context) {

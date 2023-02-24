@@ -9,16 +9,11 @@ import '../../utils/image_paths.dart';
 import '../../widgets/custom_button.dart';
 
 class LogInScreen extends StatelessWidget {
- 
   LogInScreen({super.key});
- static const routeName = "/login";
+  static const routeName = "/login";
   final c = Get.find<LoginController>();
 
-  var keys = GlobalKey<FormState>();
-//  var emailTextController =
-//       TextEditingController(text: 'bipinacharya703@gmail.com');
-
-//   var passwordTextController = TextEditingController(text: 'Bipin@123');
+  final keys = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -139,7 +134,6 @@ class LogInScreen extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   Get.toNamed(RegisterPage.routeName);
-                  // Get.off(() => RegisterPage());
                 },
                 child: const Text("Create Account ?"),
               ),
