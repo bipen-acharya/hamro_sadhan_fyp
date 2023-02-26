@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/explore_vehicle.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 
-import '../../controllers/dash_screen_controller.dart';
+import '../../controllers/core_controller.dart';
 import '../../controllers/home_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/image_paths.dart';
@@ -14,10 +14,10 @@ import '../../widgets/vehicle_menu.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
-  final c = Get.put(DashScreenController());
 
+  final c = Get.find<HomeController>();
 
-  final con = Get.find<HomeController>();
+  final coreController = Get.find<CoreController>();
   @override
   Widget build(BuildContext context) {
     var hour = DateTime.now().hour;
@@ -52,7 +52,7 @@ class Homepage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(greeting, style: theme.textTheme.titleMedium),
-                        Text("Bipin Acharya",
+                        Text("${coreController.currentUser!.name?.capitalize}",
                             style: theme.textTheme.titleLarge!.copyWith(
                                 fontSize: 19, color: AppColors.primaryColor)),
                       ],
@@ -108,22 +108,22 @@ class Homepage extends StatelessWidget {
               Column(
                 children: [
                   CarouselSlider(
-                    items: con.imageSliders,
-                    carouselController: con.controller,
+                    items: c.imageSliders,
+                    carouselController: c.controller,
                     options: CarouselOptions(
                         autoPlay: true,
                         enlargeCenterPage: true,
                         aspectRatio: 2.5,
                         onPageChanged: (index, reason) {
-                          con.current.value = index;
+                          c.current.value = index;
                         }),
                   ),
                   Obx(
                     () => Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: con.imgList.asMap().entries.map((entry) {
+                      children: c.imgList.asMap().entries.map((entry) {
                         return GestureDetector(
-                          onTap: () => con.controller.animateToPage(entry.key),
+                          onTap: () => c.controller.animateToPage(entry.key),
                           child: Container(
                             width: 5,
                             height: 5,
@@ -135,7 +135,7 @@ class Homepage extends StatelessWidget {
                                             Brightness.dark
                                         ? Colors.white
                                         : Colors.black)
-                                    .withOpacity(con.current.value == entry.key
+                                    .withOpacity(c.current.value == entry.key
                                         ? 0.9
                                         : 0.4)),
                           ),

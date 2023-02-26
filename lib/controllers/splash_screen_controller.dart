@@ -13,23 +13,11 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
     Timer(const Duration(seconds: 2), () async {
-      // if(coreController.isFirstTimeUser()){
-      //      Get.offAllNamed(LogInScreen.routeName);
-      // }
       if (c.isUserLoggedIn()) {
         Get.offAndToNamed(DashScreen.routeName);
       } else {
         Get.offAndToNamed(LogInScreen.routeName);
       }
     });
-
-    // Timer(const Duration(seconds: 3), () async {
-    //   if (coreController.isFirstTimeUser()) {
-    //     Get.offAllNamed(OnBoardScreen.routeName);
-    //   }else{
-    //           Get.offAllNamed(LogInScreen.routeName);
-    //   }
-    // }
-    // );
   }
 }

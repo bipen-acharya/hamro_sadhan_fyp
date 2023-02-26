@@ -17,12 +17,12 @@ class DashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final pages = [
       Homepage(),
-       SearchPage(),
-       StatementPage(),
+      SearchPage(),
+      StatementPage(),
       ProfilePage(),
     ];
     return Scaffold(
-      // appBar: 
+      // appBar:
       body: Obx(() => pages[c.currentIndex.value]),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
@@ -39,9 +39,9 @@ class DashScreen extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.chat_bubble_rounded), label: "history"),
+                icon: Icon(Icons.history), label: "History"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline), label: "Profile"),
           ],

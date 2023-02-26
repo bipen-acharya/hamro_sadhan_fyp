@@ -13,7 +13,6 @@ class SearchController extends GetxController {
   final RxList<bool> checkboxSeatValues = RxList.filled(5, false);
 
   updateTypeCheckboxValue(int panelIndex, int checkboxIndex, bool value) {
-    // setState(() {
     for (int i = 0; i < checkboxTypeValues.length; i++) {
       if (i == checkboxIndex) {
         checkboxTypeValues[i] = value;
@@ -21,11 +20,9 @@ class SearchController extends GetxController {
         checkboxTypeValues[i] = false;
       }
     }
-    // });
   }
 
   updateSeatCheckBoxValue(int panelIndex, int checkboxIndex, bool value) {
-    // setState(() {
     for (int i = 0; i < checkboxSeatValues.length; i++) {
       if (i == checkboxIndex) {
         checkboxSeatValues[i] = value;
@@ -33,11 +30,10 @@ class SearchController extends GetxController {
         checkboxSeatValues[i] = false;
       }
     }
-    // });
   }
 
   updateSortByCheckboxValue(int panelIndex, int checkboxIndex, bool value) {
-    // setState(() {
+   
     for (int i = 0; i < checkboxSortByValues.length; i++) {
       if (i == checkboxIndex) {
         checkboxSortByValues[i] = value;
@@ -45,7 +41,6 @@ class SearchController extends GetxController {
         checkboxSortByValues[i] = false;
       }
     }
-    // });
   }
 
   advanceSearch() {

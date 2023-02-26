@@ -7,6 +7,7 @@ import '../../controllers/core_controller.dart';
 import '../../controllers/profile_controller.dart';
 import '../../utils/image_paths.dart';
 import '../../widgets/custom_profile_menu.dart';
+import '../edit_profile.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
@@ -45,12 +46,12 @@ class ProfilePage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor),
                 onPressed: () {
-                  // Get.to(() =>  EditProfile());
+                  Get.to(() =>  EditProfile());
                 },
                 child: Text("Edit Profile",
                     style: theme.textTheme.bodyLarge!.copyWith(
                       color: AppColors.borderColor,
-                    ))),
+                    ),),),
           ),
 
           //profile menu

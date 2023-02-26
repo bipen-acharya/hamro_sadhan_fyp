@@ -30,6 +30,7 @@ class UserImages {
   static const esewa = "$basePath/icon/eshewa.png";
   static const khalti = "$basePath/icon/khalti.png";
   static const cancel = "$basePath/icon/cross.svg";
+  static const statement = "$basePath/icon/statement.svg";
 }
 
 class VehiclesImages {
