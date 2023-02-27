@@ -32,7 +32,6 @@ class Homepage extends StatelessWidget {
     } else {
       greeting = ('Good Night');
     }
-
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
     return Scaffold(

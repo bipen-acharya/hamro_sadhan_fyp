@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hamro_sadhan/views/auth/login_screen.dart';
+import '../models/access_token.dart';
 import '../models/user_model.dart';
 import '../utils/storage_helper.dart';
 import '../utils/storage_keys.dart';
@@ -10,6 +11,7 @@ import '../utils/storage_keys.dart';
 class CoreController extends GetxController {
   RxBool darkTheme = RxBool(false);
   User? currentUser;
+  Accesstoken? accessToken;
 
   bool isFirstTimeUser() {
     var appLoadDate = StorageHelper.getAppLoadedDate();

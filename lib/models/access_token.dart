@@ -18,4 +18,9 @@ class Accesstoken {
     data['expires_at'] = expiresAt;
     return data;
   }
+
+  @override
+  String toString() {
+    return "$tokenType $accessToken";
+  }
 }
