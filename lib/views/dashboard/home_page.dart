@@ -1,16 +1,13 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/views/explore_vehicle.dart';
+
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 
 import '../../controllers/core_controller.dart';
 import '../../controllers/home_controller.dart';
 import '../../utils/colors.dart';
-import '../../utils/image_paths.dart';
-import '../../widgets/all_vehicle_card.dart';
-import '../../widgets/search.dart';
-import '../../widgets/vehicle_menu.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
@@ -23,7 +20,6 @@ class Homepage extends StatelessWidget {
     var hour = DateTime.now().hour;
     String greeting;
     if (hour <= 12) {
-      
       greeting = ('Good Morning');
     } else if ((hour > 12) && (hour <= 16)) {
       greeting = ('Good Afternoon');
@@ -34,141 +30,190 @@ class Homepage extends StatelessWidget {
     }
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
+
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20,
-                  horizontal: 25,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(greeting, style: theme.textTheme.titleMedium),
-                        Text("${coreController.currentUser!.name?.capitalize}",
-                            style: theme.textTheme.titleLarge!.copyWith(
-                                fontSize: 19, color: AppColors.primaryColor)),
-                      ],
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: Image.network(
-                        "https://picsum.photos/100/100",
-                        fit: BoxFit.cover,
-                        height: 50,
-                        width: 50,
-                      ),
-                    ),
-                  ],
-                ),
+      appBar: AppBar(
+        centerTitle: false,
+        backgroundColor: AppColors.primaryColor,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(greeting,
+                style: theme.textTheme.titleMedium!.copyWith(
+                  color: AppColors.extraWhiteColor,
+                )),
+            Text("${coreController.currentUser!.name?.capitalize}",
+                style: theme.textTheme.titleLarge!
+                    .copyWith(fontSize: 15, color: AppColors.extraWhiteColor)),
+          ],
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 10,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.network(
+                "https://picsum.photos/100/100",
+                fit: BoxFit.cover,
+                height: 40,
+                width: 40,
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 0,
-                  bottom: 25,
-                  left: 20,
-                  right: 20,
-                ),
-                child: CustomTextField(
-                  onTap: () {
-                    showSearch(
-                      context: context,
-                      delegate: MySearchDelegate(),
-                    );
-                  },
-                  readOnly: true,
-                  hint: "Search ",
-                  prefixIcon: const Icon(Icons.search, size: 30),
-                ),
+            ),
+          ),
+        ],
+      ),
+      body: Obx(
+        () => SafeArea(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            const SizedBox(
+              height: 8,
+            ),
+            Center(
+              child: Image.asset(
+                'assets/logo.png',
+                height: 130,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: const [
-                    VehicleMenuCard(
-                        image: VehiclesImages.scooter, name: 'Scooter'),
-                    VehicleMenuCard(image: VehiclesImages.bike, name: 'Bike'),
-                    VehicleMenuCard(image: VehiclesImages.cycle, name: 'Cycle'),
-                    VehicleMenuCard(image: VehiclesImages.car, name: 'Car'),
-                    VehicleMenuCard(
-                        image: VehiclesImages.scooter, name: 'Scooter'),
-                  ],
-                ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Text(
+              "Please fill the details below to proceed",
+              style: textTheme.titleSmall!.copyWith(
+                color: Colors.red,
               ),
-              const SizedBox(
-                height: 7,
-              ),
-              Column(
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 29),
+              child: Column(
                 children: [
-                  CarouselSlider(
-                    items: c.imageSliders,
-                    carouselController: c.controller,
-                    options: CarouselOptions(
-                        autoPlay: true,
-                        enlargeCenterPage: true,
-                        aspectRatio: 2.5,
-                        onPageChanged: (index, reason) {
-                          c.current.value = index;
-                        }),
+                  CustomTextField(
+                    hint: 'Any',
+                    controller: c.myController,
                   ),
-                  Obx(
-                    () => Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: c.imgList.asMap().entries.map((entry) {
-                        return GestureDetector(
-                          onTap: () => c.controller.animateToPage(entry.key),
-                          child: Container(
-                            width: 5,
-                            height: 5,
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 4.0),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: (Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? Colors.white
-                                        : Colors.black)
-                                    .withOpacity(c.current.value == entry.key
-                                        ? 0.9
-                                        : 0.4)),
-                          ),
-                        );
-                      }).toList(),
+                  Row(
+                    children: [
+                      Flexible(child: TextFormField()),
+                      const SizedBox(width: 10),
+                      Flexible(child: TextFormField()),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 17,
+                  ),
+                  Row(
+                    children: [
+                      Flexible(child: TextFormField()),
+                      const SizedBox(width: 10),
+                      Flexible(child: TextFormField()),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 41,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                        maximumSize: const Size(double.infinity, 60),
+                        backgroundColor: AppColors.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        )),
+                    onPressed:
+                        c.submit.value ? () => submitData : null, //<-- SEE HERE
+                    child: const Text(
+                      'Submit',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Rent Vehicles", style: theme.textTheme.titleLarge),
-                    TextButton(
-                        onPressed: () => Get.to(() => const ExplorePage()),
-                        child: Text("See More",
-                            style: theme.textTheme.bodyMedium)),
-                  ],
-                ),
-              ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 16,
-                itemBuilder: (context, index) {
-                  return const ViewAllVehicleCard();
-                },
-              ),
-            ],
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+submitData() {
+  // Do something here
+  log("message");
+}
+
+class CustomTextField1 extends StatelessWidget {
+  const CustomTextField1(
+      {Key? key,
+      this.controller,
+      required this.label,
+      required this.hintText,
+      this.onTap,
+      this.readOnly = false})
+      : super(key: key);
+
+  final TextEditingController? controller;
+  final String label;
+  final String hintText;
+  final VoidCallback? onTap;
+  final bool? readOnly;
+
+  Icon? _getRightIcon() {
+    if (label == 'Time') {
+      return Icon(
+        Icons.access_time_rounded,
+        color: Colors.grey.withOpacity(0.5),
+      );
+    }
+    if (label == 'Date') {
+      return Icon(
+        Icons.date_range,
+        color: Colors.grey.withOpacity(0.5),
+      );
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label),
+        TextField(
+          readOnly: readOnly as bool,
+          maxLines: label == 'Description' ? 5 : 1,
+          controller: controller,
+          onTap: onTap,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(14),
+            hintText: hintText,
+            suffixIcon: _getRightIcon(),
+            border: InputBorder.none,
+            enabledBorder: _borders(),
+            focusedBorder: _borders(),
+            disabledBorder: _borders(),
           ),
         ),
+        kVerticalSpace(20),
+      ],
+    );
+  }
+
+  Widget kVerticalSpace(double height) => SizedBox(height: height);
+  _borders() {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16),
+      borderSide: BorderSide(
+        width: 1,
+        color: Colors.amber.withOpacity(0.3),
       ),
     );
   }

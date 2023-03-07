@@ -19,7 +19,7 @@ import '../views/splash_screen.dart';
 var commonPages = [
   GetPage(
       name: SplashScreen.routeName,
-      page: (() =>  SplashScreen()),
+      page: (() =>  const SplashScreen()),
       binding: BindingsBuilder(() => Get.lazyPut(() => SplashController()))),
   GetPage(
     name: RegisterPage.routeName,

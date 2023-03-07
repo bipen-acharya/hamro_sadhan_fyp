@@ -15,13 +15,21 @@ class HomeController extends GetxController {
   //   return user.value;
   // }
 
+  final myController = TextEditingController();
+  RxBool submit = false.obs;
+
   TimeOfDay now = TimeOfDay.now();
 
   RxList<VehicleCategory> vehicleCategory = RxList();
   RxBool loading = false.obs;
   @override
   void onInit() {
+    myController.addListener((){
+       submit.value = myController.text.isNotEmpty;
+    });
+
     getAllCategoryDetail();
+
     super.onInit();
   }
 

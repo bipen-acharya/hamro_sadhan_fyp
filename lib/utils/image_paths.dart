@@ -19,18 +19,19 @@ class ProfileScreenIcon {
 }
 
 class UserImages {
-  static const basePath = "assets/Users";
+  static const basePath = "assets/users";
   static const maskGroup = "assets/Users/icon/maskGroup.svg";
   static const petrol = "$basePath/icon/petrol.svg";
   static const seat = "$basePath/icon/seat.svg";
   static const speed = "$basePath/icon/speed.svg";
   static const call = "$basePath/icon/call.svg";
-  static const logo = "assets/logo2.svg";
+  static const logo = "assets/logo.png";
   static const ime = "$basePath/icon/ime_pay.png";
   static const esewa = "$basePath/icon/eshewa.png";
   static const khalti = "$basePath/icon/khalti.png";
   static const cancel = "$basePath/icon/cross.svg";
   static const statement = "$basePath/icon/statement.svg";
+  static const logo1 = "$basePath/icon/Logo.svg";
 }
 
 class VehiclesImages {

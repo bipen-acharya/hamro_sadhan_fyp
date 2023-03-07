@@ -16,7 +16,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final c = Get.find<CoreController>();
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 1), () {
       if (c.isUserLoggedIn()) {
         Get.offAndToNamed(DashScreen.routeName);
       } else {
