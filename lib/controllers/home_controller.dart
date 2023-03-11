@@ -24,28 +24,28 @@ class HomeController extends GetxController {
   RxBool loading = false.obs;
   @override
   void onInit() {
-    myController.addListener((){
-       submit.value = myController.text.isNotEmpty;
+    myController.addListener(() {
+      submit.value = myController.text.isNotEmpty;
     });
 
-    getAllCategoryDetail();
+    // getAllCategoryDetail();
 
     super.onInit();
   }
 
-  getAllCategoryDetail() async {
-    loading.value = true;
-    await VehicleCategoryRepo.getAllCategory(
-      onSuccess: (category) {
-        loading.value = false;
-        vehicleCategory.addAll(category);
-      },
-      onError: ((message) {
-        loading.value = false;
-        CustomSnackBar.error(title: "Classmate", message: message);
-      }),
-    );
-  }
+  // getAllCategoryDetail() async {
+  //   loading.value = true;
+  //   await VehicleCategoryRepo.getAllCategory(
+  //     onSuccess: (category) {
+  //       loading.value = false;
+  //       vehicleCategory.addAll(category);
+  //     },
+  //     onError: ((message) {
+  //       loading.value = false;
+  //       CustomSnackBar.error(title: "Classmate", message: message);
+  //     }),
+  //   );
+  // }
 
   String greeting() {
     var hour = DateTime.now().hour;

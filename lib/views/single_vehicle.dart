@@ -212,7 +212,7 @@ class SinglePage extends StatelessWidget {
                             color: const Color.fromARGB(230, 241, 240, 240),
                           ),
                           child: SvgPicture.asset(
-                            UserImages.call,
+                            ImagePath.call,
                             // height: 21,
                             // width: 21,
                             fit: BoxFit.contain,
@@ -273,8 +273,7 @@ class SinglePage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
-              onPressed: 
-               () => Get.to(() =>  BillingScreen()),
+              onPressed: () => Get.to(() => BillingScreen()),
               child: Text(
                 'Rent Now',
                 style: theme.textTheme.titleLarge!.copyWith(
@@ -312,7 +311,7 @@ class FeatureCard extends StatelessWidget {
               color: const Color.fromARGB(230, 241, 240, 240),
             ),
             child: SvgPicture.asset(
-              UserImages.maskGroup,
+              ImagePath.maskGroup,
               // height: 21,
               // width: 21,
               fit: BoxFit.contain,

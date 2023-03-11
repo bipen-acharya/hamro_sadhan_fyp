@@ -487,19 +487,19 @@ class BillingScreen extends StatelessWidget {
                             children: [
                               PaymentButton(
                                 name: 'Esewa',
-                                image: UserImages.esewa,
+                                image: ImagePath.esewa,
                                 isSelected: c.selectedPayment.value == 'esewa',
                                 onTap: () => c.updateSelectedPayment('esewa'),
                               ),
                               PaymentButton(
                                 name: 'Khalti',
                                 isSelected: c.selectedPayment.value == 'khalti',
-                                image: UserImages.khalti,
+                                image: ImagePath.khalti,
                                 onTap: () => c.updateSelectedPayment('khalti'),
                               ),
                               PaymentButton(
                                 name: 'Imepay',
-                                image: UserImages.ime,
+                                image: ImagePath.esewa,
                                 isSelected: c.selectedPayment.value == 'ime',
                                 onTap: () => c.updateSelectedPayment('ime'),
                               ),

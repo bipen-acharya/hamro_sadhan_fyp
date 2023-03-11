@@ -43,15 +43,18 @@ class ProfilePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor),
-                onPressed: () {
-                  Get.to(() =>  EditProfile());
-                },
-                child: Text("Edit Profile",
-                    style: theme.textTheme.bodyLarge!.copyWith(
-                      color: AppColors.borderColor,
-                    ),),),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primaryColor),
+              onPressed: () {
+                Get.to(() => EditProfile());
+              },
+              child: Text(
+                "Edit Profile",
+                style: theme.textTheme.bodyLarge!.copyWith(
+                  color: AppColors.borderColor,
+                ),
+              ),
+            ),
           ),
 
           //profile menu
@@ -68,7 +71,7 @@ class ProfilePage extends StatelessWidget {
                     return CustomProfileMenu(
                       onTap: () => myFunction(controller.darkTheme.value),
                       label: "Dark Mode",
-                      iocnData: ProfileScreenIcon.moon,
+                      iocnData: ImagePath.moon,
                       trailing: SizedBox(
                         width: 55,
                         height: 30,
@@ -86,29 +89,29 @@ class ProfilePage extends StatelessWidget {
                   }),
                   CustomProfileMenu(
                     onTap: c.changePassword,
-                    iocnData: ProfileScreenIcon.password,
+                    iocnData: ImagePath.password,
                     label: "Change Password",
                   ),
                   CustomProfileMenu(
                     onTap: () {},
-                    iocnData: ProfileScreenIcon.help,
+                    iocnData: ImagePath.help,
                     label: "Help Centre",
                   ),
                   CustomProfileMenu(
                     onTap: () {},
-                    iocnData: ProfileScreenIcon.star,
+                    iocnData: ImagePath.star,
                     label: "Rate our app",
                   ),
                   CustomProfileMenu(
                     onTap: () {},
-                    iocnData: ProfileScreenIcon.setting,
+                    iocnData: ImagePath.setting,
                     label: "Settings",
                   ),
                   CustomProfileMenu(
                     onTap: () {
                       controller.logOut();
                     },
-                    iocnData: ProfileScreenIcon.logout,
+                    iocnData: ImagePath.logout,
                     label: "Logout",
                   ),
                 ],

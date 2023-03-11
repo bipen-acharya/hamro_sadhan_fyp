@@ -92,7 +92,7 @@ class SearchController extends GetxController {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: SvgPicture.asset(UserImages.cancel)),
+                            icon: SvgPicture.asset(ImagePath.cancel)),
                         const Text(
                           "Filter By",
                           style: TextStyle(

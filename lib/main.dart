@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'controllers/core_controller.dart';
-import 'controllers/home_controller.dart';
 import 'utils/page.dart';
 import 'utils/theme.dart';
 import 'views/splash_screen.dart';
 
-void main() {
-  Get.put(HomeController());
+void main() async {
+  // Get.put(HomeController());
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
