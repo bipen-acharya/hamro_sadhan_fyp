@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hamro_sadhan/views/auth/login_screen.dart';
-import '../models/access_token.dart';
-import '../models/user_model.dart';
+import '../models/auth/access_token.dart';
+import '../models/auth/user_model.dart';
 import '../utils/storage_helper.dart';
 import '../utils/storage_keys.dart';
 

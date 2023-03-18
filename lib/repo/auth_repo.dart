@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hamro_sadhan/models/user_model.dart';
+import 'package:hamro_sadhan/models/auth/user_model.dart';
 import 'package:http/http.dart' as http;
 import '../controllers/core_controller.dart';
 import '../utils/apis.dart';

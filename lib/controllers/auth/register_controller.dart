@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 
-import '../../models/user_model.dart';
+import '../../models/auth/user_model.dart';
 import '../../repo/auth_repo.dart';
 import '../../widgets/custom_snackbar.dart';
 

@@ -4,8 +4,8 @@ import 'dart:developer';
 import 'package:get_storage/get_storage.dart';
 import 'package:hamro_sadhan/utils/storage_keys.dart';
 
-import '../models/access_token.dart';
-import '../models/user_model.dart';
+import '../models/auth/access_token.dart';
+import '../models/auth/user_model.dart';
 
 class StorageHelper {
   static DateTime? getAppLoadedDate() {
