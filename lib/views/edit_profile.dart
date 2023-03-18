@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 
-import '../controllers/home_controller.dart';
+import '../controllers/dashboard/home_controller.dart';
 
 class EditProfile extends StatelessWidget {
   EditProfile({super.key});
 
-  final c = Get.find<HomeController>();
+  final c = Get.find<HomePageController>();
 
   @override
   Widget build(BuildContext context) {

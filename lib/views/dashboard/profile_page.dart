@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/controllers/home_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
 import '../../controllers/core_controller.dart';
-import '../../controllers/profile_controller.dart';
+import '../../controllers/dashboard/profile_controller.dart';
 import '../../utils/image_paths.dart';
 import '../../widgets/custom_profile_menu.dart';
 import '../edit_profile.dart';
@@ -13,7 +13,7 @@ class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
   final c = Get.find<ProfileController>();
   final controller = Get.find<CoreController>();
-  final controllerHome = Get.find<HomeController>();
+  final controllerHome = Get.find<HomePageController>();
 
   @override
   Widget build(BuildContext context) {

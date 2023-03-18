@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/controllers/history_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/history_controller.dart';
 import 'package:hamro_sadhan/widgets/history_card.dart';
 
 class StatementPage extends StatelessWidget {

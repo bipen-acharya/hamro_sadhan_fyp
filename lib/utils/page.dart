@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/auth/register_controller.dart';
-import 'package:hamro_sadhan/controllers/history_controller.dart';
-import 'package:hamro_sadhan/controllers/home_controller.dart';
-import 'package:hamro_sadhan/controllers/search_controller.dart';
-import 'package:hamro_sadhan/controllers/splash_screen_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/history_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/search_controller.dart';
+import 'package:hamro_sadhan/controllers/auth/splash_screen_controller.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
 import 'package:hamro_sadhan/views/single_vehicle.dart';
 
 import '../controllers/auth/login_controller.dart';
-import '../controllers/dash_screen_controller.dart';
-import '../controllers/profile_controller.dart';
+import '../controllers/dashboard/dash_screen_controller.dart';
+import '../controllers/dashboard/home_controller.dart';
+import '../controllers/dashboard/profile_controller.dart';
 import '../controllers/single_page_controller.dart';
 import '../views/auth/login_screen.dart';
 import '../views/dashboard/dash_screen.dart';
@@ -38,7 +38,7 @@ var userPages = [
       binding: BindingsBuilder(
         () {
           Get.lazyPut(() => DashScreenController());
-          Get.lazyPut(() => HomeController());
+          Get.lazyPut(() => HomePageController());
           Get.lazyPut(() => SearchController());
           Get.lazyPut(() => HistoryController());
           Get.lazyPut(() => ProfileController());

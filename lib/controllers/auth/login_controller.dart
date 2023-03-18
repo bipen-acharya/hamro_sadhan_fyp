@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/controllers/home_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/history_controller.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 
 import '../../repo/auth_repo.dart';
 import '../../views/dashboard/dash_screen.dart';
 import '../../widgets/custom_snackbar.dart';
+import '../dashboard/home_controller.dart';
 
 class LoginController extends GetxController {
   // var formKey = GlobalKey<FormState>();
@@ -15,7 +16,7 @@ class LoginController extends GetxController {
 
   var emailTextController = TextEditingController();
   var passwordTextController = TextEditingController();
-  final homeController = Get.find<HomeController>();
+  final homeController = Get.find<HomePageController>();
   void onEyeClick() {
     passwordObscure.value = !passwordObscure.value;
   }

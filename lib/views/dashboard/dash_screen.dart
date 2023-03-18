@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/core_controller.dart';
 import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
-import '../../controllers/dash_screen_controller.dart';
+import '../../controllers/dashboard/dash_screen_controller.dart';
 import '../../utils/colors.dart';
 import 'home_page.dart';
 import 'profile_page.dart';

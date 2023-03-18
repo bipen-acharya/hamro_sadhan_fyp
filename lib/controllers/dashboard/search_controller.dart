@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../utils/colors.dart';
-import '../utils/image_paths.dart';
-import '../widgets/custom_button.dart';
+import '../../utils/colors.dart';
+import '../../utils/image_paths.dart';
+import '../../widgets/custom_button.dart';
 
 class SearchController extends GetxController {
   final RxList<bool> isExpanded1 = RxList.generate(3, (index) => false);

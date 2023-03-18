@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/controllers/search_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/search_controller.dart';
 
 import '../../widgets/search.dart';
 

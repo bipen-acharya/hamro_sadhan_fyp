@@ -5,13 +5,13 @@ import 'package:hamro_sadhan/views/explore_vehicle.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 
 import '../../controllers/core_controller.dart';
-import '../../controllers/home_controller.dart';
+import '../../controllers/dashboard/home_controller.dart';
 import '../../utils/colors.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
 
-  final c = Get.find<HomeController>();
+  final c = Get.find<HomePageController>();
 
   final coreController = Get.find<CoreController>();
   @override

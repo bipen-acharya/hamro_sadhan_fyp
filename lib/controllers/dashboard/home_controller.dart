@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/category.dart';
 
-class HomeController extends GetxController {
+class HomePageController extends GetxController {
   // final user = (null as User?).obs;
   final CarouselController controller = CarouselController();
 // int current = 0;

@@ -26,7 +26,7 @@ class AuthRepo {
       });
       http.Response response = await http.post(
           Uri.parse(
-            Api.login,
+            HamroSadhanApi.login,
           ),
           headers: headers,
           body: body);
@@ -72,7 +72,7 @@ class AuthRepo {
       });
       http.Response response = await http.post(
           Uri.parse(
-            Api.register,
+            HamroSadhanApi.register,
           ),
           headers: headers,
           body: body);
