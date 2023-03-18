@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/views/explore_vehicle.dart';
 
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 
@@ -97,29 +96,65 @@ class Homepage extends StatelessWidget {
                 const SizedBox(
                   height: 17,
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 7),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Start Date and Time ",
+                        style: textTheme.bodySmall!.copyWith(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Expanded(
+                          child: Container(
+                        height: 1.5,
+                        color: const Color.fromRGBO(239, 239, 239, 1),
+                      ))
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     Flexible(
                       child: TextFormField(
                         decoration: InputDecoration(
+                          filled: true,
+                          fillColor: AppColors.extraWhiteColor,
                           contentPadding: const EdgeInsets.all(8.0),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           hintText: "Date ",
                         ),
+                        readOnly: true,
+                        controller: c.startDateController,
+                        onTap: () => c.startChooseDate(context),
                       ),
                     ),
                     const SizedBox(width: 10),
                     Flexible(
                       child: TextFormField(
                         decoration: InputDecoration(
+                          filled: true,
+                          fillColor: AppColors.extraWhiteColor,
                           contentPadding: const EdgeInsets.all(8.0),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           hintText: "Time",
                         ),
+                        readOnly: true,
+                        controller: c.startTimeController,
+                        onTap: () => c.startChooseTime(context),
                       ),
                     ),
                   ],
@@ -127,29 +162,80 @@ class Homepage extends StatelessWidget {
                 const SizedBox(
                   height: 17,
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 7),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "End Date and Time ",
+                        style: textTheme.bodySmall!.copyWith(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Expanded(
+                          child: Container(
+                        height: 1.5,
+                        color: const Color.fromRGBO(239, 239, 239, 1),
+                      ))
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
                   children: [
                     Flexible(
                       child: TextFormField(
                         decoration: InputDecoration(
+                          filled: true,
+                          fillColor: AppColors.extraWhiteColor,
                           contentPadding: const EdgeInsets.all(8.0),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           hintText: "Date",
                         ),
+                        readOnly: true,
+                        controller: c.endDateController,
+                        onTap: () => c.endChooseDate(context),
                       ),
                     ),
                     const SizedBox(width: 10),
                     Flexible(
                       child: TextFormField(
                         decoration: InputDecoration(
+                          filled: true,
+                          fillColor: AppColors.extraWhiteColor,
                           contentPadding: const EdgeInsets.all(8.0),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           hintText: "Time",
                         ),
+                        readOnly: true,
+                        controller: c.endTimeController,
+                        onTap: () => c.endChooseTime(context),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Note: You must fill all the above before you proceed",
+                      style: textTheme.bodySmall!.copyWith(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.red,
                       ),
                     ),
                   ],
@@ -157,19 +243,34 @@ class Homepage extends StatelessWidget {
                 const SizedBox(
                   height: 41,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 50),
-                      maximumSize: const Size(double.infinity, 60),
-                      backgroundColor: AppColors.primaryColor,
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: c.submit.value
+                        ? AppColors.primaryColor
+                        : AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
-                      )),
-                  onPressed:
-                      c.submit.value ? () => submitData : null, //<-- SEE HERE
-                  child: const Text(
-                    'Submit',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    onPressed: c.submit.value
+                        ? () {
+                            Get.to(() => const ExplorePage());
+                          }
+                        : null,
+                    child: Text(
+                      'Proceed',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: c.submit.value ? Colors.white : Colors.grey,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -179,9 +280,6 @@ class Homepage extends StatelessWidget {
       ),
     );
   }
-}
 
-submitData() {
-  // Do something here
-  log("message");
+  submitData() {}
 }

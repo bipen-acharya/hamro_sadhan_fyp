@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/billing_controller.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
-import 'package:hamro_sadhan/utils/validators.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 
 import '../utils/image_paths.dart';
