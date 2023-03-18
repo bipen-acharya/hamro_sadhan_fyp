@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hamro_sadhan/models/auth/user_model.dart';
 import 'package:http/http.dart' as http;
-import '../controllers/core_controller.dart';
+import '../controllers/auth/core_controller.dart';
+import '../models/auth/access_token.dart';
 import '../utils/apis.dart';
 import '../utils/storage_keys.dart';
 
@@ -34,13 +36,11 @@ class AuthRepo {
       dynamic data = jsonDecode(response.body);
       if (data["status"]) {
         final box = GetStorage();
-        // log("--------------------------------  ${data['data']["user"]}");
-        // log("--------------------------------  ${data["data"]["token"]}");
+
+        log("--------------------------------  ${data["data"]["token"].toString()}");
         // User user = User.fromJson(data['user']);
-        // Accesstoken accessToken = Accesstoken.fromJson(data['token']);
         // log(user.email.toString());
-        await box.write(
-            StorageKeys.ACCESS_TOKEN, json.encode(data["data"]["token"]));
+        await box.write(StorageKeys.ACCESS_TOKEN, (data["data"]["token"]));
         await box.write(StorageKeys.USER, data["data"]["user"]);
         Get.find<CoreController>().loadCurrentUser();
         onSuccess();

@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/category.dart';
 
-import '../controllers/core_controller.dart';
+import '../controllers/auth/core_controller.dart';
 
 import 'package:http/http.dart' as http;
 

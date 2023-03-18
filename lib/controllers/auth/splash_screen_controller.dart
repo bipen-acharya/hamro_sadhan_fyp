@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/dashboard/dash_screen.dart';
 
 import '../../views/auth/login_screen.dart';
-import '../core_controller.dart';
+import 'core_controller.dart';
 
 class SplashController extends GetxController {
   final c = Get.find<CoreController>();

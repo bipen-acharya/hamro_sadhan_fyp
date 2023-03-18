@@ -22,21 +22,20 @@ class LoginController extends GetxController {
   }
 
   void onSubmit() async {
-        loading.show(message: "loggin in ..");
-      await AuthRepo.loginUser(
-        email: emailTextController.text,
-        password: passwordTextController.text,
-        onSuccess: () {
-          // homeController.setUser(user);
-          Get.offAllNamed(DashScreen.routeName);
-          CustomSnackBar.success(
-              title: "Login Successful", message: "Logged in succesfully");
-        },
-        onError: (message) {
-          loading.hide();
-          CustomSnackBar.error(message: message, title: "Login");
-        },
-      );
-    
+    loading.show(message: "loggin in ..");
+    await AuthRepo.loginUser(
+      email: emailTextController.text,
+      password: passwordTextController.text,
+      onSuccess: () {
+        // homeController.setUser(user);
+        Get.offAllNamed(DashScreen.routeName);
+        CustomSnackBar.success(
+            title: "Login Successful", message: "Logged in succesfully");
+      },
+      onError: (message) {
+        loading.hide();
+        CustomSnackBar.error(message: message, title: "Login");
+      },
+    );
   }
 }

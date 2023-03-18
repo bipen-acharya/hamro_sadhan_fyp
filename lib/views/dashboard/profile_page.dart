@@ -3,7 +3,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
-import '../../controllers/core_controller.dart';
+import '../../controllers/auth/core_controller.dart';
 import '../../controllers/dashboard/profile_controller.dart';
 import '../../utils/image_paths.dart';
 import '../../widgets/custom_profile_menu.dart';

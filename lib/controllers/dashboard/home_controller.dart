@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/category.dart';
 
+import '../../models/vehicle.dart';
+import '../../repo/vehicle_repo.dart';
+import '../../widgets/custom_snackbar.dart';
+import '../auth/core_controller.dart';
+
 class HomePageController extends GetxController {
   // final user = (null as User?).obs;
   final CarouselController controller = CarouselController();
@@ -13,6 +18,8 @@ class HomePageController extends GetxController {
   // User? getuser() {
   //   return user.value;
   // }
+
+  var coreController = Get.put(CoreController());
 
   final myController = TextEditingController();
 
@@ -37,15 +44,16 @@ class HomePageController extends GetxController {
   RxList<VehicleCategory> vehicleCategory = RxList();
   RxBool loading = false.obs;
 
-  
   @override
   void onInit() {
+    var token = coreController.accessToken;
+    log("token-----=>>>>>>>>>>>>${token.toString()}");
     startDateController.addListener(enableButton);
     startTimeController.addListener(enableButton);
     endDateController.addListener(enableButton);
     endTimeController.addListener(enableButton);
     myController.addListener(enableButton);
-   super.onInit();
+    super.onInit();
   }
 
   // bool submit = false;
@@ -136,5 +144,26 @@ class HomePageController extends GetxController {
       endTime = pickedTime.format(context);
       endTimeController.text = endTime.toString();
     }
+  }
+
+  RxList<Vehicle> vehicleList = RxList();
+  getAllVehicleList(
+      // String startDate, String startTime, String endDate,String endTime
+      ) async {
+    loading.value = true;
+    await VehicleRepo.getAllVehicle(
+      startDate: '2023-03-18',
+      startTime: '11:00',
+      endDate: '2023-03-18',
+      endTime: '12:00',
+      onSuccess: (vehicle) {
+        loading.value = false;
+        vehicleList.addAll(vehicle);
+      },
+      onError: (message) {
+        loading.value = false;
+        CustomSnackBar.error(message: message, title: "Vehicle");
+      },
+    );
   }
 }
