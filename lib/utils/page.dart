@@ -44,9 +44,9 @@ var userPages = [
           Get.lazyPut(() => ProfileController());
         },
       )),
-  GetPage(
-      name: SinglePage.routeName,
-      page: (() => const SinglePage()),
-      binding:
-          BindingsBuilder(() => Get.lazyPut(() => SinglePageController()))),
+  // GetPage(
+  //     name: SinglePage.routeName,
+  //     page: (() =>  SinglePage()),
+  //     binding:
+  //         BindingsBuilder(() => Get.lazyPut(() => SinglePageController()))),
 ];

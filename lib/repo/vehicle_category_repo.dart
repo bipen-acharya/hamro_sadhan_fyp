@@ -14,7 +14,7 @@ class VehicleCategoryRepo {
       required Function(String message) onError}) async {
     try {
       var coreController = Get.find<CoreController>();
-      var token = coreController.accessToken;
+      var token = coreController.accesstoken;
       var url = Uri.parse("");
       http.Response response = await http.get(
         url,
@@ -25,8 +25,6 @@ class VehicleCategoryRepo {
         },
       );
       var data = json.decode(response.body);
-      log("all catgeory");
-      log(data["data"].toString());
       if (data['status']) {
         log("on sucess ma aayo ");
         onSuccess(categoryListFromJson(data['data']['categories']));

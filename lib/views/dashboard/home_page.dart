@@ -9,6 +9,7 @@ import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 import '../../controllers/auth/core_controller.dart';
 import '../../controllers/dashboard/home_controller.dart';
 import '../../utils/colors.dart';
+import '../../utils/storage_helper.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
@@ -262,10 +263,11 @@ class Homepage extends StatelessWidget {
                     ),
                     onPressed: c.submit.value
                         ? () {
-                            // Get.to(() => ExplorePage());
-                            // c.getAllVehicleList();
-                            var token = coreController.accessToken;
-                            log("token-----=>>>>>>>>>>>>${token.toString()}");
+                            Get.to(() => ExplorePage());
+                            c.getAllVehicleList();
+                            // var token = coreController.accesstoken;
+                            // var token = StorageHelper.getToken()!;
+                            // log("token-----=>>>>>>>>>>>>${token.toString()}");
                           }
                         : null,
                     child: Text(

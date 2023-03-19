@@ -46,7 +46,7 @@ class HomePageController extends GetxController {
 
   @override
   void onInit() {
-    var token = coreController.accessToken;
+    var token = coreController.accesstoken;
     log("token-----=>>>>>>>>>>>>${token.toString()}");
     startDateController.addListener(enableButton);
     startTimeController.addListener(enableButton);
@@ -152,10 +152,10 @@ class HomePageController extends GetxController {
       ) async {
     loading.value = true;
     await VehicleRepo.getAllVehicle(
-      startDate: '2023-03-18',
-      startTime: '11:00',
-      endDate: '2023-03-18',
-      endTime: '12:00',
+      // startDate: '2023-03-18',
+      // startTime: '2023-03-18 11:00',
+      // endDate: '2023-03-18',
+      // endTime: '2023-03-18 12:00',
       onSuccess: (vehicle) {
         loading.value = false;
         vehicleList.addAll(vehicle);

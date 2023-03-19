@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
-import 'package:hamro_sadhan/controllers/explore_controller.dart';
 import 'package:hamro_sadhan/views/single_vehicle.dart';
 
 import '../models/vehicle.dart';
 import '../utils/colors.dart';
-import '../widgets/recent_vehicle_card.dart';
 
 class ExplorePage extends StatelessWidget {
   ExplorePage({super.key});
@@ -59,7 +57,8 @@ class ExplorePage extends StatelessWidget {
                       vehicle: vehicles,
                     );
                   },
-                )),
+                ),
+              ),
       ),
     );
   }
@@ -76,7 +75,9 @@ class RecentVehicleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const SinglePage());
+        Get.to(() => SinglePage(
+              vehicle: vehicle,
+            ));
       },
       child: Container(
         height: 95,
@@ -105,7 +106,8 @@ class RecentVehicleCard extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10)),
-                  child: Image.network(
+                  child: 
+                  Image.network(
                     "https://dalamancarrentals.com/arayuz/assets/img/car-rent-news/h_3_730x485.png?.1638283284",
                     fit: BoxFit.fill,
                   ),
@@ -126,17 +128,17 @@ class RecentVehicleCard extends StatelessWidget {
                     vehicle.vehicleName ?? "",
                     overflow: TextOverflow.ellipsis,
                     softWrap: false,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                   Row(
-                    children: const [
-                      Icon(Icons.money_rounded),
+                    children: [
+                      const Icon(Icons.money_rounded),
                       Text(
-                        "2500/day",
-                        style: TextStyle(
+                        vehicle.costPerHour.toString(),
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: AppColors.primaryColor,

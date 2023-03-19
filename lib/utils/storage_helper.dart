@@ -30,9 +30,9 @@ class StorageHelper {
   static Accesstoken? getToken() {
     try {
       final box = GetStorage();
-      Accesstoken token = Accesstoken.fromJson(
-          jsonDecode(box.read(StorageKeys.ACCESS_TOKEN)) ?? "");
-      log("--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>${StorageKeys.ACCESS_TOKEN}");
+      Accesstoken token =
+          Accesstoken.fromJson(jsonDecode(box.read(StorageKeys.ACCESS_TOKEN)));
+
       return token;
     } catch (e) {
       log(e.toString());

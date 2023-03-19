@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/models/vehicle.dart';
 import 'package:hamro_sadhan/utils/image_paths.dart';
 import 'package:hamro_sadhan/views/billing_screen.dart';
 
@@ -8,8 +9,9 @@ import '../utils/colors.dart';
 
 class SinglePage extends StatelessWidget {
   static const routeName = "/single_page";
-  const SinglePage({super.key});
+  const SinglePage({super.key, required this.vehicle});
 
+  final Vehicle vehicle;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -39,12 +41,12 @@ class SinglePage extends StatelessWidget {
             const SizedBox(
               height: 17,
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.only(
                 left: 37,
               ),
               child: Text(
-                "Audi SUV",
+               vehicle.vehicleName??"",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
