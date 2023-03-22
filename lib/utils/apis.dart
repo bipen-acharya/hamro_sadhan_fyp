@@ -4,4 +4,5 @@ class HamroSadhanApi {
   static String login = "$baseUrl/login";
   static String category = "$baseUrl/category";
   static String availableVehicle = "$baseUrl/available-vehicle";
+  static String changePassword = "$baseUrl/change-password";
 }

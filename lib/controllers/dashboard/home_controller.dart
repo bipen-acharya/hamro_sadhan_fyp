@@ -21,7 +21,7 @@ class HomePageController extends GetxController {
 
   var coreController = Get.put(CoreController());
 
-  final myController = TextEditingController();
+  // final myController = TextEditingController();
 
 //start date
   TextEditingController startDateController = TextEditingController();
@@ -52,7 +52,7 @@ class HomePageController extends GetxController {
     startTimeController.addListener(enableButton);
     endDateController.addListener(enableButton);
     endTimeController.addListener(enableButton);
-    myController.addListener(enableButton);
+    // myController.addListener(enableButton);
     super.onInit();
   }
 
@@ -62,30 +62,30 @@ class HomePageController extends GetxController {
     submit.value = startTimeController.text.isNotEmpty &&
         startDateController.text.isNotEmpty &&
         endDateController.text.isNotEmpty &&
-        endTimeController.text.isNotEmpty &&
-        myController.text.isNotEmpty;
+        endTimeController.text.isNotEmpty;
+    // myController.text.isNotEmpty;
   }
 
-  final List<String> imgList = [
-    'https://www.yelkenrentacar.com/dosya/2789/manset/1-2-slider_777.webp',
-    'https://www.yelkenrentacar.com/dosya/2789/haber/4-2-2022-fall-special-car-rental-discount_659.webp',
-    'https://www.yelkenrentacar.com/dosya/2789/haber/3-2-winter-campaign_275.webp',
-  ];
+  // final List<String> imgList = [
+  //   'https://www.yelkenrentacar.com/dosya/2789/manset/1-2-slider_777.webp',
+  //   'https://www.yelkenrentacar.com/dosya/2789/haber/4-2-2022-fall-special-car-rental-discount_659.webp',
+  //   'https://www.yelkenrentacar.com/dosya/2789/haber/3-2-winter-campaign_275.webp',
+  // ];
 
-  late List<Widget> imageSliders = imgList
-      .map((item) => Container(
-            margin: const EdgeInsets.all(5.0),
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                child: Image.network(
-                  item,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 136,
-                )),
-          ))
-      .toList();
+  // late List<Widget> imageSliders = imgList
+  //     .map((item) => Container(
+  //           margin: const EdgeInsets.all(5.0),
+  //           padding: const EdgeInsets.symmetric(vertical: 10),
+  //           child: ClipRRect(
+  //               borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+  //               child: Image.network(
+  //                 item,
+  //                 fit: BoxFit.cover,
+  //                 width: double.infinity,
+  //                 height: 136,
+  //               )),
+  //         ))
+  //     .toList();
 
   startChooseDate(BuildContext context) async {
     log("choose date");
@@ -98,9 +98,11 @@ class HomePageController extends GetxController {
 
     if (pickedDate != null) {
       startSelectedDate.value = pickedDate;
+
       startDateController.text =
           startSelectedDate.value.toString().split(" ")[0];
       log(startSelectedDate.toString());
+      log('--------->>>>>>>>>>>>${startDateController.text.toString()}');
     }
   }
 
@@ -116,6 +118,8 @@ class HomePageController extends GetxController {
 
       startTimeController.text = startTime.toString();
       log(startTimeController.text);
+      log(startSelectedTime.value.toString());
+      
     }
   }
 
@@ -147,15 +151,13 @@ class HomePageController extends GetxController {
   }
 
   RxList<Vehicle> vehicleList = RxList();
-  getAllVehicleList(
-      // String startDate, String startTime, String endDate,String endTime
-      ) async {
+  getAllVehicleList() async {
     loading.value = true;
     await VehicleRepo.getAllVehicle(
-      // startDate: '2023-03-18',
-      // startTime: '2023-03-18 11:00',
-      // endDate: '2023-03-18',
-      // endTime: '2023-03-18 12:00',
+      startDate: startDateController.text,
+      startTime: startTimeController.text,
+      endDate: endDateController.text,
+      endTime: endTimeController.text,
       onSuccess: (vehicle) {
         loading.value = false;
         vehicleList.addAll(vehicle);

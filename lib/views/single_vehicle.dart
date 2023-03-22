@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -41,50 +42,36 @@ class SinglePage extends StatelessWidget {
             const SizedBox(
               height: 17,
             ),
-             Padding(
-              padding: EdgeInsets.only(
+            Padding(
+              padding: const EdgeInsets.only(
                 left: 37,
               ),
               child: Text(
-               vehicle.vehicleName??"",
-                style: TextStyle(
+                vehicle.vehicleName ?? "",
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ),
+           
             Padding(
-              padding: const EdgeInsets.only(
-                left: 37,
-                bottom: 14,
-              ),
-              child: Row(
-                children: const [
-                  Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                    size: 17,
-                  ),
-                  SizedBox(
-                    width: 13,
-                  ),
-                  Text("4.9"),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 25, left: 25),
+              padding: const EdgeInsets.only(right: 25, left: 25, top: 10),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
 
                 // ignore: prefer_const_constructors
-                child: Image(
-                  height: Get.height / 3,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  // ignore: prefer_const_constructors
-                  image: const NetworkImage(
-                    'https://picsum.photos/1000/500',
+
+                child: CachedNetworkImage(
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  fit: BoxFit.fill,
+                  height: MediaQuery.of(context).size.height / 2.7,
+                  imageUrl: vehicle.imageUrl!,
+                  errorWidget: (context, url, error) => Image.asset(
+                    'assets/logo.png',
+                    height: MediaQuery.of(context).size.height / 2.7,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
@@ -132,7 +119,7 @@ class SinglePage extends StatelessWidget {
                       right: 37,
                     ),
                     child: Text(
-                      "Features list consists of a panoramic sunroof, four-zone climate control, a digital driver’s display, and a 10.1-inch touchscreen infotainment",
+                      vehicle.vehicleDescription ?? "",
                       style: theme.textTheme.bodyMedium!.copyWith(
                         fontSize: 13,
                         color: const Color.fromRGBO(
@@ -147,21 +134,20 @@ class SinglePage extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 41,
-                      right: 37,
-                    ),
-                    child: SizedBox(
-                      height: 90,
-                      child: ListView.builder(
-                          physics: const ClampingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemCount: 4,
-                          itemBuilder: (context, index) {
-                            return FeatureCard(theme: theme);
-                          }),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 41,
+                        right: 37,
+                      ),
+                      child: SizedBox(
+                        height: 90,
+                        child: FeatureCard(
+                          theme: theme,
+                          vehicles: vehicle,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -223,8 +209,10 @@ class SinglePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 40,
+                  const IntrinsicHeight(
+                    child: SizedBox(
+                      height: 40,
+                    ),
                   )
                 ],
               ),
@@ -255,12 +243,12 @@ class SinglePage extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "Rs. 1500",
+                  vehicle.costPerHour.toString(),
                   style: theme.textTheme.titleLarge!
                       .copyWith(color: AppColors.primaryColor),
                 ),
                 Text(
-                  "/Day",
+                  "/Hour",
                   style: theme.textTheme.titleLarge!.copyWith(
                       color: AppColors.secondaryColor,
                       fontWeight: FontWeight.w400),
@@ -294,42 +282,90 @@ class FeatureCard extends StatelessWidget {
   const FeatureCard({
     super.key,
     required this.theme,
+    required this.vehicles,
   });
 
   final ThemeData theme;
+  final Vehicle vehicles;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: const Color.fromARGB(230, 241, 240, 240),
-            ),
-            child: SvgPicture.asset(
-              ImagePath.maskGroup,
-              // height: 21,
-              // width: 21,
-              fit: BoxFit.contain,
-            ),
+          FeatureTile(
+            theme: theme,
+            image: ImagePath.seat,
+            text: vehicles.seat ?? "",
           ),
-          const SizedBox(
-            height: 9,
+          FeatureTile(
+            theme: theme,
+            image: ImagePath.cc,
+            text: vehicles.mileage ?? "",
           ),
-          Text(
-            "7 seat",
-            style: theme.textTheme.bodyLarge!.copyWith(
-              fontSize: 12,
-            ),
+          FeatureTile(
+            theme: theme,
+            image: ImagePath.speed,
+            text: vehicles.mileage ?? "",
+          ),
+          FeatureTile(
+            theme: theme,
+            image: ImagePath.transmissionType,
+            text: vehicles.trasmissionType ?? "",
+          ),
+          FeatureTile(
+            theme: theme,
+            image: ImagePath.petrol,
+            text: vehicles.fuelType ?? "",
           ),
         ],
       ),
+    );
+  }
+}
+
+class FeatureTile extends StatelessWidget {
+  const FeatureTile({
+    super.key,
+    required this.theme,
+    required this.image,
+    required this.text,
+  });
+
+  final ThemeData theme;
+  final String image;
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.all(5),
+          padding: const EdgeInsets.all(10),
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: const Color.fromARGB(230, 241, 240, 240),
+          ),
+          child: SvgPicture.asset(
+            image,
+            
+            fit: BoxFit.contain,
+          ),
+        ),
+        const SizedBox(
+          height: 9,
+        ),
+        Text(
+          text,
+          style: theme.textTheme.bodyLarge!.copyWith(
+            fontSize: 12,
+          ),
+        ),
+      ],
     );
   }
 }

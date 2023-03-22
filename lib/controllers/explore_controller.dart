@@ -11,11 +11,6 @@
 //   RxBool loading = false.obs;
 
 
-//   var coreController = Get.find<CoreController>();
-//   @override
-//   void onInit() {
-//     var token = coreController.accessToken;
-//     log("token-----=>>>>>>>>>>>>${token.toString()}");
-//     super.onInit();
-//   }
+
+
 // }

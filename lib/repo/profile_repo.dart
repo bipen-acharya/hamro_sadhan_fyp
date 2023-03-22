@@ -1,34 +1,26 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:hamro_sadhan/models/vehicle.dart';
 import 'package:http/http.dart' as http;
 import '../utils/apis.dart';
 import '../utils/storage_helper.dart';
 
-class VehicleRepo {
-  static Future<void> getAllVehicle(
-      {required String startDate,
-      required String startTime,
-      required String endDate,
-      required String endTime,
-      required Function(List<Vehicle>) onSuccess,
+class ProfileRepo {
+  static Future<void> changePasswordUser(
+      {required String oldPassword,
+      required String newPassword,
+      required Function() onSuccess,
       required Function(String message) onError}) async {
     try {
       var token = StorageHelper.getToken();
-      var url = Uri.parse(HamroSadhanApi.availableVehicle);
+      var url = Uri.parse(HamroSadhanApi.changePassword);
       var headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
         "Authorization": "${token!.tokenType!} ${token.accessToken!}"
       };
-
-      var body = json.encode({
-        "start_date": startDate,
-        "start_time": startTime,
-        "end_date": endDate,
-        "end_time": endTime,
-      });
+      var body = json
+          .encode({"old_password": oldPassword, "new_password": newPassword});
 
       http.Response response = await http.post(
         url,
@@ -36,10 +28,10 @@ class VehicleRepo {
         body: body,
       );
       var data = json.decode(response.body);
-
+      print(data);
       if (data['status']) {
         log("on sucess ma aayo ");
-        onSuccess(vehicleListFromJson(data['data']));
+        onSuccess();
       } else {
         onError(data['message']);
       }

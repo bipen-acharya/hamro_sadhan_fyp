@@ -13,9 +13,15 @@ class ImagePath {
   static const setting = "$basePath/setting.svg";
   static const cancel = "assets/icons/cross.svg";
   static const call = "assets/icons/call.svg";
-  static const maskGroup = "assets/icons/maskGroup.svg";
+  static const transmissionType = "assets/icons/maskGroup.svg";
+  static const seat = "assets/icons/cc.svg";
+  static const cc = "assets/icons/diseal.svg";
+  static const speed = "assets/icons/seat.svg";
+  static const petrol = "assets/icons/speed.svg";
+
   static const esewa = "assets/icons/eshewa.png";
   static const khalti = "assets/icons/khalti.png";
+  static const confirm = "assets/icons/confirm.svg";
 }
 
 // profile screen icons image path

@@ -2,7 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/views/confirm_order.dart';
+import 'package:hamro_sadhan/widgets/custom_snackbar.dart';
 import 'package:intl/intl.dart';
+
+import '../views/billing_screen.dart';
 
 class BillingController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -34,7 +38,9 @@ class BillingController extends GetxController {
   // This function will be called when the continue button is tapped
   stepContinue() {
     if (formKey.currentState!.validate()) {
-      currentStep < 2 ? (currentStep.value += 1) : null;
+      currentStep < 2
+          ? (currentStep.value += 1)
+          : Get.to(() => const OrderConfirmPage());
     }
   }
 

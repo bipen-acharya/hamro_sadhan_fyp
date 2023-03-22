@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/auth/core_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/profile_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/search_controller.dart';
 import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
 import '../../controllers/dashboard/dash_screen_controller.dart';
 import '../../utils/colors.dart';
@@ -14,6 +17,9 @@ class DashScreen extends StatelessWidget {
   DashScreen({super.key});
   // final coreController = Get.find<CoreController>();
   final c = Get.put(DashScreenController());
+  final co = Get.put(SearchController());
+  final con = Get.put(ProfileController());
+  final conn = Get.put(HomePageController());
   final coreController = Get.put(CoreController());
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
+
 import 'package:hamro_sadhan/utils/colors.dart';
 import '../../controllers/auth/core_controller.dart';
 import '../../controllers/dashboard/profile_controller.dart';
@@ -14,6 +15,7 @@ class ProfilePage extends StatelessWidget {
   final c = Get.find<ProfileController>();
   final controller = Get.find<CoreController>();
   final controllerHome = Get.find<HomePageController>();
+  // final con = Get.put(SearchController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +36,7 @@ class ProfilePage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
-            child: Text(
-                // controllerHome.getuser()?.data.user.name ?? ""
-                "Bipin",
+            child: Text("${controller.currentUser!.name?.capitalize}",
                 style: theme.textTheme.bodyLarge),
           ),
 
@@ -51,7 +51,7 @@ class ProfilePage extends StatelessWidget {
               child: Text(
                 "Edit Profile",
                 style: theme.textTheme.bodyLarge!.copyWith(
-                  color: AppColors.borderColor,
+                  color: AppColors.extraWhiteColor,
                 ),
               ),
             ),

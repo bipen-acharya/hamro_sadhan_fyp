@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
@@ -42,7 +43,8 @@ class ExplorePage extends StatelessWidget {
         () => (c.loading.value)
             ? const Center(child: CircularProgressIndicator())
             : Container(
-                padding: const EdgeInsets.all(15.0),
+                margin: const EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: GridView.builder(
                   itemCount: c.vehicleList.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -54,7 +56,7 @@ class ExplorePage extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     Vehicle vehicles = c.vehicleList[index];
                     return RecentVehicleCard(
-                      vehicle: vehicles,
+                      vehicles: vehicles,
                     );
                   },
                 ),
@@ -67,16 +69,16 @@ class ExplorePage extends StatelessWidget {
 class RecentVehicleCard extends StatelessWidget {
   const RecentVehicleCard({
     Key? key,
-    required this.vehicle,
+    required this.vehicles,
   }) : super(key: key);
 
-  final Vehicle vehicle;
+  final Vehicle vehicles;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Get.to(() => SinglePage(
-              vehicle: vehicle,
+              vehicle: vehicles,
             ));
       },
       child: Container(
@@ -106,10 +108,17 @@ class RecentVehicleCard extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10)),
-                  child: 
-                  Image.network(
-                    "https://dalamancarrentals.com/arayuz/assets/img/car-rent-news/h_3_730x485.png?.1638283284",
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
                     fit: BoxFit.fill,
+                    imageUrl: vehicles.imageUrl!,
+                    errorWidget: (context, url, error) => Image.asset(
+                      'assets/logo.png',
+                      height: 87,
+                      fit: BoxFit.contain,
+                    ),
+                    height: 87,
                   ),
                 )
                 // Image.asset(
@@ -123,9 +132,10 @@ class RecentVehicleCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 6),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    vehicle.vehicleName ?? "",
+                    vehicles.vehicleName ?? "",
                     overflow: TextOverflow.ellipsis,
                     softWrap: false,
                     style: const TextStyle(
@@ -134,16 +144,38 @@ class RecentVehicleCard extends StatelessWidget {
                     ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(Icons.money_rounded),
-                      Text(
-                        vehicle.costPerHour.toString(),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.primaryColor,
-                        ),
+                      Row(
+                        children: [
+                          const Text(
+                            "Rs",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                          Text(
+                            ' ${vehicles.costPerHour.toString()}/hour',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                        ],
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Text(
+                          'Seat ${vehicles.seat.toString()}',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ],

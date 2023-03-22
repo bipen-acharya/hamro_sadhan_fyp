@@ -1,15 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/explore_vehicle.dart';
-
-import 'package:hamro_sadhan/widgets/custom_text_field.dart';
+import 'package:intl/intl.dart';
 
 import '../../controllers/auth/core_controller.dart';
 import '../../controllers/dashboard/home_controller.dart';
 import '../../utils/colors.dart';
-import '../../utils/storage_helper.dart';
+import '../../widgets/custom_snackbar.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
@@ -92,10 +89,10 @@ class Homepage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 29),
             child: Column(
               children: [
-                CustomTextField(
-                  hint: 'Any',
-                  controller: c.myController,
-                ),
+                // CustomTextField(
+                //   hint: 'Any',
+                //   controller: c.myController,
+                // ),
                 const SizedBox(
                   height: 17,
                 ),
@@ -263,11 +260,44 @@ class Homepage extends StatelessWidget {
                     ),
                     onPressed: c.submit.value
                         ? () {
+                            c.vehicleList.clear();
+
+                            DateTime startDateTime =
+                                DateFormat("yyyy-MM-dd hh:mm a").parse(
+                                    "${c.startDateController.text} ${c.startTimeController.text}");
+                            DateTime endDateTime =
+                                DateFormat("yyyy-MM-dd hh:mm a").parse(
+                                    "${c.endDateController.text} ${c.endTimeController.text}");
+
+                            // if (endDateTime.isAfter(
+                            //     startDateTime.add(const Duration(hours: 1)))) {
+                            //   return CustomSnackBar.error(
+                            //       title: "End time",
+                            //       message:
+                            //           "End time must be at least 1 hour after start time");
+                            // }
+
+                            if (endDateTime.isAtSameMomentAs(startDateTime)) {
+                              return CustomSnackBar.error(
+                                  title: "End time",
+                                  message:
+                                      "End time can not be the same as start time");
+                            }
+
+                            if (endDateTime.isBefore(startDateTime)) {
+                              return CustomSnackBar.error(
+                                  title: "End time",
+                                  message:
+                                      "End time can not be before start time");
+                            }
+
                             Get.to(() => ExplorePage());
+
                             c.getAllVehicleList();
-                            // var token = coreController.accesstoken;
-                            // var token = StorageHelper.getToken()!;
-                            // log("token-----=>>>>>>>>>>>>${token.toString()}");
+                            // c.endDateController.clear();
+                            // c.startDateController.clear();
+                            // c.endTimeController.clear();
+                            // c.startTimeController.clear();
                           }
                         : null,
                     child: Text(
