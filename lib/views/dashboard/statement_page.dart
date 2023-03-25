@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/history_controller.dart';
 import 'package:hamro_sadhan/widgets/history_card.dart';
 
+import '../../models/order.dart';
+
 class StatementPage extends StatelessWidget {
-   StatementPage({super.key});
+  StatementPage({super.key});
   static const routeName = "/statement";
 
-  final con = Get.find<HistoryController>();
+  // final c = Get.find<HistoryController>();
+  final c = Get.put(HistoryController());
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -27,15 +30,23 @@ class StatementPage extends StatelessWidget {
           ),
           centerTitle: false,
         ),
-        body: SizedBox(
-          // height: MediaQuery.of(context).size.height - 208,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 15,
-            itemBuilder: (context, index) {
-              return HistoryCard(showDate: index % 2 == 0);
-            },
-          ),
-        ));
+        body: Obx(
+          () => (c.loading.value)
+              ? const Center(child: CircularProgressIndicator())
+              : SizedBox(
+                  // height: MediaQuery.of(context).size.height - 208,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: c.orderDetails.length,
+                    itemBuilder: (context, index) {
+                      Order orders = c.orderDetails[index];
+                      return HistoryCard(
+                        showDate: index % 2 == 0,
+                        order: orders,
+                      );
+                    },
+                  ),
+                ),
+        ),);
   }
 }

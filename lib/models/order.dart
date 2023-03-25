@@ -1,27 +1,7 @@
+List<Order> orderListFromJson(List<dynamic> orderJson) => List<Order>.from(
+    orderJson.map((orderJsonList) => Order.fromJson(orderJsonList)));
+
 class Order {
-  List<Vehicles>? vehicles;
-
-  Order({this.vehicles});
-
-  Order.fromJson(Map<String, dynamic> json) {
-    if (json['vehicles'] != null) {
-      vehicles = <Vehicles>[];
-      json['vehicles'].forEach((v) {
-        vehicles!.add(Vehicles.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (vehicles != null) {
-      data['vehicles'] = vehicles!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Vehicles {
   int? id;
   int? userId;
   int? vendorId;
@@ -36,10 +16,10 @@ class Vehicles {
   int? price;
   String? createdAt;
   String? updatedAt;
-  Vehicle? vehicle;
-  Vendor? vendor;
+  OrderVehicle? vehicle;
+  OrderVendor? vendor;
 
-  Vehicles(
+  Order(
       {this.id,
       this.userId,
       this.vendorId,
@@ -57,7 +37,7 @@ class Vehicles {
       this.vehicle,
       this.vendor});
 
-  Vehicles.fromJson(Map<String, dynamic> json) {
+  Order.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     vendorId = json['vendor_id'];
@@ -73,13 +53,13 @@ class Vehicles {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     vehicle =
-        json['vehicle'] != null ? Vehicle.fromJson(json['vehicle']) : null;
+        json['vehicle'] != null ? OrderVehicle.fromJson(json['vehicle']) : null;
     vendor =
-        json['vendor'] != null ? Vendor.fromJson(json['vendor']) : null;
+        json['vendor'] != null ? OrderVendor.fromJson(json['vendor']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['user_id'] = userId;
     data['vendor_id'] = vendorId;
@@ -104,7 +84,7 @@ class Vehicles {
   }
 }
 
-class Vehicle {
+class OrderVehicle {
   int? id;
   int? userId;
   int? categoryId;
@@ -124,7 +104,7 @@ class Vehicle {
   String? updatedAt;
   String? imageUrl;
 
-  Vehicle(
+  OrderVehicle(
       {this.id,
       this.userId,
       this.categoryId,
@@ -144,7 +124,7 @@ class Vehicle {
       this.updatedAt,
       this.imageUrl});
 
-  Vehicle.fromJson(Map<String, dynamic> json) {
+  OrderVehicle.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     categoryId = json['category_id'];
@@ -166,7 +146,7 @@ class Vehicle {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['user_id'] = userId;
     data['category_id'] = categoryId;
@@ -189,19 +169,19 @@ class Vehicle {
   }
 }
 
-class Vendor {
+class OrderVendor {
   int? id;
   String? name;
   String? phoneNumber;
   String? email;
-  Null? emailVerifiedAt;
+  String? emailVerifiedAt;
   String? type;
-  Null? profileImage;
+  String? profileImage;
   String? createdAt;
   String? updatedAt;
-  Null? profileImageUrl;
+  String? profileImageUrl;
 
-  Vendor(
+  OrderVendor(
       {this.id,
       this.name,
       this.phoneNumber,
@@ -213,7 +193,7 @@ class Vendor {
       this.updatedAt,
       this.profileImageUrl});
 
-  Vendor.fromJson(Map<String, dynamic> json) {
+  OrderVendor.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     phoneNumber = json['phone_number'];
@@ -227,7 +207,7 @@ class Vendor {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     data['phone_number'] = phoneNumber;

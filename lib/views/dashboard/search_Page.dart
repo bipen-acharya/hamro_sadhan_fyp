@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/controllers/dashboard/search_controller.dart';
 
 import '../../widgets/search.dart';
@@ -10,11 +11,13 @@ class SearchPage extends StatelessWidget {
   static const routeName = "/search";
 
   final c = Get.find<SearchController>();
+  
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
+    
           
     return Scaffold(
       appBar: AppBar(

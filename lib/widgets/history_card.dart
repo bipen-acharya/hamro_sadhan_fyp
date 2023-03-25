@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../models/order.dart';
 import '../utils/colors.dart';
 
 class HistoryCard extends StatelessWidget {
   const HistoryCard({
     Key? key,
-    required this.showDate,
+    required this.showDate, required this.order,
   }) : super(key: key);
 
   final bool showDate;
+  final Order order;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,7 @@ class HistoryCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Rent from Sishir company limited",
+                 order.vendor!.name??"",
                   style: textTheme.bodyLarge!.copyWith(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,

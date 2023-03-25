@@ -6,10 +6,16 @@ import '../../utils/colors.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_snackbar.dart';
 import '../../widgets/custom_text_field.dart';
+import 'home_controller.dart';
 
 class ProfileController extends GetxController {
   TextEditingController previousPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
 
   final keys = GlobalKey<FormState>();
   changePassword() {
@@ -129,10 +135,15 @@ class ProfileController extends GetxController {
         onSuccess: () {
           Navigator.pop(context);
           CustomSnackBar.success(
-              message: "Password changed successfully", title: "Password",);
+            message: "Password changed successfully",
+            title: "Password",
+          );
         },
         onError: (message) {
-          CustomSnackBar.error(message: message, title: "Password",);
+          CustomSnackBar.error(
+            message: message,
+            title: "Password",
+          );
         });
   }
 }

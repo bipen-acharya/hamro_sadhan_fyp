@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/controllers/dashboard/history_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
 import 'package:hamro_sadhan/views/dashboard/dash_screen.dart';
 
 import '../utils/image_paths.dart';
 
 class OrderConfirmPage extends StatelessWidget {
-  const OrderConfirmPage({super.key});
+  OrderConfirmPage({super.key});
+
+  final c = Get.find<HistoryController>();
+  final homeController = Get.find<HomePageController>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +56,12 @@ class OrderConfirmPage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Get.offAll(() => DashScreen());
+            c.orderDetails.clear();
+            c.getAllOrders();
+            homeController.endDateController.clear();
+            homeController.startDateController.clear();
+            homeController.endTimeController.clear();
+            homeController.startTimeController.clear();
           },
           style: ElevatedButton.styleFrom(
               minimumSize: Size(Get.width - 60, 50),

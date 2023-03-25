@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 
 import '../../utils/colors.dart';
 import '../../utils/image_paths.dart';
@@ -11,6 +12,13 @@ class SearchController extends GetxController {
   final RxList<bool> checkboxTypeValues = RxList.filled(5, false);
   final RxList<bool> checkboxSortByValues = RxList.filled(2, false);
   final RxList<bool> checkboxSeatValues = RxList.filled(5, false);
+
+  
+  @override
+  void onInit() {
+    super.onInit();
+   
+  }
 
   updateTypeCheckboxValue(int panelIndex, int checkboxIndex, bool value) {
     for (int i = 0; i < checkboxTypeValues.length; i++) {

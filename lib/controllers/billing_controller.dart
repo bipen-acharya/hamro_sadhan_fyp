@@ -209,7 +209,7 @@ class BillingController extends GetxController {
         onSuccess: () {
           CustomSnackBar.success(
               title: "Order Successful", message: "Order placed succesfully");
-          Get.off(() => const OrderConfirmPage());
+          Get.off(() =>  OrderConfirmPage());
         },
         onError: (message) {
           loading.value = false;
