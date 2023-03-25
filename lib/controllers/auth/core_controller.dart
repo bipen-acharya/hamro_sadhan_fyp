@@ -13,8 +13,6 @@ class CoreController extends GetxController {
   User? currentUser;
   Accesstoken? accesstoken;
 
-  var token;
-
   bool isFirstTimeUser() {
     var appLoadDate = StorageHelper.getAppLoadedDate();
     return appLoadDate == null;
@@ -23,8 +21,6 @@ class CoreController extends GetxController {
   @override
   void onInit() async {
     loadCurrentUser();
-    // loadUserToken();
-
     super.onInit();
   }
 

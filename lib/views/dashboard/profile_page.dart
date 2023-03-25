@@ -68,6 +68,7 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   Obx(() {
+                    
                     return CustomProfileMenu(
                       onTap: () => myFunction(controller.darkTheme.value),
                       label: "Dark Mode",

@@ -269,35 +269,36 @@ class Homepage extends StatelessWidget {
                                 DateFormat("yyyy-MM-dd hh:mm a").parse(
                                     "${c.endDateController.text} ${c.endTimeController.text}");
 
-                            // if (endDateTime.isAfter(
-                            //     startDateTime.add(const Duration(hours: 1)))) {
-                            //   return CustomSnackBar.error(
-                            //       title: "End time",
-                            //       message:
-                            //           "End time must be at least 1 hour after start time");
-                            // }
-
+                            if (endDateTime.isBefore(startDateTime)) {
+                              // ignore: void_checks
+                              return CustomSnackBar.error(
+                                  title: "End date",
+                                  message:
+                                      "End date can not be before start date");
+                            }
                             if (endDateTime.isAtSameMomentAs(startDateTime)) {
+                              // ignore: void_checks
                               return CustomSnackBar.error(
                                   title: "End time",
                                   message:
                                       "End time can not be the same as start time");
                             }
-
-                            if (endDateTime.isBefore(startDateTime)) {
+                            if (endDateTime.isBefore(
+                                startDateTime.add(const Duration(hours: 1)))) {
+                              // ignore: void_checks
                               return CustomSnackBar.error(
                                   title: "End time",
                                   message:
-                                      "End time can not be before start time");
+                                      "End time must be at least 1 hour after start time");
                             }
 
                             Get.to(() => ExplorePage());
 
                             c.getAllVehicleList();
-                            // c.endDateController.clear();
-                            // c.startDateController.clear();
-                            // c.endTimeController.clear();
-                            // c.startTimeController.clear();
+                            c.endDateController.clear();
+                            c.startDateController.clear();
+                            c.endTimeController.clear();
+                            c.startTimeController.clear();
                           }
                         : null,
                     child: Text(

@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/category.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/vehicle.dart';
 import '../../repo/vehicle_repo.dart';
@@ -25,6 +26,7 @@ class HomePageController extends GetxController {
 
 //start date
   TextEditingController startDateController = TextEditingController();
+  TextEditingController sTController = TextEditingController();
   TextEditingController startTimeController = TextEditingController();
   var startSelectedDate = DateTime.now().obs;
   var startSelectedTime = TimeOfDay.now().obs;
@@ -33,15 +35,12 @@ class HomePageController extends GetxController {
   //end date home page controller
   TextEditingController endDateController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
+  TextEditingController eTController = TextEditingController();
   var endSelectedDate = DateTime.now().obs;
   var endSelectedTime = TimeOfDay.now().obs;
   late String endTime;
 
   RxBool submit = false.obs;
-
-  TimeOfDay now = TimeOfDay.now();
-
-  RxList<VehicleCategory> vehicleCategory = RxList();
   RxBool loading = false.obs;
 
   @override
@@ -52,40 +51,16 @@ class HomePageController extends GetxController {
     startTimeController.addListener(enableButton);
     endDateController.addListener(enableButton);
     endTimeController.addListener(enableButton);
-    // myController.addListener(enableButton);
+
     super.onInit();
   }
-
-  // bool submit = false;
 
   void enableButton() {
     submit.value = startTimeController.text.isNotEmpty &&
         startDateController.text.isNotEmpty &&
         endDateController.text.isNotEmpty &&
         endTimeController.text.isNotEmpty;
-    // myController.text.isNotEmpty;
   }
-
-  // final List<String> imgList = [
-  //   'https://www.yelkenrentacar.com/dosya/2789/manset/1-2-slider_777.webp',
-  //   'https://www.yelkenrentacar.com/dosya/2789/haber/4-2-2022-fall-special-car-rental-discount_659.webp',
-  //   'https://www.yelkenrentacar.com/dosya/2789/haber/3-2-winter-campaign_275.webp',
-  // ];
-
-  // late List<Widget> imageSliders = imgList
-  //     .map((item) => Container(
-  //           margin: const EdgeInsets.all(5.0),
-  //           padding: const EdgeInsets.symmetric(vertical: 10),
-  //           child: ClipRRect(
-  //               borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-  //               child: Image.network(
-  //                 item,
-  //                 fit: BoxFit.cover,
-  //                 width: double.infinity,
-  //                 height: 136,
-  //               )),
-  //         ))
-  //     .toList();
 
   startChooseDate(BuildContext context) async {
     log("choose date");
@@ -101,7 +76,6 @@ class HomePageController extends GetxController {
 
       startDateController.text =
           startSelectedDate.value.toString().split(" ")[0];
-      log(startSelectedDate.toString());
       log('--------->>>>>>>>>>>>${startDateController.text.toString()}');
     }
   }
@@ -111,15 +85,19 @@ class HomePageController extends GetxController {
       context: context,
       initialTime:
           TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().hour),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(),
+          child: child ?? Container(),
+        );
+      },
     );
     if (pickedTime != null) {
       startSelectedTime.value = pickedTime;
-      startTime = pickedTime.format(context);
-
+      // ignore: use_build_context_synchronously
+      startTime = pickedTime.format(context).toString();
       startTimeController.text = startTime.toString();
-      log(startTimeController.text);
-      log(startSelectedTime.value.toString());
-      
+      sTController.text = "${pickedTime.hour}:${pickedTime.minute}:00";
     }
   }
 
@@ -147,17 +125,19 @@ class HomePageController extends GetxController {
       endSelectedTime.value = pickedTime;
       endTime = pickedTime.format(context);
       endTimeController.text = endTime.toString();
+      eTController.text = "${pickedTime.hour}:${pickedTime.minute}:00";
     }
   }
 
   RxList<Vehicle> vehicleList = RxList();
+
   getAllVehicleList() async {
     loading.value = true;
+    log("-----Start date ---${startDateController.text} ${sTController.text}");
+    log("-----End date ---${endDateController.text} ${eTController.text}");
     await VehicleRepo.getAllVehicle(
-      startDate: startDateController.text,
-      startTime: startTimeController.text,
-      endDate: endDateController.text,
-      endTime: endTimeController.text,
+      startDate: '${startDateController.text} ${sTController.text}',
+      endDate: '${endDateController.text} ${eTController.text}',
       onSuccess: (vehicle) {
         loading.value = false;
         vehicleList.addAll(vehicle);

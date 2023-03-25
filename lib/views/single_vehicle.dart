@@ -54,7 +54,6 @@ class SinglePage extends StatelessWidget {
                 ),
               ),
             ),
-           
             Padding(
               padding: const EdgeInsets.only(right: 25, left: 25, top: 10),
               child: ClipRRect(
@@ -176,20 +175,41 @@ class SinglePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.network(
-                            "https://picsum.photos/100/100",
-                            fit: BoxFit.cover,
-                            height: 40,
-                            width: 40,
-                          ),
-                        ),
-                        Text(
-                          "Shishir Rentals Pvt. Ltd",
-                          style: theme.textTheme.bodyMedium!.copyWith(
-                            fontSize: 14,
-                          ),
+                        Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Image.network(
+                                "https://picsum.photos/100/100",
+                                fit: BoxFit.cover,
+                                height: 40,
+                                width: 40,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  vehicle.vendor!.name ?? "",
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  vehicle.vendor!.phoneNumber ?? "",
+                                  style: theme.textTheme.bodyMedium!.copyWith(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                         Container(
                           padding: const EdgeInsets.all(10),
@@ -263,7 +283,9 @@ class SinglePage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
-              onPressed: () => Get.to(() => BillingScreen()),
+              onPressed: () => Get.to(() => BillingScreen(
+                    singleVehicle: vehicle,
+                  )),
               child: Text(
                 'Rent Now',
                 style: theme.textTheme.titleLarge!.copyWith(
@@ -352,7 +374,6 @@ class FeatureTile extends StatelessWidget {
           ),
           child: SvgPicture.asset(
             image,
-            
             fit: BoxFit.contain,
           ),
         ),

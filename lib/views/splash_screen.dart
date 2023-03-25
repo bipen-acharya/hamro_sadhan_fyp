@@ -12,11 +12,10 @@ import 'auth/login_screen.dart';
 class SplashScreen extends StatelessWidget {
   static const routeName = "/splashScreen";
   // final controller = Get.put(HomeController());
-  SplashScreen({super.key});
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     final c = Get.find<CoreController>();
     Timer(const Duration(seconds: 1), () {
       if (c.isUserLoggedIn()) {

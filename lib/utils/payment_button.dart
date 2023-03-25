@@ -41,7 +41,12 @@ class PaymentButton extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(image),
+                    Image.asset(
+                      image,
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.fill,
+                    ),
                     const SizedBox(
                       width: 13,
                     ),

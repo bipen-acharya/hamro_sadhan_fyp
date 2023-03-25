@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/billing_controller.dart';
+import 'package:hamro_sadhan/models/vehicle.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 
 import '../utils/image_paths.dart';
 import '../utils/payment_button.dart';
+import '../utils/validators.dart';
 
 class BillingScreen extends StatelessWidget {
-  BillingScreen({super.key});
+  BillingScreen({super.key, required this.singleVehicle});
 
+  final Vehicle singleVehicle;
   final c = Get.put(BillingController());
   @override
   Widget build(BuildContext context) {
@@ -117,19 +120,20 @@ class BillingScreen extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            const CustomTextField(
+                            CustomTextField(
+                              controller: c.nameController,
                               hint: "Name",
-                              // validator: Validators.checkFieldEmpty,
+                              validator: Validators.checkFieldEmpty,
+                              textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(
                               height: 17,
                             ),
-                            const CustomTextField(
-                              // controller: c.emailTextController,
-                              // validator: Validators.checkPhoneField,
+                            CustomTextField(
+                              controller: c.contactController,
+                              validator: Validators.checkPhoneField,
                               hint: "Phone number ",
                               textInputAction: TextInputAction.next,
-                              textInputType: TextInputType.emailAddress,
                             ),
                             const SizedBox(
                               height: 17,
@@ -165,8 +169,9 @@ class BillingScreen extends StatelessWidget {
                             CustomTextField(
                               hint: "Select date",
                               readOnly: true,
-                              controller: c.dateController,
-                              onTap: () => c.chooseDate(context),
+                              validator: Validators.checkFieldEmpty,
+                              controller: c.startDateController,
+                              onTap: () => c.startChooseDate(context),
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(
@@ -175,8 +180,9 @@ class BillingScreen extends StatelessWidget {
                             CustomTextField(
                               hint: "Select Time",
                               readOnly: true,
-                              controller: c.timeController,
-                              onTap: () => c.chooseTime(context),
+                              validator: Validators.checkFieldEmpty,
+                              controller: c.startTimeController,
+                              onTap: () => c.startChooseTime(context),
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(
@@ -210,21 +216,23 @@ class BillingScreen extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            const CustomTextField(
+                            CustomTextField(
                               hint: "Select date",
                               readOnly: true,
-                              // controller: c.dateController,
-                              // onTap: () => c.chooseDate(context),
+                              validator: Validators.checkFieldEmpty,
+                              controller: c.endDateController,
+                              onTap: () => c.endChooseDate(context),
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(
                               height: 17,
                             ),
-                            const CustomTextField(
+                            CustomTextField(
                               hint: "Select Time",
                               readOnly: true,
-                              // controller: c.dateController,
-                              // onTap: () => c.chooseDate(context),
+                              validator: Validators.checkFieldEmpty,
+                              controller: c.endTimeController,
+                              onTap: () => c.endChooseTime(context),
                               textInputAction: TextInputAction.next,
                             ),
                           ],
@@ -295,7 +303,7 @@ class BillingScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Audi SUV",
+                                          singleVehicle.vehicleName ?? "",
                                           style: textTheme.titleLarge!.copyWith(
                                             fontSize: 14,
                                           ),
@@ -304,7 +312,7 @@ class BillingScreen extends StatelessWidget {
                                           height: 7,
                                         ),
                                         Text(
-                                          "7 Seat V8 Diesel - 11 kmph",
+                                          singleVehicle.seat ?? "",
                                           style: textTheme.bodyMedium!.copyWith(
                                             fontSize: 12,
                                             color: AppColors.secondaryColor,
@@ -331,7 +339,7 @@ class BillingScreen extends StatelessWidget {
                                               color: AppColors.secondaryColor,
                                             ),
                                             Text(
-                                              "14/02/2023 - 11:00am",
+                                              "${c.startDateController.text} ${c.startTimeController.text}",
                                               style: textTheme.bodyMedium!
                                                   .copyWith(
                                                 fontSize: 12,
@@ -348,7 +356,7 @@ class BillingScreen extends StatelessWidget {
                                             const Icon(Icons.calendar_month,
                                                 size: 12, color: Colors.grey),
                                             Text(
-                                              "14/02/2023 - 11:00am",
+                                              "${c.endDateController.text} ${c.endTimeController.text}",
                                               style: textTheme.bodyMedium!
                                                   .copyWith(
                                                 fontSize: 12,
@@ -357,6 +365,11 @@ class BillingScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              c.calculateTotal();
+                                            },
+                                            child: const Text("total"))
                                       ],
                                     )
                                   ],
@@ -386,7 +399,7 @@ class BillingScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Audi SUV 2021 Edition | Full Auto",
+                                  singleVehicle.vehicleName ?? "",
                                   style: textTheme.titleLarge,
                                 ),
                                 const SizedBox(
@@ -485,7 +498,7 @@ class BillingScreen extends StatelessWidget {
                             runSpacing: 20,
                             children: [
                               PaymentButton(
-                                name: 'Esewa',
+                                name: 'Cash Payment',
                                 image: ImagePath.esewa,
                                 isSelected: c.selectedPayment.value == 'esewa',
                                 onTap: () => c.updateSelectedPayment('esewa'),
@@ -496,12 +509,12 @@ class BillingScreen extends StatelessWidget {
                                 image: ImagePath.khalti,
                                 onTap: () => c.updateSelectedPayment('khalti'),
                               ),
-                              PaymentButton(
-                                name: 'Imepay',
-                                image: ImagePath.esewa,
-                                isSelected: c.selectedPayment.value == 'ime',
-                                onTap: () => c.updateSelectedPayment('ime'),
-                              ),
+                              // PaymentButton(
+                              //   name: 'Imepay',
+                              //   image: ImagePath.esewa,
+                              //   isSelected: c.selectedPayment.value == 'ime',
+                              //   onTap: () => c.updateSelectedPayment('ime'),
+                              // ),
                             ],
                           ),
                         ],

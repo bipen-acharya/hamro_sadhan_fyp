@@ -18,7 +18,8 @@ class VehicleMenuCard extends StatelessWidget {
       padding: const EdgeInsets.only(
         left: 19,
       ),
-      child: InkWell(
+      child: 
+      InkWell(
         onTap: () {},
         child: Column(
           children: [

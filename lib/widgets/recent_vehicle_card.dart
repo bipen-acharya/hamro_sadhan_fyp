@@ -10,9 +10,10 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return InkWell(
+//     return 
+//     InkWell(
 //       onTap: () {
-//         Get.to(() => const SinglePage());
+//         Get.to(() =>  SinglePage());
 //       },
 //       child: Container(
 //         height: 95,

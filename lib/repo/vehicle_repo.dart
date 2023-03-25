@@ -9,25 +9,23 @@ import '../utils/storage_helper.dart';
 class VehicleRepo {
   static Future<void> getAllVehicle(
       {required String startDate,
-      required String startTime,
       required String endDate,
-      required String endTime,
       required Function(List<Vehicle>) onSuccess,
       required Function(String message) onError}) async {
     try {
       var token = StorageHelper.getToken();
       var url = Uri.parse(HamroSadhanApi.availableVehicle);
+      log("${token!.tokenType!} ${token.accessToken!}");
+
       var headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "${token!.tokenType!} ${token.accessToken!}"
+        "Authorization": "${token.tokenType!} ${token.accessToken!}"
       };
 
       var body = json.encode({
         "start_date": startDate,
-        "start_time": startTime,
         "end_date": endDate,
-        "end_time": endTime,
       });
 
       http.Response response = await http.post(
