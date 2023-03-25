@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/billing_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/models/vehicle.dart';
 import 'package:hamro_sadhan/utils/colors.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
@@ -14,10 +15,15 @@ class BillingScreen extends StatelessWidget {
 
   final Vehicle singleVehicle;
   final c = Get.put(BillingController());
+  final homeController = Get.find<HomePageController>();
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
+    c.costPerHour = singleVehicle.costPerHour!;
+    c.vehicleId.value = singleVehicle.id!;
+    c.vendorId.value = singleVehicle.vendor!.id!;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 248, 249, 250),
       appBar: AppBar(
@@ -138,103 +144,103 @@ class BillingScreen extends StatelessWidget {
                             const SizedBox(
                               height: 17,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 7),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    "Start Time ",
-                                    style: textTheme.bodySmall!.copyWith(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  Expanded(
-                                      child: Container(
-                                    height: 1.5,
-                                    color:
-                                        const Color.fromRGBO(239, 239, 239, 1),
-                                  ))
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            CustomTextField(
-                              hint: "Select date",
-                              readOnly: true,
-                              validator: Validators.checkFieldEmpty,
-                              controller: c.startDateController,
-                              onTap: () => c.startChooseDate(context),
-                              textInputAction: TextInputAction.next,
-                            ),
-                            const SizedBox(
-                              height: 17,
-                            ),
-                            CustomTextField(
-                              hint: "Select Time",
-                              readOnly: true,
-                              validator: Validators.checkFieldEmpty,
-                              controller: c.startTimeController,
-                              onTap: () => c.startChooseTime(context),
-                              textInputAction: TextInputAction.next,
-                            ),
-                            const SizedBox(
-                              height: 17,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 7),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    "End Time ",
-                                    style: textTheme.bodySmall!.copyWith(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  Expanded(
-                                      child: Container(
-                                    height: 1.5,
-                                    color:
-                                        const Color.fromRGBO(239, 239, 239, 1),
-                                  ))
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            CustomTextField(
-                              hint: "Select date",
-                              readOnly: true,
-                              validator: Validators.checkFieldEmpty,
-                              controller: c.endDateController,
-                              onTap: () => c.endChooseDate(context),
-                              textInputAction: TextInputAction.next,
-                            ),
-                            const SizedBox(
-                              height: 17,
-                            ),
-                            CustomTextField(
-                              hint: "Select Time",
-                              readOnly: true,
-                              validator: Validators.checkFieldEmpty,
-                              controller: c.endTimeController,
-                              onTap: () => c.endChooseTime(context),
-                              textInputAction: TextInputAction.next,
-                            ),
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.symmetric(horizontal: 7),
+                            //   child: Row(
+                            //     crossAxisAlignment: CrossAxisAlignment.end,
+                            //     children: [
+                            //       Text(
+                            //         "Start Time ",
+                            //         style: textTheme.bodySmall!.copyWith(
+                            //           fontSize: 10,
+                            //           fontWeight: FontWeight.w400,
+                            //         ),
+                            //       ),
+                            //       const SizedBox(
+                            //         width: 8,
+                            //       ),
+                            //       Expanded(
+                            //           child: Container(
+                            //         height: 1.5,
+                            //         color:
+                            //             const Color.fromRGBO(239, 239, 239, 1),
+                            //       ))
+                            //     ],
+                            //   ),
+                            // ),
+                            // const SizedBox(
+                            //   height: 10,
+                            // ),
+                            // CustomTextField(
+                            //   hint: "Select date",
+                            //   readOnly: true,
+                            //   validator: Validators.checkFieldEmpty,
+                            //   controller: c.startDateController,
+                            //   onTap: () => c.startChooseDate(context),
+                            //   textInputAction: TextInputAction.next,
+                            // ),
+                            // const SizedBox(
+                            //   height: 17,
+                            // ),
+                            // CustomTextField(
+                            //   hint: "Select Time",
+                            //   readOnly: true,
+                            //   validator: Validators.checkFieldEmpty,
+                            //   controller: c.startTimeController,
+                            //   onTap: () => c.startChooseTime(context),
+                            //   textInputAction: TextInputAction.next,
+                            // ),
+                            // const SizedBox(
+                            //   height: 17,
+                            // ),
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.symmetric(horizontal: 7),
+                            //   child: Row(
+                            //     crossAxisAlignment: CrossAxisAlignment.end,
+                            //     children: [
+                            //       Text(
+                            //         "End Time ",
+                            //         style: textTheme.bodySmall!.copyWith(
+                            //           fontSize: 10,
+                            //           fontWeight: FontWeight.w400,
+                            //         ),
+                            //       ),
+                            //       const SizedBox(
+                            //         width: 8,
+                            //       ),
+                            //       Expanded(
+                            //           child: Container(
+                            //         height: 1.5,
+                            //         color:
+                            //             const Color.fromRGBO(239, 239, 239, 1),
+                            //       ))
+                            //     ],
+                            //   ),
+                            // ),
+                            // const SizedBox(
+                            //   height: 10,
+                            // ),
+                            // CustomTextField(
+                            //   hint: "Select date",
+                            //   readOnly: true,
+                            //   validator: Validators.checkFieldEmpty,
+                            //   controller: c.endDateController,
+                            //   onTap: () => c.endChooseDate(context),
+                            //   textInputAction: TextInputAction.next,
+                            // ),
+                            // const SizedBox(
+                            //   height: 17,
+                            // ),
+                            // CustomTextField(
+                            //   hint: "Select Time",
+                            //   readOnly: true,
+                            //   validator: Validators.checkFieldEmpty,
+                            //   controller: c.endTimeController,
+                            //   onTap: () => c.endChooseTime(context),
+                            //   textInputAction: TextInputAction.next,
+                            // ),
                           ],
                         ),
                       ),
@@ -339,7 +345,7 @@ class BillingScreen extends StatelessWidget {
                                               color: AppColors.secondaryColor,
                                             ),
                                             Text(
-                                              "${c.startDateController.text} ${c.startTimeController.text}",
+                                              "${homeController.startDateController.text} ${homeController.startTimeController.text}",
                                               style: textTheme.bodyMedium!
                                                   .copyWith(
                                                 fontSize: 12,
@@ -356,7 +362,7 @@ class BillingScreen extends StatelessWidget {
                                             const Icon(Icons.calendar_month,
                                                 size: 12, color: Colors.grey),
                                             Text(
-                                              "${c.endDateController.text} ${c.endTimeController.text}",
+                                              "${homeController.endDateController.text} ${homeController.endTimeController.text}",
                                               style: textTheme.bodyMedium!
                                                   .copyWith(
                                                 fontSize: 12,
@@ -365,11 +371,6 @@ class BillingScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        ElevatedButton(
-                                            onPressed: () {
-                                              c.calculateTotal();
-                                            },
-                                            child: const Text("total"))
                                       ],
                                     )
                                   ],
@@ -456,7 +457,7 @@ class BillingScreen extends StatelessWidget {
                                           color: AppColors.primaryColor),
                                     ),
                                     Text(
-                                      "Rs.2700.00",
+                                      c.totalAmount.toString(),
                                       style: textTheme.bodyLarge!.copyWith(
                                           color: AppColors.primaryColor),
                                     ),
@@ -509,12 +510,6 @@ class BillingScreen extends StatelessWidget {
                                 image: ImagePath.khalti,
                                 onTap: () => c.updateSelectedPayment('khalti'),
                               ),
-                              // PaymentButton(
-                              //   name: 'Imepay',
-                              //   image: ImagePath.esewa,
-                              //   isSelected: c.selectedPayment.value == 'ime',
-                              //   onTap: () => c.updateSelectedPayment('ime'),
-                              // ),
                             ],
                           ),
                         ],

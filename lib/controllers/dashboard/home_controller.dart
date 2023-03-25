@@ -45,8 +45,6 @@ class HomePageController extends GetxController {
 
   @override
   void onInit() {
-    var token = coreController.accesstoken;
-    log("token-----=>>>>>>>>>>>>${token.toString()}");
     startDateController.addListener(enableButton);
     startTimeController.addListener(enableButton);
     endDateController.addListener(enableButton);

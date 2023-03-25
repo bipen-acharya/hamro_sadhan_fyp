@@ -291,14 +291,12 @@ class Homepage extends StatelessWidget {
                                   message:
                                       "End time must be at least 1 hour after start time");
                             }
-
                             Get.to(() => ExplorePage());
-
                             c.getAllVehicleList();
-                            c.endDateController.clear();
-                            c.startDateController.clear();
-                            c.endTimeController.clear();
-                            c.startTimeController.clear();
+                            // c.endDateController.clear();
+                            // c.startDateController.clear();
+                            // c.endTimeController.clear();
+                            // c.startTimeController.clear();
                           }
                         : null,
                     child: Text(

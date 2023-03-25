@@ -1,0 +1,243 @@
+class Order {
+  List<Vehicles>? vehicles;
+
+  Order({this.vehicles});
+
+  Order.fromJson(Map<String, dynamic> json) {
+    if (json['vehicles'] != null) {
+      vehicles = <Vehicles>[];
+      json['vehicles'].forEach((v) {
+        vehicles!.add(Vehicles.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (vehicles != null) {
+      data['vehicles'] = vehicles!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Vehicles {
+  int? id;
+  int? userId;
+  int? vendorId;
+  int? vehicleId;
+  String? startDate;
+  String? endDate;
+  String? status;
+  int? totalPrice;
+  String? orderType;
+  String? paymentStatus;
+  int? quantity;
+  int? price;
+  String? createdAt;
+  String? updatedAt;
+  Vehicle? vehicle;
+  Vendor? vendor;
+
+  Vehicles(
+      {this.id,
+      this.userId,
+      this.vendorId,
+      this.vehicleId,
+      this.startDate,
+      this.endDate,
+      this.status,
+      this.totalPrice,
+      this.orderType,
+      this.paymentStatus,
+      this.quantity,
+      this.price,
+      this.createdAt,
+      this.updatedAt,
+      this.vehicle,
+      this.vendor});
+
+  Vehicles.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    vendorId = json['vendor_id'];
+    vehicleId = json['vehicle_id'];
+    startDate = json['start_date'];
+    endDate = json['end_date'];
+    status = json['status'];
+    totalPrice = json['total_price'];
+    orderType = json['order_type'];
+    paymentStatus = json['payment_status'];
+    quantity = json['quantity'];
+    price = json['price'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    vehicle =
+        json['vehicle'] != null ? Vehicle.fromJson(json['vehicle']) : null;
+    vendor =
+        json['vendor'] != null ? Vendor.fromJson(json['vendor']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['vendor_id'] = vendorId;
+    data['vehicle_id'] = vehicleId;
+    data['start_date'] = startDate;
+    data['end_date'] = endDate;
+    data['status'] = status;
+    data['total_price'] = totalPrice;
+    data['order_type'] = orderType;
+    data['payment_status'] = paymentStatus;
+    data['quantity'] = quantity;
+    data['price'] = price;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (vehicle != null) {
+      data['vehicle'] = vehicle!.toJson();
+    }
+    if (vendor != null) {
+      data['vendor'] = vendor!.toJson();
+    }
+    return data;
+  }
+}
+
+class Vehicle {
+  int? id;
+  int? userId;
+  int? categoryId;
+  String? vehicleName;
+  String? brandName;
+  String? color;
+  String? mileage;
+  String? image;
+  String? trasmissionType;
+  String? seat;
+  String? vehicleNumber;
+  String? status;
+  String? fuelType;
+  String? vehicleDescription;
+  int? costPerHour;
+  String? createdAt;
+  String? updatedAt;
+  String? imageUrl;
+
+  Vehicle(
+      {this.id,
+      this.userId,
+      this.categoryId,
+      this.vehicleName,
+      this.brandName,
+      this.color,
+      this.mileage,
+      this.image,
+      this.trasmissionType,
+      this.seat,
+      this.vehicleNumber,
+      this.status,
+      this.fuelType,
+      this.vehicleDescription,
+      this.costPerHour,
+      this.createdAt,
+      this.updatedAt,
+      this.imageUrl});
+
+  Vehicle.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    categoryId = json['category_id'];
+    vehicleName = json['vehicle_name'];
+    brandName = json['brand_name'];
+    color = json['color'];
+    mileage = json['mileage'];
+    image = json['image'];
+    trasmissionType = json['trasmission_type'];
+    seat = json['seat'];
+    vehicleNumber = json['vehicle_number'];
+    status = json['status'];
+    fuelType = json['fuel_type'];
+    vehicleDescription = json['vehicle_description'];
+    costPerHour = json['cost_per_hour'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    imageUrl = json['image_url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['category_id'] = categoryId;
+    data['vehicle_name'] = vehicleName;
+    data['brand_name'] = brandName;
+    data['color'] = color;
+    data['mileage'] = mileage;
+    data['image'] = image;
+    data['trasmission_type'] = trasmissionType;
+    data['seat'] = seat;
+    data['vehicle_number'] = vehicleNumber;
+    data['status'] = status;
+    data['fuel_type'] = fuelType;
+    data['vehicle_description'] = vehicleDescription;
+    data['cost_per_hour'] = costPerHour;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['image_url'] = imageUrl;
+    return data;
+  }
+}
+
+class Vendor {
+  int? id;
+  String? name;
+  String? phoneNumber;
+  String? email;
+  Null? emailVerifiedAt;
+  String? type;
+  Null? profileImage;
+  String? createdAt;
+  String? updatedAt;
+  Null? profileImageUrl;
+
+  Vendor(
+      {this.id,
+      this.name,
+      this.phoneNumber,
+      this.email,
+      this.emailVerifiedAt,
+      this.type,
+      this.profileImage,
+      this.createdAt,
+      this.updatedAt,
+      this.profileImageUrl});
+
+  Vendor.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    phoneNumber = json['phone_number'];
+    email = json['email'];
+    emailVerifiedAt = json['email_verified_at'];
+    type = json['type'];
+    profileImage = json['profile_image'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    profileImageUrl = json['profile_image_url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['name'] = name;
+    data['phone_number'] = phoneNumber;
+    data['email'] = email;
+    data['email_verified_at'] = emailVerifiedAt;
+    data['type'] = type;
+    data['profile_image'] = profileImage;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['profile_image_url'] = profileImageUrl;
+    return data;
+  }
+}

@@ -11,6 +11,8 @@ class ExplorePage extends StatelessWidget {
   ExplorePage({super.key});
 
   final c = Get.find<HomePageController>();
+
+  
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);

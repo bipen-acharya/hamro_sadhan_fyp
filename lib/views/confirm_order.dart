@@ -50,7 +50,7 @@ class OrderConfirmPage extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () {
-            Get.offAll(DashScreen());
+            Get.offAll(() => DashScreen());
           },
           style: ElevatedButton.styleFrom(
               minimumSize: Size(Get.width - 60, 50),

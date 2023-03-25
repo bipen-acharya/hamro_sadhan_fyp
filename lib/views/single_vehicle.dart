@@ -17,6 +17,7 @@ class SinglePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var textTheme = theme.textTheme;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
