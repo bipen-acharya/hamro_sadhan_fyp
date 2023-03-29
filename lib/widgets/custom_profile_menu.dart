@@ -31,7 +31,10 @@ class CustomProfileMenu extends StatelessWidget {
       ),
       title: Text(
         label,
-        style: theme.textTheme.bodyLarge!.copyWith(fontSize: 15),
+        style: theme.textTheme.bodyLarge!.copyWith(
+          fontSize: 15,
+          color:  theme.colorScheme.secondary,
+        ),
       ),
       trailing: Padding(
         padding: const EdgeInsets.only(right: 15),

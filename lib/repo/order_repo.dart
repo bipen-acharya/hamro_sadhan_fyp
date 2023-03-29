@@ -74,10 +74,8 @@ class OrderRepo {
         headers: headers,
       );
       var data = json.decode(response.body);
-      print(data);
+     
       if (data['status']) {
-        log("on sucess ma aayo ");
-
         onSuccess(orderListFromJson(data['data']['orders']));
       } else {
         onError(data['message']);

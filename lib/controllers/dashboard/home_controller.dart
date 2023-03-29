@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/category.dart';
+import 'package:hamro_sadhan/repo/vehicle_category_repo.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/vehicle.dart';
@@ -51,9 +52,9 @@ class HomePageController extends GetxController {
     endTimeController.addListener(enableButton);
 
     super.onInit();
+
+   
   }
-
-
 
   void enableButton() {
     submit.value = startTimeController.text.isNotEmpty &&
@@ -67,8 +68,15 @@ class HomePageController extends GetxController {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2022, DateTime.now().month, DateTime.now().day),
+      firstDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime(2050),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(),
+          child: child ?? Container(),
+        );
+      },
     );
 
     if (pickedDate != null) {
@@ -97,7 +105,8 @@ class HomePageController extends GetxController {
       // ignore: use_build_context_synchronously
       startTime = pickedTime.format(context).toString();
       startTimeController.text = startTime.toString();
-      sTController.text = "${pickedTime.hour}:${pickedTime.minute}:00";
+      sTController.text =
+          "${pickedTime.hour.toString().padLeft(2, '0')}:${pickedTime.minute.toString().padLeft(2, '0')}:00";
     }
   }
 
@@ -105,8 +114,15 @@ class HomePageController extends GetxController {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2022, DateTime.now().month, DateTime.now().day),
+      firstDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime(2050),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(),
+          child: child ?? Container(),
+        );
+      },
     );
 
     if (pickedDate != null) {
@@ -125,11 +141,14 @@ class HomePageController extends GetxController {
       endSelectedTime.value = pickedTime;
       endTime = pickedTime.format(context);
       endTimeController.text = endTime.toString();
-      eTController.text = "${pickedTime.hour}:${pickedTime.minute}:00";
+      eTController.text =
+          "${pickedTime.hour.toString().padLeft(2, '0')}:${pickedTime.minute.toString().padLeft(2, '0')}:00";
+      log('------>>>>>>>.end date ->>>>${eTController.text}');
     }
   }
 
   RxList<Vehicle> vehicleList = RxList();
+  RxList<VehicleCategory> vehicleCategory = RxList();
 
   getAllVehicleList() async {
     loading.value = true;
@@ -146,6 +165,21 @@ class HomePageController extends GetxController {
         loading.value = false;
         CustomSnackBar.error(message: message, title: "Vehicle");
       },
+    );
+  }
+
+  getAllCategory() async {
+    loading.value = true;
+    await VehicleCategoryRepo.getAllVehicleCategory(
+      onSuccess: (category) {
+        loading.value = false;
+        vehicleCategory.addAll(category);
+        // print({'------->>>>>>>>${vehicleCategory.toList().toString()}'});
+      },
+      onError: ((message) {
+        loading.value = false;
+        CustomSnackBar.error(title: "Category", message: message);
+      }),
     );
   }
 }

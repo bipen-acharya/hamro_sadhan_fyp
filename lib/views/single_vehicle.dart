@@ -20,18 +20,18 @@ class SinglePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: theme.colorScheme.tertiary,
         elevation: 5,
         shadowColor: const Color(0xFF494949).withOpacity(0.06),
         leading: InkWell(
           onTap: () {
             Get.back();
           },
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.only(left: 20),
             child: Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              color: theme.colorScheme.secondary,
             ),
           ),
         ),
@@ -49,9 +49,10 @@ class SinglePage extends StatelessWidget {
               ),
               child: Text(
                 vehicle.vehicleName ?? "",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
+                  color: theme.colorScheme.secondary,
                 ),
               ),
             ),
@@ -83,7 +84,7 @@ class SinglePage extends StatelessWidget {
               // height: Get.height / 2,
 
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: theme.colorScheme.tertiary,
                 borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(40.0),
                   topLeft: Radius.circular(40.0),
@@ -107,7 +108,8 @@ class SinglePage extends StatelessWidget {
                     ),
                     child: Text(
                       "Overview",
-                      style: theme.textTheme.titleLarge,
+                      style: theme.textTheme.titleLarge!
+                          .copyWith(color: theme.colorScheme.secondary),
                     ),
                   ),
                   const SizedBox(
@@ -161,8 +163,7 @@ class SinglePage extends StatelessWidget {
                     child: Text(
                       "Renter",
                       style: theme.textTheme.bodyLarge!.copyWith(
-                        fontSize: 16,
-                      ),
+                          fontSize: 16, color: theme.colorScheme.secondary),
                     ),
                   ),
                   const SizedBox(
@@ -197,6 +198,7 @@ class SinglePage extends StatelessWidget {
                                   vehicle.vendor!.name ?? "",
                                   style: theme.textTheme.bodyMedium!.copyWith(
                                     fontSize: 14,
+                                    color: theme.colorScheme.secondary,
                                   ),
                                 ),
                                 const SizedBox(
@@ -205,8 +207,8 @@ class SinglePage extends StatelessWidget {
                                 Text(
                                   vehicle.vendor!.phoneNumber ?? "",
                                   style: theme.textTheme.bodyMedium!.copyWith(
-                                    fontSize: 14,
-                                  ),
+                                      fontSize: 14,
+                                      color: theme.colorScheme.secondary),
                                 ),
                               ],
                             ),
@@ -218,7 +220,7 @@ class SinglePage extends StatelessWidget {
                           width: 50,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: const Color.fromARGB(230, 241, 240, 240),
+                            color: Colors.grey,
                           ),
                           child: SvgPicture.asset(
                             ImagePath.call,
@@ -242,16 +244,15 @@ class SinglePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: Color.fromARGB(230, 241, 240, 240),
-          // boxShadow: [
-          //   BoxShadow(
-          //     offset: const Offset(4, 4),
-          //     blurRadius: 9,
-          //     color: const Color(0xFF494949).withOpacity(0.4),
-          //   ),
-          // ],
-        ),
+        decoration: const BoxDecoration(color: AppColors.secondaryColor
+            // boxShadow: [
+            //   BoxShadow(
+            //     offset: const Offset(4, 4),
+            //     blurRadius: 9,
+            //     color: const Color(0xFF494949).withOpacity(0.4),
+            //   ),
+            // ],
+            ),
         height: 90,
         width: MediaQuery.of(context).size.width,
         alignment: Alignment.center,
@@ -271,7 +272,7 @@ class SinglePage extends StatelessWidget {
                 Text(
                   "/Hour",
                   style: theme.textTheme.titleLarge!.copyWith(
-                      color: AppColors.secondaryColor,
+                      color: theme.colorScheme.secondary,
                       fontWeight: FontWeight.w400),
                 ),
               ],
@@ -370,9 +371,8 @@ class FeatureTile extends StatelessWidget {
           height: 50,
           width: 50,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: const Color.fromARGB(230, 241, 240, 240),
-          ),
+              borderRadius: BorderRadius.circular(10),
+              color: AppColors.secondaryColor),
           child: SvgPicture.asset(
             image,
             fit: BoxFit.contain,
@@ -383,9 +383,8 @@ class FeatureTile extends StatelessWidget {
         ),
         Text(
           text,
-          style: theme.textTheme.bodyLarge!.copyWith(
-            fontSize: 12,
-          ),
+          style: theme.textTheme.bodyLarge!
+              .copyWith(fontSize: 12, color: theme.colorScheme.secondary),
         ),
       ],
     );

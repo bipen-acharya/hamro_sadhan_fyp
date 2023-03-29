@@ -60,6 +60,7 @@ class ProfileController extends GetxController {
                   style: theme.textTheme.titleMedium!.copyWith(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
+                    color: theme.colorScheme.secondary,
                   ),
                 ),
                 const SizedBox(

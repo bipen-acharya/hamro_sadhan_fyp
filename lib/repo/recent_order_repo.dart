@@ -1,40 +1,32 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:get/get.dart';
-import 'package:hamro_sadhan/models/category.dart';
-import 'package:hamro_sadhan/utils/apis.dart';
-
-import '../controllers/auth/core_controller.dart';
+import '../models/order.dart';
+import '../utils/apis.dart';
+import '../utils/storage_helper.dart';
 
 import 'package:http/http.dart' as http;
 
-import '../utils/storage_helper.dart';
-
-class VehicleCategoryRepo {
-  static Future<void> getAllVehicleCategory(
-      {required Function(List<VehicleCategory>) onSuccess,
+class RecentOrderRepo {
+  static Future<void> getAllRecentOrder(
+      {required Function(List<Order>) onSuccess,
       required Function(String message) onError}) async {
     try {
-      log("on sucess ma aayo ");
       var token = StorageHelper.getToken();
-      var url = Uri.parse(HamroSadhanApi.category);
+      var url = Uri.parse(HamroSadhanApi.recentOrder);
       var headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "${token!.tokenType} ${token.accessToken!}"
+        "Authorization": "${token!.tokenType!} ${token.accessToken!}"
       };
       http.Response response = await http.get(
         url,
         headers: headers,
       );
       var data = json.decode(response.body);
-
-      print(data.toString());
+    
       if (data['status']) {
-        log("on sucess ma aayo ");
-
-        onSuccess(categoryListFromJson(data['data']['categories']));
+        onSuccess(orderListFromJson(data['data']));
       } else {
         onError(data['message']);
       }

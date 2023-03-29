@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -24,20 +25,33 @@ class ProfilePage extends StatelessWidget {
       body: SafeArea(
           child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: Center(
-              child: CircleAvatar(
-                backgroundImage: NetworkImage("https://picsum.photos/200/300"),
-                radius: 40,
-                backgroundColor: Colors.pink,
-              ),
-            ),
-          ),
+          Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
+                child: CachedNetworkImage(
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  fit: BoxFit.fill,
+                  imageUrl: controller.currentUser!.profileImageUrl ?? "",
+                  errorWidget: (context, url, error) => Image.asset(
+                    'assets/logo.png',
+                    height: 87,
+                    fit: BoxFit.contain,
+                  ),
+                  height: 87,
+                ),
+              )),
           Padding(
             padding: const EdgeInsets.only(top: 10),
-            child: Text("${controller.currentUser!.name?.capitalize}",
-                style: theme.textTheme.bodyLarge),
+            child: Text(
+              "${controller.currentUser!.name?.capitalize}",
+              style: theme.textTheme.bodyLarge!.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
+            ),
           ),
 
           Padding(
@@ -61,6 +75,7 @@ class ProfilePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 20),
             child: Card(
+              color: theme.colorScheme.tertiary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -68,7 +83,6 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   Obx(() {
-                    
                     return CustomProfileMenu(
                       onTap: () => myFunction(controller.darkTheme.value),
                       label: "Dark Mode",

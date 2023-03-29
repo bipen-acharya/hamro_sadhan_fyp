@@ -45,11 +45,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    const textTheme = TextStyle(
-      fontFamily: "ZillaSlab",
-      fontWeight: FontWeight.w400,
-      fontSize: 16,
-    );
+    var textTheme = theme.textTheme;
     return TextFormField(
       autofocus: autoFocus,
       onFieldSubmitted: onSubmit,
@@ -73,7 +69,7 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: (suffixIcon != null) ? suffixIcon : null,
         contentPadding: const EdgeInsets.all(16),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: theme.colorScheme.tertiary,
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(
@@ -97,9 +93,10 @@ class CustomTextField extends StatelessWidget {
               color: (border == null) ? AppColors.borderColor : border!),
         ),
         hintText: hint ?? "",
-        hintStyle: textTheme.copyWith(color: AppColors.hintTextColor),
+        hintStyle:
+            textTheme.bodyMedium!.copyWith(color: AppColors.hintTextColor),
       ),
-      style: textTheme,
+      style: textTheme.bodyMedium!.copyWith(color: theme.colorScheme.secondary),
     );
   }
 }

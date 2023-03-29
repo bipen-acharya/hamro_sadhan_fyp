@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/auth/core_controller.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/controllers/dashboard/profile_controller.dart';
-import 'package:hamro_sadhan/controllers/dashboard/search_controller.dart';
+import 'package:hamro_sadhan/views/dashboard/recent_page.dart';
 import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
 import '../../controllers/dashboard/dash_screen_controller.dart';
+import '../../controllers/dashboard/recent_controller.dart';
 import '../../utils/colors.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
@@ -17,7 +18,7 @@ class DashScreen extends StatelessWidget {
   DashScreen({super.key});
   // final coreController = Get.find<CoreController>();
   final c = Get.put(DashScreenController());
-  final co = Get.put(SearchController());
+  final co = Get.put(RecentOrderController());
   final con = Get.put(ProfileController());
   final conn = Get.put(HomePageController());
   final coreController = Get.put(CoreController());
@@ -25,7 +26,7 @@ class DashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final pages = [
       Homepage(),
-      SearchPage(),
+      RecentOrderScreen(),
       StatementPage(),
       ProfilePage(),
     ];
@@ -47,7 +48,8 @@ class DashScreen extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.recent_actors), label: "Bookings"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.history), label: "History"),
             BottomNavigationBarItem(

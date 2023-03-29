@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:khalti_flutter/khalti_flutter.dart';
 
 import 'controllers/auth/core_controller.dart';
 import 'controllers/dashboard/home_controller.dart';
@@ -21,21 +22,34 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CoreController>(
-        init: Get.put(CoreController()),
-        builder: (c) {
-          return GetMaterialApp(
-            debugShowCheckedModeBanner: true,
-            title: 'Hamro Sadhan',
-            theme: basicTheme(),
-            darkTheme: ThemeData.dark(),
-            initialRoute: SplashScreen.routeName,
-            themeMode: c.darkTheme.value ? ThemeMode.dark : ThemeMode.light,
-            initialBinding: BindingsBuilder(() {
-              Get.put(CoreController());
-            }),
-            getPages: [...commonPages, ...userPages],
-          );
+    return KhaltiScope(
+        publicKey: "test_public_key_f18b878e02d64e10988f46aea7baa233",
+        builder: (context, navigatorKey) {
+          return GetBuilder<CoreController>(
+              init: Get.put(CoreController()),
+              builder: (c) {
+                return GetMaterialApp(
+                  navigatorKey: navigatorKey,
+                  supportedLocales: const [
+                    Locale('en', 'US'),
+                    Locale('ne', 'NP'),
+                  ],
+                  localizationsDelegates: const [
+                    KhaltiLocalizations.delegate,
+                  ],
+                  debugShowCheckedModeBanner: true,
+                  title: 'Hamro Sadhan',
+                  theme: basicTheme(),
+                  darkTheme: darkTheme(),
+                  initialRoute: SplashScreen.routeName,
+                  themeMode:
+                      c.darkTheme.value ? ThemeMode.dark : ThemeMode.light,
+                  initialBinding: BindingsBuilder(() {
+                    Get.put(CoreController());
+                  }),
+                  getPages: [...commonPages, ...userPages],
+                );
+              });
         });
   }
 }

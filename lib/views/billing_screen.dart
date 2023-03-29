@@ -24,21 +24,21 @@ class BillingScreen extends StatelessWidget {
     c.costPerHour = singleVehicle.costPerHour!;
     c.vehicleId.value = singleVehicle.id!;
     c.vendorId.value = singleVehicle.vendor!.id!;
+
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 248, 249, 250),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: theme.colorScheme.tertiary,
         elevation: 5,
         shadowColor: const Color(0xFF494949).withOpacity(0.06),
         leading: InkWell(
           onTap: () {
             c.currentStep > 0 ? (c.currentStep.value -= 1) : Get.back();
           },
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.only(left: 20),
             child: Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              color: theme.colorScheme.secondary,
             ),
           ),
         ),
@@ -52,7 +52,9 @@ class BillingScreen extends StatelessWidget {
                 physics: const ScrollPhysics(),
                 currentStep: c.currentStep.value,
                 onStepTapped: (step) => c.stepTapped(step),
-                onStepContinue: c.stepContinue,
+                onStepContinue: () {
+                  c.stepContinue(context);
+                },
                 elevation: 0,
                 margin: const EdgeInsets.symmetric(vertical: 20),
                 controlsBuilder:
@@ -90,8 +92,9 @@ class BillingScreen extends StatelessWidget {
                 },
                 steps: [
                   Step(
-                    title:
-                        const Text('Details', style: TextStyle(fontSize: 12)),
+                    title: Text('Details',
+                        style: TextStyle(
+                            fontSize: 12, color: theme.colorScheme.secondary)),
                     content: SizedBox(
                       height: MediaQuery.of(context).size.height - 300,
                       child: Form(
@@ -107,9 +110,9 @@ class BillingScreen extends StatelessWidget {
                                   Text(
                                     "Details",
                                     style: textTheme.bodySmall!.copyWith(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w400,
+                                        color: theme.colorScheme.secondary),
                                   ),
                                   const SizedBox(
                                     width: 8,
@@ -144,103 +147,6 @@ class BillingScreen extends StatelessWidget {
                             const SizedBox(
                               height: 17,
                             ),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(horizontal: 7),
-                            //   child: Row(
-                            //     crossAxisAlignment: CrossAxisAlignment.end,
-                            //     children: [
-                            //       Text(
-                            //         "Start Time ",
-                            //         style: textTheme.bodySmall!.copyWith(
-                            //           fontSize: 10,
-                            //           fontWeight: FontWeight.w400,
-                            //         ),
-                            //       ),
-                            //       const SizedBox(
-                            //         width: 8,
-                            //       ),
-                            //       Expanded(
-                            //           child: Container(
-                            //         height: 1.5,
-                            //         color:
-                            //             const Color.fromRGBO(239, 239, 239, 1),
-                            //       ))
-                            //     ],
-                            //   ),
-                            // ),
-                            // const SizedBox(
-                            //   height: 10,
-                            // ),
-                            // CustomTextField(
-                            //   hint: "Select date",
-                            //   readOnly: true,
-                            //   validator: Validators.checkFieldEmpty,
-                            //   controller: c.startDateController,
-                            //   onTap: () => c.startChooseDate(context),
-                            //   textInputAction: TextInputAction.next,
-                            // ),
-                            // const SizedBox(
-                            //   height: 17,
-                            // ),
-                            // CustomTextField(
-                            //   hint: "Select Time",
-                            //   readOnly: true,
-                            //   validator: Validators.checkFieldEmpty,
-                            //   controller: c.startTimeController,
-                            //   onTap: () => c.startChooseTime(context),
-                            //   textInputAction: TextInputAction.next,
-                            // ),
-                            // const SizedBox(
-                            //   height: 17,
-                            // ),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(horizontal: 7),
-                            //   child: Row(
-                            //     crossAxisAlignment: CrossAxisAlignment.end,
-                            //     children: [
-                            //       Text(
-                            //         "End Time ",
-                            //         style: textTheme.bodySmall!.copyWith(
-                            //           fontSize: 10,
-                            //           fontWeight: FontWeight.w400,
-                            //         ),
-                            //       ),
-                            //       const SizedBox(
-                            //         width: 8,
-                            //       ),
-                            //       Expanded(
-                            //           child: Container(
-                            //         height: 1.5,
-                            //         color:
-                            //             const Color.fromRGBO(239, 239, 239, 1),
-                            //       ))
-                            //     ],
-                            //   ),
-                            // ),
-                            // const SizedBox(
-                            //   height: 10,
-                            // ),
-                            // CustomTextField(
-                            //   hint: "Select date",
-                            //   readOnly: true,
-                            //   validator: Validators.checkFieldEmpty,
-                            //   controller: c.endDateController,
-                            //   onTap: () => c.endChooseDate(context),
-                            //   textInputAction: TextInputAction.next,
-                            // ),
-                            // const SizedBox(
-                            //   height: 17,
-                            // ),
-                            // CustomTextField(
-                            //   hint: "Select Time",
-                            //   readOnly: true,
-                            //   validator: Validators.checkFieldEmpty,
-                            //   controller: c.endTimeController,
-                            //   onTap: () => c.endChooseTime(context),
-                            //   textInputAction: TextInputAction.next,
-                            // ),
                           ],
                         ),
                       ),
@@ -256,9 +162,12 @@ class BillingScreen extends StatelessWidget {
                   //
                   //
                   Step(
-                    title: const Text(
+                    title: Text(
                       'Confirmation',
-                      style: TextStyle(fontSize: 12),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: theme.colorScheme.secondary,
+                      ),
                     ),
                     content: SizedBox(
                       height: MediaQuery.of(context).size.height - 300,
@@ -269,7 +178,7 @@ class BillingScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: AppColors.extraWhiteColor,
+                              color: theme.colorScheme.tertiary,
                               boxShadow: [
                                 BoxShadow(
                                   offset: const Offset(4, 4),
@@ -284,7 +193,8 @@ class BillingScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   "Summary",
-                                  style: textTheme.titleLarge,
+                                  style: textTheme.titleLarge!.copyWith(
+                                      color: theme.colorScheme.secondary),
                                 ),
                                 const SizedBox(
                                   height: 9,
@@ -311,8 +221,9 @@ class BillingScreen extends StatelessWidget {
                                         Text(
                                           singleVehicle.vehicleName ?? "",
                                           style: textTheme.titleLarge!.copyWith(
-                                            fontSize: 14,
-                                          ),
+                                              fontSize: 14,
+                                              color:
+                                                  theme.colorScheme.secondary),
                                         ),
                                         const SizedBox(
                                           height: 7,
@@ -386,7 +297,7 @@ class BillingScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: AppColors.extraWhiteColor,
+                              color: theme.colorScheme.tertiary,
                               boxShadow: [
                                 BoxShadow(
                                   offset: const Offset(4, 4),
@@ -401,7 +312,9 @@ class BillingScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   singleVehicle.vehicleName ?? "",
-                                  style: textTheme.titleLarge,
+                                  style: textTheme.titleLarge!.copyWith(
+                                    color: theme.colorScheme.secondary,
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 4,
@@ -422,10 +335,18 @@ class BillingScreen extends StatelessWidget {
                                             children: [
                                               Text(
                                                 "Amount",
-                                                style: textTheme.bodyMedium,
+                                                style: textTheme.bodyMedium!
+                                                    .copyWith(
+                                                  color: theme
+                                                      .colorScheme.secondary,
+                                                ),
                                               ),
                                               Text("Rs.900.00",
-                                                  style: textTheme.bodyMedium),
+                                                  style: textTheme.bodyMedium!
+                                                      .copyWith(
+                                                    color: theme
+                                                        .colorScheme.secondary,
+                                                  )),
                                             ],
                                           ),
                                         );
@@ -454,12 +375,16 @@ class BillingScreen extends StatelessWidget {
                                     Text(
                                       "Total",
                                       style: textTheme.bodyLarge!.copyWith(
-                                          color: AppColors.primaryColor),
+                                        // color: AppColors.primaryColor
+                                        color: theme.colorScheme.secondary,
+                                      ),
                                     ),
                                     Text(
                                       c.totalAmount.toString(),
                                       style: textTheme.bodyLarge!.copyWith(
-                                          color: AppColors.primaryColor),
+                                        // color: AppColors.primaryColor
+                                        color: theme.colorScheme.secondary,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -480,8 +405,11 @@ class BillingScreen extends StatelessWidget {
                   //
                   //
                   Step(
-                    title:
-                        const Text('Payment', style: TextStyle(fontSize: 12)),
+                    title: Text('Payment',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: theme.colorScheme.secondary,
+                        )),
                     content: SizedBox(
                       height: MediaQuery.of(context).size.height - 300,
                       child: Column(
@@ -489,7 +417,9 @@ class BillingScreen extends StatelessWidget {
                         children: [
                           Text(
                             "Select Payment Method",
-                            style: textTheme.titleLarge,
+                            style: textTheme.titleLarge!.copyWith(
+                              color: theme.colorScheme.secondary,
+                            ),
                           ),
                           const SizedBox(
                             height: 28,
