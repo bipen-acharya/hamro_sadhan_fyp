@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:carousel_slider/carousel_controller.dart';
@@ -5,10 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/category.dart';
 import 'package:hamro_sadhan/repo/vehicle_category_repo.dart';
-import 'package:intl/intl.dart';
+
+import 'package:http/http.dart' as http;
 
 import '../../models/vehicle.dart';
 import '../../repo/vehicle_repo.dart';
+import '../../utils/apis.dart';
+import '../../utils/storage_helper.dart';
 import '../../widgets/custom_snackbar.dart';
 import '../auth/core_controller.dart';
 
@@ -52,8 +56,6 @@ class HomePageController extends GetxController {
     endTimeController.addListener(enableButton);
 
     super.onInit();
-
-   
   }
 
   void enableButton() {
@@ -181,5 +183,38 @@ class HomePageController extends GetxController {
         CustomSnackBar.error(title: "Category", message: message);
       }),
     );
+  }
+
+  var search = "".obs;
+  var productList = <Vehicle>[].obs;
+
+  fetchCarItem() async {
+    try {
+      String s = search.value;
+      var token = StorageHelper.getToken();
+      var url = Uri.parse(HamroSadhanApi.availableVehicle);
+      var headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "${token!.tokenType!} ${token.accessToken!}"
+      };
+      var body = json.encode({
+        "start_date": '${startDateController.text} ${sTController.text}',
+        "end_date": '${endDateController.text} ${eTController.text}',
+        "search": s
+      });
+      http.Response response = await http.post(
+        url,
+        headers: headers,
+        body: body,
+      );
+      var data = json.decode(response.body);
+      var productLists = vehicleListFromJson(data['data']);
+      productList.value = productLists;
+      print(productList);
+      return productList;
+    } catch (e) {
+      Future.error('$e');
+    }
   }
 }

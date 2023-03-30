@@ -47,4 +47,5 @@ class VehicleRepo {
       onError("Sorry something went wrong. Please try again");
     }
   }
+
 }

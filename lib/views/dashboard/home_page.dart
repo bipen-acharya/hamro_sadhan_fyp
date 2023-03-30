@@ -325,6 +325,7 @@ class Homepage extends StatelessWidget {
                                             "End time must be at least 1 hour after start time");
                                   }
                                   Get.to(() => ExplorePage());
+                                  c.vehicleCategory.clear();
                                   c.getAllCategory();
                                   c.getAllVehicleList();
                                 }

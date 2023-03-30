@@ -12,10 +12,7 @@ class ProfileController extends GetxController {
   TextEditingController previousPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
+ 
 
   final keys = GlobalKey<FormState>();
   changePassword() {

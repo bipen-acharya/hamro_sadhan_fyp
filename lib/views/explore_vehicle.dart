@@ -108,20 +108,7 @@ class ExplorePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Container(
-                  //   color: Colors.amber,
-                  //   height: 60,
-                  //   child: ListView.builder(
-                  //       itemCount: c.vehicleCategory.length,
-                  //       shrinkWrap: true,
-                  //       itemBuilder: (context, index) {
-                  //         VehicleCategory category = c.vehicleCategory[index];
-                  //         return Text(
-                  //           category.name ?? "kjads",
-                  //           style: TextStyle(color: Colors.black),
-                  //         );
-                  //       }),
-                  // ),
+             
                   Container(
                     height: Get.height - 210,
                     margin: const EdgeInsets.only(top: 15),

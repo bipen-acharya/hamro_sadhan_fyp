@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
+import 'package:hamro_sadhan/models/vehicle.dart';
+import 'package:hamro_sadhan/views/single_vehicle.dart';
 
 class MySearchDelegate extends SearchDelegate {
-  // SearchController searchController = Get.put(SearchController());
+  final c = Get.find<HomePageController>();
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -20,49 +25,63 @@ class MySearchDelegate extends SearchDelegate {
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-        onPressed: () {
-          close(context, null);
-        },
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
-        ));
+      onPressed: () {
+        close(context, null);
+      },
+      icon: const Icon(
+        Icons.arrow_back,
+        color: Colors.black,
+      ),
+    );
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    return ListView.separated(
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        // ProductInfo product = searchController.productList[index];
-        return Material(
-          elevation: 2.0,
-          child: ListTile(
-            tileColor: Colors.white,
-            title: const Text("product.modelName"),
-            subtitle: const Text("product.productTitle"),
-            leading: const CircleAvatar(
-              radius: 22,
-              backgroundColor: Colors.orange,
-              child: CircleAvatar(
-                backgroundImage: NetworkImage("https://picsum.photos/100/100"),
-              ),
-            ),
-            trailing: const Text("product.carTag"),
-            onTap: () {
-              // if (product.carTag == 'BUY') {
-              //   Get.to(() => DetailScreen(productInfo: product));
-              // } else {
-              //   Get.to(() => RentDetailScreen(productInfo: product));
-              // }
+    return FutureBuilder(
+      future: c.fetchCarItem(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView.separated(
+            itemCount: c.productList.length,
+            itemBuilder: (context, index) {
+              Vehicle vehicle = c.productList[index];
+              return Material(
+                elevation: 2.0,
+                child: ListTile(
+                  tileColor: Colors.white,
+                  title: Text(vehicle.vehicleName!),
+                  subtitle: const Text("product.productTitle"),
+                  leading: const CircleAvatar(
+                    radius: 22,
+                    backgroundColor: Colors.orange,
+                    child: CircleAvatar(
+                      backgroundImage:
+                          NetworkImage("https://picsum.photos/100/100"),
+                    ),
+                  ),
+                  trailing: const Text("product.carTag"),
+                  onTap: () {
+                    Get.to(() => SinglePage(vehicle: vehicle));
+                  },
+                ),
+              );
             },
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(
-          height: 5,
-        );
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(
+                height: 5,
+              );
+            },
+          );
+        } else if (c.productList == []) {
+          print("log------->>>>>>> empty product list");
+          return const Center(
+            child: Text("No Inventory Found"),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
       },
     );
   }
@@ -70,25 +89,25 @@ class MySearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     // final SearchController searchController = Get.find();
-
+    c.search.value = query;
     return query == ""
         ? ListView.builder(
-            itemCount: 3,
+            itemCount: c.productList.length,
             itemBuilder: (context, index) {
-              // CarModel result = searchController.suggetionList[index];
+              Vehicle vehicle = c.productList[index];
               return ListTile(
-                title: const Text("result.modelName"),
+                title: Text(vehicle.vehicleName ?? ""),
                 onTap: () {
-                  // query = result.modelName;
+                  Get.to(() => SinglePage(vehicle: vehicle));
                 },
               );
             })
         : ListView.builder(
-            itemCount: 4,
+            itemCount: c.productList.length,
             itemBuilder: (context, index) {
-              // ProductInfo result = searchController.productList[index];
+              Vehicle vehicle = c.productList[index];
               return ListTile(
-                title: const Text("result.modelName"),
+                title: Text(vehicle.vehicleName ?? ""),
                 onTap: () {
                   // query = result.modelName;
 
