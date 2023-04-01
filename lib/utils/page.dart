@@ -7,10 +7,12 @@ import 'package:hamro_sadhan/views/auth/register_screen.dart';
 
 import '../controllers/auth/login_controller.dart';
 import '../controllers/dashboard/dash_screen_controller.dart';
+import '../controllers/dashboard/edit_profile_controller.dart';
 import '../controllers/dashboard/home_controller.dart';
 import '../controllers/dashboard/profile_controller.dart';
 import '../views/auth/login_screen.dart';
 import '../views/dashboard/dash_screen.dart';
+import '../views/edit_profile.dart';
 import '../views/splash_screen.dart';
 
 var commonPages = [
@@ -47,4 +49,12 @@ var userPages = [
   //     page: (() =>  SinglePage()),
   //     binding:
   //         BindingsBuilder(() => Get.lazyPut(() => SinglePageController()))),
+
+  GetPage(
+    name: EditProfile.routeName,
+    page: () => EditProfile(),
+    binding: BindingsBuilder(() => Get.lazyPut(
+          () => EditProfileController(),
+        )),
+  ),
 ];

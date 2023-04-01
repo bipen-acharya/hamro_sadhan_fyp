@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
+import 'package:hamro_sadhan/controllers/explore_controller.dart';
 import 'package:hamro_sadhan/repo/order_repo.dart';
 import 'package:hamro_sadhan/views/confirm_order.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
@@ -14,6 +15,8 @@ class BillingController extends GetxController {
   final formKey = GlobalKey<FormState>();
   RxBool loading = false.obs;
   final currentStep = 0.obs;
+
+  PaymentController paymentController = Get.put(PaymentController());
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController contactController = TextEditingController();
@@ -75,6 +78,7 @@ class BillingController extends GetxController {
     }
   }
 
+  String? payment;
   payWithKhalti(
       context, double amount, String productIdentity, String productName) {
     KhaltiScope.of(context).pay(
@@ -87,6 +91,13 @@ class BillingController extends GetxController {
         PaymentPreference.khalti,
       ],
       onSuccess: (success) {
+        paymentController.token.value = success.token;
+        paymentController.amount.value = success.amount;
+
+        log("tnx id -----------${paymentController.token.toString()}");
+        payment = paymentController.token.toString();
+        paymentController.postPayment();
+        postOrder();
         CustomSnackBar.success(title: "Payment", message: "Payment Successful");
       },
       onFailure: (fa) {
@@ -104,11 +115,14 @@ class BillingController extends GetxController {
   postOrder() async {
     loading.value = true;
     await OrderRepo.addOrder(
+        // khaltiResponse: paymentSuccess,
+        amount: paymentController.amount.value.toString(),
+        tnxid: payment,
         startDate:
             '${homeController.startDateController.text} ${homeController.sTController.text}',
         endDate:
             '${homeController.endDateController.text} ${homeController.eTController.text}',
-        orderType: "cash",
+        orderType: "khalti",
         paymentStatus: "false",
         vendorId: vendorId.value,
         vehicleId: vehicleId.value,

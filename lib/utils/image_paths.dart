@@ -18,6 +18,14 @@ class ImagePath {
   static const cc = "assets/icons/diseal.svg";
   static const speed = "assets/icons/seat.svg";
   static const petrol = "assets/icons/speed.svg";
+  static const cash = "assets/icons/cash.png";
+  static const noHistory = "assets/icons/history.svg";
+  static const home = "assets/icons/home.svg";
+  static const noVehicle = "assets/icons/no_vehicle_available.svg";
+  static const profile = "assets/icons/profile.svg";
+  static const noRecentBooking = "assets/icons/recent_booking.svg";
+  static const recent = "assets/icons/recent.svg";
+  static const statement = "assets/icons/statement.svg";
 
   static const esewa = "assets/icons/eshewa.png";
   static const khalti = "assets/icons/khalti.png";

@@ -50,7 +50,7 @@ class MySearchDelegate extends SearchDelegate {
                 child: ListTile(
                   tileColor: Colors.white,
                   title: Text(vehicle.vehicleName!),
-                  subtitle: const Text("product.productTitle"),
+                  subtitle: Text(vehicle.vendor!.name ?? ""),
                   leading: const CircleAvatar(
                     radius: 22,
                     backgroundColor: Colors.orange,
@@ -59,7 +59,7 @@ class MySearchDelegate extends SearchDelegate {
                           NetworkImage("https://picsum.photos/100/100"),
                     ),
                   ),
-                  trailing: const Text("product.carTag"),
+                  trailing: Text(vehicle.costPerHour.toString()),
                   onTap: () {
                     Get.to(() => SinglePage(vehicle: vehicle));
                   },
@@ -92,9 +92,9 @@ class MySearchDelegate extends SearchDelegate {
     c.search.value = query;
     return query == ""
         ? ListView.builder(
-            itemCount: c.productList.length,
+            itemCount: c.vehicleList.length > 3 ? 6 : c.vehicleList.length,
             itemBuilder: (context, index) {
-              Vehicle vehicle = c.productList[index];
+              Vehicle vehicle = c.vehicleList[index];
               return ListTile(
                 title: Text(vehicle.vehicleName ?? ""),
                 onTap: () {
@@ -103,9 +103,9 @@ class MySearchDelegate extends SearchDelegate {
               );
             })
         : ListView.builder(
-            itemCount: c.productList.length,
+            itemCount: c.vehicleList.length > 3 ? 3 : c.vehicleList.length,
             itemBuilder: (context, index) {
-              Vehicle vehicle = c.productList[index];
+              Vehicle vehicle = c.vehicleList[index];
               return ListTile(
                 title: Text(vehicle.vehicleName ?? ""),
                 onTap: () {

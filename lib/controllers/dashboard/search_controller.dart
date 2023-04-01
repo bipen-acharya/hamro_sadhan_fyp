@@ -1,8 +1,12 @@
 import 'package:expandable/expandable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
+import 'package:hamro_sadhan/models/category.dart';
 import '../../utils/colors.dart';
+import '../../utils/image_paths.dart';
 import '../../widgets/custom_button.dart';
 
 class SearchController extends GetxController {
@@ -15,8 +19,21 @@ class SearchController extends GetxController {
   int selectedIndex = -1; // Initially, no checkbox is selected
 
   RxInt category = 0.obs;
+  // var vehicleCategory = [].obs;
+
+  var selectedIds = <int>{}.obs;
 
   final RxList<bool> checkboxTypeValues = RxList.filled(5, false);
+
+  void toggleSelection(int id) {
+    if (selectedIds.contains(id)) {
+      selectedIds.remove(id);
+      homeController.vehicleCategory.refresh();
+    } else {
+      selectedIds.add(id);
+      homeController.vehicleCategory.refresh();
+    }
+  }
 
   advanceSearch() {
     showModalBottomSheet(
@@ -31,64 +48,95 @@ class SearchController extends GetxController {
       builder: ((context) {
         final theme =
             Theme.of(context).copyWith(dividerColor: Colors.transparent);
-        return SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-                top: 0,
-                // right: 20,
-                // left: 20,
-                bottom: MediaQuery.of(context).viewInsets.bottom),
+        return Obx(
+          () => SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 22,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 22,
+                ),
+                child: Column(mainAxisSize: MainAxisSize.min, children: [
                   const SizedBox(
                     height: 15,
                   ),
-                  ExpandablePanel(
-                    header: ListTile(
-                      title: titileText('Type'),
+                  Container(
+                    height: 5,
+                    width: 105,
+                    decoration: BoxDecoration(
+                      color: AppColors.borderColor,
+                      borderRadius: BorderRadius.circular(100),
                     ),
-                    expanded: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: homeController.vehicleCategory == null
-                          ? 0
-                          : homeController.vehicleCategory.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CheckboxListTile(
-                          activeColor: AppColors.primaryColor,
-                          title: Text(homeController.vehicleCategory[index].name
-                              .toString()),
-                          value: selectedIndex ==
-                              index, // Check if this checkbox is selected
-                          onChanged: (val) {
-                            if (selectedIndex == index) {
-                              // User clicked on the same checkbox again
-                              selectedIndex = -1; // Deselect it
-                            } else {
-                              selectedIndex = index; // Select this checkbox
-                            }
-
-                            // typeIdController.text = homeController.vehicleCategory[index].id.toString();
-                          },
-                        );
-                      },
-                    ),
-                    collapsed: Container(),
-                  ),
-                  CustomElevatedButton(
-                    onTap: () {},
-                    buttonText: 'Submit',
                   ),
                   const SizedBox(
-                    height: 27,
+                    height: 12,
                   ),
-                ],
-              ),
-            ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: SvgPicture.asset(ImagePath.cancel)),
+                      const Text(
+                        "Filter By",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          selectedIds.clear();
+
+                          selectedIds.refresh();
+                        },
+                        child: const Text(
+                          "Clear All",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 255, 0, 51)),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      ExpandablePanel(
+                        header: const ListTile(
+                          title: Text('Type'),
+                        ),
+                        expanded: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: homeController.vehicleCategory.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            VehicleCategory item =
+                                homeController.vehicleCategory[index];
+                            return CheckboxListTile(
+                              activeColor: selectedIds.contains(item.id)
+                                  ? Colors.blue
+                                  : null,
+                              title: Text(item.name ?? ""),
+                              value: selectedIds.contains(item.id),
+                              onChanged: (val) {
+                                toggleSelection(item.id!);
+                                homeController.vehicleCategory.refresh();
+                                selectedIds.refresh();
+                              },
+                            );
+                          },
+                        ),
+                        collapsed: Container(),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          print(selectedIds.toList());
+                        },
+                        child: Text('Print Selected Ids'),
+                      ),
+                    ],
+                  ),
+                ])),
           ),
         );
       }),

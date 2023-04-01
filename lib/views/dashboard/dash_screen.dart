@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/auth/core_controller.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/controllers/dashboard/profile_controller.dart';
+import 'package:hamro_sadhan/utils/image_paths.dart';
 import 'package:hamro_sadhan/views/dashboard/recent_page.dart';
 import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
 import '../../controllers/dashboard/dash_screen_controller.dart';
@@ -45,15 +47,51 @@ class DashScreen extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           currentIndex: c.currentIndex.value,
           onTap: c.onItemTapped,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined), label: "Home"),
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: SvgPicture.asset(
+                    ImagePath.home,
+                    color: c.currentIndex.value == 0
+                        ? AppColors.tertiaryColor
+                        : Colors.white,
+                  ),
+                ),
+                label: "Home"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.recent_actors), label: "Bookings"),
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: SvgPicture.asset(
+                    ImagePath.recent,
+                    color: c.currentIndex.value == 1
+                        ? AppColors.tertiaryColor
+                        : Colors.white,
+                  ),
+                ),
+                label: "Bookings"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.history), label: "History"),
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: SvgPicture.asset(
+                    ImagePath.statement,
+                    color: c.currentIndex.value == 2
+                        ? AppColors.tertiaryColor
+                        : Colors.white,
+                  ),
+                ),
+                label: "History"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline), label: "Profile"),
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: SvgPicture.asset(
+                    ImagePath.profile,
+                    color: c.currentIndex.value == 3
+                        ? AppColors.tertiaryColor
+                        : Colors.white,
+                  ),
+                ),
+                label: "Profile"),
           ],
         ),
       ),

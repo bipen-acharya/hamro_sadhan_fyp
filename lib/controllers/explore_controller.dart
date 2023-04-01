@@ -1,16 +1,25 @@
-// import 'dart:developer';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
-// import 'package:get/get.dart';
-// import 'package:hamro_sadhan/models/vehicle.dart';
-// import 'package:hamro_sadhan/repo/vehicle_repo.dart';
+class PaymentController extends GetxController {
+  var token = "".obs;
+  var amount = 0.obs;
 
-// import '../widgets/custom_snackbar.dart';
-// import 'auth/core_controller.dart';
-
-// class ExploreController extends GetxController {
-//   RxBool loading = false.obs;
-
-
-
-
-// }
+  void postPayment() async {
+    const String url =
+        "http://hs.test/api/khalti/payment/verify";
+    try {
+      var response = await http.post(
+        Uri.parse(url),
+        body: {
+          "token": token.value,
+          "amount": amount.value.toString(),
+        },
+      );
+      print(token.value);
+      print(response.body);
+    } catch (e) {
+      Future.error(e);
+    }
+  }
+}

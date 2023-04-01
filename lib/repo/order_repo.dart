@@ -8,7 +8,9 @@ import '../utils/storage_helper.dart';
 
 class OrderRepo {
   static Future<void> addOrder(
-      {required String startDate,
+      {String? tnxid,
+      String? amount,
+      required String startDate,
       required String endDate,
       required String orderType,
       required String paymentStatus,
@@ -37,6 +39,9 @@ class OrderRepo {
         "price": price,
         "quantity": quantity,
         "vehicle_id": vehicleId,
+        "payment_method": 'khalti',
+        "transaction_id": tnxid,
+        "amount": amount,
       });
 
       http.Response response = await http.post(
@@ -61,28 +66,28 @@ class OrderRepo {
   static Future<void> getAllOrders(
       {required Function(List<Order>) onSuccess,
       required Function(String message) onError}) async {
-    try {
-      var token = StorageHelper.getToken();
-      var url = Uri.parse(HamroSadhanApi.viewOrder);
-      var headers = {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": "${token!.tokenType!} ${token.accessToken!}"
-      };
-      http.Response response = await http.get(
-        url,
-        headers: headers,
-      );
-      var data = json.decode(response.body);
-     
-      if (data['status']) {
-        onSuccess(orderListFromJson(data['data']['orders']));
-      } else {
-        onError(data['message']);
-      }
-    } catch (e) {
-      log("-->>>>$e");
-      onError("Sorry something went wrong. Please try again");
+    // try {
+    var token = StorageHelper.getToken();
+    var url = Uri.parse(HamroSadhanApi.viewOrder);
+    var headers = {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "${token!.tokenType!} ${token.accessToken!}"
+    };
+    http.Response response = await http.get(
+      url,
+      headers: headers,
+    );
+    var data = json.decode(response.body);
+
+    if (data['status']) {
+      onSuccess(orderListFromJson(data['data']['orders']));
+    } else {
+      onError(data['message']);
     }
+    // } catch (e) {
+    //   log("-->>>>$e");
+    //   onError("Sorry something went wrong. Please try again");
+    // }
   }
 }

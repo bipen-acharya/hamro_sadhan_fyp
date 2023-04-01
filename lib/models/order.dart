@@ -9,7 +9,7 @@ class Order {
   String? startDate;
   String? endDate;
   String? status;
-  int? totalPrice;
+  double? totalPrice;
   String? orderType;
   String? paymentStatus;
   int? quantity;
@@ -45,7 +45,7 @@ class Order {
     startDate = json['start_date'];
     endDate = json['end_date'];
     status = json['status'];
-    totalPrice = json['total_price'];
+    totalPrice = double.parse('${json['total_price']}');
     orderType = json['order_type'];
     paymentStatus = json['payment_status'];
     quantity = json['quantity'];
@@ -68,6 +68,7 @@ class Order {
     data['end_date'] = endDate;
     data['status'] = status;
     data['total_price'] = totalPrice;
+
     data['order_type'] = orderType;
     data['payment_status'] = paymentStatus;
     data['quantity'] = quantity;

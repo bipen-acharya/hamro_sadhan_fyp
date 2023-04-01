@@ -2,17 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/repo/profile_repo.dart';
 
+import '../../models/auth/user_model.dart';
 import '../../utils/colors.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_snackbar.dart';
 import '../../widgets/custom_text_field.dart';
+import '../auth/core_controller.dart';
 import 'home_controller.dart';
 
 class ProfileController extends GetxController {
   TextEditingController previousPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
 
- 
+  final coreController  = Get.find<CoreController>();
+
+  Rxn<User> user = Rxn<User>(); 
+
+  @override
+  void onInit() {
+    loadUser();
+    super.onInit();
+  }
+
+  void loadUser(){
+    user.value = coreController.currentUser;
+  }
 
   final keys = GlobalKey<FormState>();
   changePassword() {
