@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/views/single_vehicle.dart';
@@ -9,6 +10,7 @@ import '../controllers/dashboard/search_controller.dart';
 import '../models/category.dart';
 import '../models/vehicle.dart';
 import '../utils/colors.dart';
+import '../utils/image_paths.dart';
 import '../widgets/search.dart';
 
 class ExplorePage extends StatelessWidget {
@@ -44,96 +46,116 @@ class ExplorePage extends StatelessWidget {
         ),
         centerTitle: false,
       ),
-      body: Obx(
-        () => (c.loading.value)
-            ? const Center(child: CircularProgressIndicator())
-            : Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 15),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: ((MediaQuery.of(context).size.width) * 0.75),
-                          height: ((MediaQuery.of(context).size.height) * 0.06),
-                          decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(19)),
-                          child: TextButton(
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
-                                  child: Icon(
-                                    Icons.search,
-                                    color: Colors.grey.shade600,
-                                  ),
-                                ),
-                                Text(
-                                  "Search",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade600,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            ),
-                            onPressed: () {
-                              showSearch(
-                                context: context,
-                                delegate: MySearchDelegate(),
-                              );
-                            },
-                          ),
-                        ),
-                        InkWell(
-                          onTap: con.advanceSearch,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: Container(
+      body: Obx(() => (c.loading.value)
+          ? const Center(child: CircularProgressIndicator())
+          : (c.vehicleList.isEmpty
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: SvgPicture.asset(
+                        ImagePath.noVehicle,
+                        height: 300,
+                        width: 200,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 53,
+                    ),
+                    const Text("No Available Vehicle")
+                  ],
+                )
+              : SizedBox(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 15),
+                        child: Row(
+                          children: [
+                            Container(
                               width:
-                                  ((MediaQuery.of(context).size.width) * 0.1),
+                                  ((MediaQuery.of(context).size.width) * 0.75),
                               height:
                                   ((MediaQuery.of(context).size.height) * 0.06),
                               decoration: BoxDecoration(
-                                  color: Colors.blueGrey.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(10)
-                                  // shape: BoxShape.rectangle,
-                                  ),
-                              child: const Icon(
-                                  CupertinoIcons.slider_horizontal_3),
+                                  color: Colors.grey.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(19)),
+                              child: TextButton(
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: Icon(
+                                        Icons.search,
+                                        color: Colors.grey.shade600,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Search",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade600,
+                                          fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  showSearch(
+                                    context: context,
+                                    delegate: MySearchDelegate(),
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-             
-                  Container(
-                    height: Get.height - 210,
-                    margin: const EdgeInsets.only(top: 15),
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: GridView.builder(
-                      physics: const ScrollPhysics(), // t
-                      itemCount: c.vehicleList.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisExtent: 150,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 20.0,
-                        mainAxisSpacing: 20.0,
+                            InkWell(
+                              onTap: con.advanceSearch,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: Container(
+                                  width: ((MediaQuery.of(context).size.width) *
+                                      0.1),
+                                  height:
+                                      ((MediaQuery.of(context).size.height) *
+                                          0.06),
+                                  decoration: BoxDecoration(
+                                      color: Colors.blueGrey.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(10)
+                                      // shape: BoxShape.rectangle,
+                                      ),
+                                  child: const Icon(
+                                      CupertinoIcons.slider_horizontal_3),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                      itemBuilder: (BuildContext context, int index) {
-                        Vehicle vehicles = c.vehicleList[index];
-                        return RecentVehicleCard(
-                          vehicles: vehicles,
-                        );
-                      },
-                    ),
+                      Container(
+                        height: Get.height - 210,
+                        margin: const EdgeInsets.only(top: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: GridView.builder(
+                          physics: const ScrollPhysics(), // t
+                          itemCount: c.vehicleList.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent: 150,
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 20.0,
+                            mainAxisSpacing: 20.0,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            Vehicle vehicles = c.vehicleList[index];
+                            return RecentVehicleCard(
+                              vehicles: vehicles,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-      ),
+                ))),
     );
   }
 }

@@ -12,7 +12,6 @@ import '../../controllers/dashboard/recent_controller.dart';
 import '../../utils/colors.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
-import 'search_page.dart';
 
 class DashScreen extends StatelessWidget {
   static const routeName = '/dash-screen';
@@ -69,7 +68,7 @@ class DashScreen extends StatelessWidget {
                         : Colors.white,
                   ),
                 ),
-                label: "Bookings"),
+                label: "Recent"),
             BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.only(top: 5),
@@ -80,7 +79,7 @@ class DashScreen extends StatelessWidget {
                         : Colors.white,
                   ),
                 ),
-                label: "History"),
+                label: "Statement"),
             BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.only(top: 5),

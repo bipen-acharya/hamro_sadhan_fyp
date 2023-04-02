@@ -70,7 +70,6 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
           ),
-
           //profile menu
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 20),
@@ -119,9 +118,19 @@ class ProfilePage extends StatelessWidget {
                   ),
                   CustomProfileMenu(
                     onTap: () {},
-                    iocnData: ImagePath.setting,
-                    label: "Settings",
+                    iocnData: ImagePath.star,
+                    label: "About Us",
                   ),
+                  CustomProfileMenu(
+                    onTap: () {},
+                    iocnData: ImagePath.star,
+                    label: "Version",
+                  ),
+                  // CustomProfileMenu(
+                  //   onTap: () {},
+                  //   iocnData: ImagePath.setting,
+                  //   label: "Settings",
+                  // ),
                   CustomProfileMenu(
                     onTap: () {
                       controller.logOut();
