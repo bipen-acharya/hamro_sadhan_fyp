@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/search_controller.dart';
-import 'package:hamro_sadhan/models/category.dart';
 import 'package:hamro_sadhan/views/explore_vehicle.dart';
 import 'package:intl/intl.dart';
 
@@ -327,7 +326,7 @@ class Homepage extends StatelessWidget {
                                   Get.to(() => ExplorePage());
                                   c.vehicleCategory.clear();
                                   c.getAllCategory();
-                                  c.getAllVehicleList("Any");
+                                  c.getAllVehicleList("Any", []);
                                 }
                               : null,
                           child: Text(

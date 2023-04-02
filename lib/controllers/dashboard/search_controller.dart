@@ -84,20 +84,23 @@ class SearchController extends GetxController {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          selectedIds.clear();
-
-                          selectedIds.refresh();
-                        },
-                        child: const Text(
-                          "Clear All",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: Color.fromARGB(255, 255, 0, 51)),
-                        ),
+                      const SizedBox(
+                        width: 1,
                       ),
+                      // TextButton(
+                      //   onPressed: () {
+                      //     selectedIds.clear();
+
+                      //     selectedIds.refresh();
+                      //   },
+                      //   child: const Text(
+                      //     "Clear All",
+                      //     style: TextStyle(
+                      //         fontSize: 12,
+                      //         fontWeight: FontWeight.w500,
+                      //         color: Color.fromARGB(255, 255, 0, 51)),
+                      //   ),
+                      // ),
                     ],
                   ),
                   Column(
@@ -172,7 +175,9 @@ class SearchController extends GetxController {
                           String sortyBy = selectedOption.value;
                           // homeController.getAllVehicleList(selectedOption.value);
 
-                          homeController.getAllVehicleList(sortyBy);
+                          homeController.getAllVehicleList(
+                              sortyBy, selectedIds.toList());
+                          Navigator.pop(context);
                           print(selectedIds.toList());
                           print('Selected option: ${selectedOption.value}');
                         },

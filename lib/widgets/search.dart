@@ -51,12 +51,11 @@ class MySearchDelegate extends SearchDelegate {
                   tileColor: Colors.white,
                   title: Text(vehicle.vehicleName!),
                   subtitle: Text(vehicle.vendor!.name ?? ""),
-                  leading: const CircleAvatar(
+                  leading: CircleAvatar(
                     radius: 22,
                     // backgroundColor: Colors.orange,
                     child: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage("https://picsum.photos/100/100"),
+                      backgroundImage: NetworkImage(vehicle.imageUrl ?? ""),
                     ),
                   ),
                   trailing: Text(vehicle.costPerHour.toString()),

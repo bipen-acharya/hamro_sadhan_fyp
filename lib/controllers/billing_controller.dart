@@ -47,6 +47,7 @@ class BillingController extends GetxController {
     currentStep > 0 ? (currentStep.value -= 1) : null;
   }
 
+  final duration = ''.obs;
   RxDouble totalAmount = 0.0.obs;
   calculateTotal(int cost) {
     String startDateC =
@@ -57,6 +58,25 @@ class BillingController extends GetxController {
 
     DateTime endDate = DateTime.parse(endDateC);
     Duration difference = endDate.difference(startDate);
+    if (difference.inMinutes < 60) {
+      // Less than an hour
+      String duration = '${difference.inMinutes} min';
+      print(duration);
+    } else {
+      int days = difference.inDays;
+      int hours = difference.inHours.remainder(24);
+      int minutes = difference.inMinutes.remainder(60);
+      if (days > 0) {
+        duration.value += '$days day ';
+      }
+      if (hours > 0) {
+        duration.value += '$hours hr ';
+      }
+      if (minutes > 0) {
+        duration.value += '$minutes min';
+      }
+      log('-----duration------>>>>>>${duration.trim()}');
+    }
     int hours = difference.inHours;
     int minutes = difference.inMinutes.remainder(60);
     double costPerHour = cost.toDouble();
@@ -127,7 +147,7 @@ class BillingController extends GetxController {
         vendorId: vendorId.value,
         vehicleId: vehicleId.value,
         quantity: 1,
-        totalPrice: totalAmount.value,
+        totalPrice: totalAmount.value.toInt(),
         price: 0,
         onSuccess: () {
           CustomSnackBar.success(

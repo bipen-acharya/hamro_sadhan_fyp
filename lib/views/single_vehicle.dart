@@ -219,9 +219,8 @@ class SinglePage extends StatelessWidget {
                           height: 50,
                           width: 50,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey,
-                          ),
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color(0xFFF8F8F8)),
                           child: SvgPicture.asset(
                             ImagePath.call,
                             // height: 21,
@@ -244,7 +243,7 @@ class SinglePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(color: AppColors.secondaryColor
+        decoration: const BoxDecoration(color: Color(0xFFF8F8F8)
             // boxShadow: [
             //   BoxShadow(
             //     offset: const Offset(4, 4),
@@ -372,7 +371,7 @@ class FeatureTile extends StatelessWidget {
           width: 50,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: AppColors.secondaryColor),
+              color: const Color(0xFFF8F8F8)),
           child: SvgPicture.asset(
             image,
             fit: BoxFit.contain,

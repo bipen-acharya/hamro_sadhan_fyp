@@ -171,8 +171,7 @@ class BillingScreen extends StatelessWidget {
                     ),
                     content: SizedBox(
                       height: MediaQuery.of(context).size.height - 300,
-                      child: 
-                      Column(
+                      child: Column(
                         children: [
                           Container(
                             width: double.infinity,
@@ -189,8 +188,7 @@ class BillingScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child: 
-                            Column(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
@@ -321,38 +319,27 @@ class BillingScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 4,
                                 ),
-                                SizedBox(
-                                  height: 100,
-                                  child: ListView.builder(
-                                      itemCount: 3,
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 4),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Amount",
-                                                style: textTheme.bodyMedium!
-                                                    .copyWith(
-                                                  color: theme
-                                                      .colorScheme.secondary,
-                                                ),
-                                              ),
-                                              Text("Rs.900.00",
-                                                  style: textTheme.bodyMedium!
-                                                      .copyWith(
-                                                    color: theme
-                                                        .colorScheme.secondary,
-                                                  )),
-                                            ],
-                                          ),
-                                        );
-                                      }),
+                                CalculationRow(
+                                  textTheme: textTheme,
+                                  theme: theme,
+                                  calculation: c.duration.value,
+                                  title: 'Total Time',
+                                ),
+                                CalculationRow(
+                                  textTheme: textTheme,
+                                  theme: theme,
+                                  calculation:
+                                      singleVehicle.costPerHour.toString(),
+                                  title: 'Cost per hour',
+                                ),
+                                CalculationRow(
+                                  textTheme: textTheme,
+                                  theme: theme,
+                                  calculation: c.totalAmount.toString(),
+                                  title: 'Calucation amount',
+                                ),
+                                const SizedBox(
+                                  height: 6,
                                 ),
                                 Row(
                                   children: List.generate(
@@ -377,16 +364,27 @@ class BillingScreen extends StatelessWidget {
                                     Text(
                                       "Total",
                                       style: textTheme.bodyLarge!.copyWith(
-                                        // color: AppColors.primaryColor
-                                        color: theme.colorScheme.secondary,
-                                      ),
+                                          color: AppColors.primaryColor
+                                          // color: theme.colorScheme.secondary,
+                                          ),
                                     ),
-                                    Text(
-                                      c.totalAmount.toString(),
-                                      style: textTheme.bodyLarge!.copyWith(
-                                        // color: AppColors.primaryColor
-                                        color: theme.colorScheme.secondary,
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Rs ',
+                                          style: textTheme.bodyLarge!.copyWith(
+                                            // color: AppColors.primaryColor
+                                            color: theme.colorScheme.secondary,
+                                          ),
+                                        ),
+                                        Text(
+                                          c.totalAmount.toInt().toString(),
+                                          style: textTheme.bodyLarge!.copyWith(
+                                              color: AppColors.primaryColor
+                                              // color: theme.colorScheme.secondary,
+                                              ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -457,6 +455,44 @@ class BillingScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CalculationRow extends StatelessWidget {
+  const CalculationRow({
+    super.key,
+    required this.textTheme,
+    required this.theme,
+    required this.title,
+    required this.calculation,
+  });
+
+  final TextTheme textTheme;
+  final ThemeData theme;
+
+  final String title;
+  final String calculation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: textTheme.bodyMedium!.copyWith(
+              color: theme.colorScheme.secondary,
+            ),
+          ),
+          Text(calculation,
+              style: textTheme.bodyMedium!.copyWith(
+                color: theme.colorScheme.secondary,
+              )),
+        ],
       ),
     );
   }

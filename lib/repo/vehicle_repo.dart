@@ -9,11 +9,13 @@ import '../utils/storage_helper.dart';
 class VehicleRepo {
   static Future<void> getAllVehicle(
       {String? sortType,
+      List<int>? categoryIds,
       required String startDate,
       required String endDate,
       required Function(List<Vehicle>) onSuccess,
       required Function(String message) onError}) async {
     try {
+      categoryIds = [1];
       log("----sort by $sortType");
       var token = StorageHelper.getToken();
       var url = Uri.parse(HamroSadhanApi.availableVehicle);
@@ -27,17 +29,32 @@ class VehicleRepo {
       log("-------start date $startDate");
       log("-------end date $startDate");
       var body;
-
-      if (sortType != "Any") {
+      if (sortType == "Any" && categoryIds == null) {
+        body = json.encode({
+          "start_date": startDate,
+          "end_date": endDate,
+        });
+      } else if (sortType != "Any" &&
+          (categoryIds == null || categoryIds.isEmpty)) {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,
           "sort_type": sortType,
         });
+      } else if (categoryIds != null &&
+          categoryIds.isNotEmpty &&
+          sortType == "Any") {
+        body = json.encode({
+          "start_date": startDate,
+          "end_date": endDate,
+          "category_id": categoryIds,
+        });
       } else {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,
+          "category_id": categoryIds,
+          "sort_type": sortType,
         });
       }
 

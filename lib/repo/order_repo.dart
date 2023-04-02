@@ -17,7 +17,7 @@ class OrderRepo {
       required int vendorId,
       required int vehicleId,
       required int quantity,
-      required double totalPrice,
+      required int totalPrice,
       required int price,
       required Function() onSuccess,
       required Function(String message) onError}) async {
