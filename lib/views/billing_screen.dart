@@ -171,7 +171,8 @@ class BillingScreen extends StatelessWidget {
                     ),
                     content: SizedBox(
                       height: MediaQuery.of(context).size.height - 300,
-                      child: Column(
+                      child: 
+                      Column(
                         children: [
                           Container(
                             width: double.infinity,
@@ -188,7 +189,8 @@ class BillingScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child: Column(
+                            child: 
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(

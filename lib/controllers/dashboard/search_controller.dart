@@ -1,5 +1,4 @@
 import 'package:expandable/expandable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -35,6 +34,7 @@ class SearchController extends GetxController {
     }
   }
 
+  final selectedOption = 'Any'.obs;
   advanceSearch() {
     showModalBottomSheet(
       backgroundColor: AppColors.backGroundColor,
@@ -104,6 +104,42 @@ class SearchController extends GetxController {
                     children: [
                       ExpandablePanel(
                         header: const ListTile(
+                          title: Text('Sort by'),
+                        ),
+                        collapsed: Container(),
+                        expanded: Column(
+                          children: [
+                            CheckboxListTile(
+                              title: const Text('Default'),
+                              activeColor: AppColors.primaryColor,
+                              value: selectedOption.value == 'Any',
+                              onChanged: (bool? value) {
+                                selectedOption.value = 'Any';
+                              },
+                            ),
+                            CheckboxListTile(
+                              title: const Text('Ascending'),
+                              activeColor: AppColors.primaryColor,
+                              value: selectedOption.value == 'ascending',
+                              onChanged: (bool? value) {
+                                selectedOption.value =
+                                    value == true ? 'ascending' : 'Any';
+                              },
+                            ),
+                            CheckboxListTile(
+                              activeColor: AppColors.primaryColor,
+                              title: const Text('Descending'),
+                              value: selectedOption.value == 'descending',
+                              onChanged: (bool? value) {
+                                selectedOption.value =
+                                    value == true ? 'descending' : 'Any';
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      ExpandablePanel(
+                        header: const ListTile(
                           title: Text('Type'),
                         ),
                         expanded: ListView.builder(
@@ -114,7 +150,7 @@ class SearchController extends GetxController {
                                 homeController.vehicleCategory[index];
                             return CheckboxListTile(
                               activeColor: selectedIds.contains(item.id)
-                                  ? Colors.blue
+                                  ? AppColors.primaryColor
                                   : null,
                               title: Text(item.name ?? ""),
                               value: selectedIds.contains(item.id),
@@ -128,11 +164,22 @@ class SearchController extends GetxController {
                         ),
                         collapsed: Container(),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomElevatedButton(
+                        onTap: () {
+                          String sortyBy = selectedOption.value;
+                          // homeController.getAllVehicleList(selectedOption.value);
+
+                          homeController.getAllVehicleList(sortyBy);
                           print(selectedIds.toList());
+                          print('Selected option: ${selectedOption.value}');
                         },
-                        child: Text('Print Selected Ids'),
+                        buttonText: "Done",
+                      ),
+                      const SizedBox(
+                        height: 30,
                       ),
                     ],
                   ),

@@ -1,12 +1,12 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/utils/colors.dart';
-
+import 'package:hamro_sadhan/views/dashboard/recent_booking_view_page.dart';
+import 'package:hamro_sadhan/widgets/custom_button.dart';
 import '../../controllers/dashboard/recent_controller.dart';
 import '../../models/order.dart';
 import '../../utils/image_paths.dart';
+import '../confirm_order.dart';
 
 class RecentOrderScreen extends StatelessWidget {
   RecentOrderScreen({super.key});
@@ -65,7 +65,7 @@ class RecentOrderScreen extends StatelessWidget {
                       Order recentOrders = c.recentOrderDetails[index];
                       return Container(
                         width: double.infinity,
-                        height: 136,
+                        height: 169,
                         margin: const EdgeInsets.symmetric(
                             vertical: 7.5, horizontal: 26),
                         decoration: BoxDecoration(
@@ -78,50 +78,119 @@ class RecentOrderScreen extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              top: 20, bottom: 13, left: 20),
+                              top: 20, bottom: 13, left: 15, right: 15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                recentOrders.vehicle!.vehicleName!,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 16),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                "12th Jan 2023, 01:00 PM",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.green),
-                                    child: const Text("View"),
+                                  Text(
+                                    recentOrders.vehicle!.vehicleName!,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 16),
                                   ),
                                   const SizedBox(
-                                    width: 20,
+                                    height: 10,
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.red,
-                                    ),
-                                    child: const Text("Cancel"),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.calendar_month,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 6.5,
+                                          ),
+                                          Text(
+                                            "12th Jan 2023",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.calendar_month,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 6.5,
+                                          ),
+                                          Text(
+                                            "12th Jan 2023",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.watch,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 6.5,
+                                          ),
+                                          Text(
+                                            "12th Jan 2023",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.calendar_month,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 6.5,
+                                          ),
+                                          Text(
+                                            "12th Jan 2023",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                   const SizedBox(
-                                    width: 20,
+                                    height: 10,
                                   ),
                                 ],
-                              )
+                              ),
+                              CustomElevatedButton(
+                                  onTap: () {
+                                    Get.to(() => OrderConfirmPage());
+                                  },
+                                  buttonText: "View Details")
                             ],
                           ),
                         ),

@@ -14,6 +14,7 @@ import '../utils/image_paths.dart';
 import '../widgets/search.dart';
 
 class ExplorePage extends StatelessWidget {
+  static const routeName = "/explore-page";
   ExplorePage({super.key});
 
   final c = Get.find<HomePageController>();

@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/category.dart';
@@ -17,17 +15,9 @@ import '../../widgets/custom_snackbar.dart';
 import '../auth/core_controller.dart';
 
 class HomePageController extends GetxController {
-  // final user = (null as User?).obs;
-  final CarouselController controller = CarouselController();
-// int current = 0;
   RxInt current = RxInt(0);
-  // User? getuser() {
-  //   return user.value;
-  // }
 
   var coreController = Get.put(CoreController());
-
-  // final myController = TextEditingController();
 
 //start date
   TextEditingController startDateController = TextEditingController();
@@ -152,11 +142,13 @@ class HomePageController extends GetxController {
   RxList<Vehicle> vehicleList = RxList();
   RxList<VehicleCategory> vehicleCategory = RxList();
 
-  getAllVehicleList() async {
+  getAllVehicleList(String sortBy) async {
+    vehicleList.clear();
     loading.value = true;
     log("-----Start date ---${startDateController.text} ${sTController.text}");
     log("-----End date ---${endDateController.text} ${eTController.text}");
     await VehicleRepo.getAllVehicle(
+      sortType: sortBy,
       startDate: '${startDateController.text} ${sTController.text}',
       endDate: '${endDateController.text} ${eTController.text}',
       onSuccess: (vehicle) {
@@ -176,7 +168,6 @@ class HomePageController extends GetxController {
       onSuccess: (category) {
         loading.value = false;
         vehicleCategory.addAll(category);
-        // print({'------->>>>>>>>${vehicleCategory.toList().toString()}'});
       },
       onError: ((message) {
         loading.value = false;
@@ -186,9 +177,9 @@ class HomePageController extends GetxController {
   }
 
   var search = "".obs;
-  var productList = <Vehicle>[].obs;
+  var fetchVehicleList = <Vehicle>[].obs;
 
-  fetchCarItem() async {
+  fetchVehicleItem() async {
     try {
       String s = search.value;
       var token = StorageHelper.getToken();
@@ -210,9 +201,8 @@ class HomePageController extends GetxController {
       );
       var data = json.decode(response.body);
       var productLists = vehicleListFromJson(data['data']);
-      productList.value = productLists;
-      print(productList);
-      return productList;
+      fetchVehicleList.value = productLists;
+      return fetchVehicleList;
     } catch (e) {
       Future.error('$e');
     }

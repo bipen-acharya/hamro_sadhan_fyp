@@ -70,7 +70,7 @@ class OrderConfirmPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               )),
-          child: const Text("Back to home"),
+          child: const Text("Recent Bookings"),
         ),
       ),
     );

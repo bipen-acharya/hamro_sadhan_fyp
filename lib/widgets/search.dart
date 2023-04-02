@@ -38,13 +38,13 @@ class MySearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     return FutureBuilder(
-      future: c.fetchCarItem(),
+      future: c.fetchVehicleItem(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ListView.separated(
-            itemCount: c.productList.length,
+            itemCount: c.fetchVehicleList.length,
             itemBuilder: (context, index) {
-              Vehicle vehicle = c.productList[index];
+              Vehicle vehicle = c.fetchVehicleList[index];
               return Material(
                 elevation: 2.0,
                 child: ListTile(
@@ -53,7 +53,7 @@ class MySearchDelegate extends SearchDelegate {
                   subtitle: Text(vehicle.vendor!.name ?? ""),
                   leading: const CircleAvatar(
                     radius: 22,
-                    backgroundColor: Colors.orange,
+                    // backgroundColor: Colors.orange,
                     child: CircleAvatar(
                       backgroundImage:
                           NetworkImage("https://picsum.photos/100/100"),
@@ -72,7 +72,7 @@ class MySearchDelegate extends SearchDelegate {
               );
             },
           );
-        } else if (c.productList == []) {
+        } else if (c.fetchVehicleList == []) {
           print("log------->>>>>>> empty product list");
           return const Center(
             child: Text("No Inventory Found"),
@@ -88,7 +88,6 @@ class MySearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // final SearchController searchController = Get.find();
     c.search.value = query;
     return query == ""
         ? ListView.builder(
@@ -109,11 +108,10 @@ class MySearchDelegate extends SearchDelegate {
               return ListTile(
                 title: Text(vehicle.vehicleName ?? ""),
                 onTap: () {
-                  // query = result.modelName;
-
                   showResults(context);
                 },
               );
-            });
+            },
+          );
   }
 }

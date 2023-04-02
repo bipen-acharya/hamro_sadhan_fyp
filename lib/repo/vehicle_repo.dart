@@ -8,11 +8,13 @@ import '../utils/storage_helper.dart';
 
 class VehicleRepo {
   static Future<void> getAllVehicle(
-      {required String startDate,
+      {String? sortType,
+      required String startDate,
       required String endDate,
       required Function(List<Vehicle>) onSuccess,
       required Function(String message) onError}) async {
     try {
+      log("----sort by $sortType");
       var token = StorageHelper.getToken();
       var url = Uri.parse(HamroSadhanApi.availableVehicle);
       log("${token!.tokenType!} ${token.accessToken!}");
@@ -24,10 +26,20 @@ class VehicleRepo {
       };
       log("-------start date $startDate");
       log("-------end date $startDate");
-      var body = json.encode({
-        "start_date": startDate,
-        "end_date": endDate,
-      });
+      var body;
+
+      if (sortType != "Any") {
+        body = json.encode({
+          "start_date": startDate,
+          "end_date": endDate,
+          "sort_type": sortType,
+        });
+      } else {
+        body = json.encode({
+          "start_date": startDate,
+          "end_date": endDate,
+        });
+      }
 
       http.Response response = await http.post(
         url,
@@ -47,5 +59,4 @@ class VehicleRepo {
       onError("Sorry something went wrong. Please try again");
     }
   }
-
 }

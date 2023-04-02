@@ -327,7 +327,7 @@ class Homepage extends StatelessWidget {
                                   Get.to(() => ExplorePage());
                                   c.vehicleCategory.clear();
                                   c.getAllCategory();
-                                  c.getAllVehicleList();
+                                  c.getAllVehicleList("Any");
                                 }
                               : null,
                           child: Text(

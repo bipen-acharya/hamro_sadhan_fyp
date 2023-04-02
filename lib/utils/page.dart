@@ -3,7 +3,9 @@ import 'package:hamro_sadhan/controllers/auth/register_controller.dart';
 import 'package:hamro_sadhan/controllers/dashboard/history_controller.dart';
 import 'package:hamro_sadhan/controllers/dashboard/recent_controller.dart';
 import 'package:hamro_sadhan/controllers/auth/splash_screen_controller.dart';
+import 'package:hamro_sadhan/controllers/dashboard/search_controller.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
+import 'package:hamro_sadhan/views/explore_vehicle.dart';
 
 import '../controllers/auth/login_controller.dart';
 import '../controllers/dashboard/dash_screen_controller.dart';
@@ -57,4 +59,11 @@ var userPages = [
           () => EditProfileController(),
         )),
   ),
+
+  GetPage(
+      name: ExplorePage.routeName,
+      page: () => ExplorePage(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => SearchController());
+      })),
 ];

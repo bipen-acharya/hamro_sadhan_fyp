@@ -66,7 +66,7 @@ class OrderRepo {
   static Future<void> getAllOrders(
       {required Function(List<Order>) onSuccess,
       required Function(String message) onError}) async {
-    // try {
+    try {
     var token = StorageHelper.getToken();
     var url = Uri.parse(HamroSadhanApi.viewOrder);
     var headers = {
@@ -85,9 +85,9 @@ class OrderRepo {
     } else {
       onError(data['message']);
     }
-    // } catch (e) {
-    //   log("-->>>>$e");
-    //   onError("Sorry something went wrong. Please try again");
-    // }
+    } catch (e) {
+      log("-->>>>$e");
+      onError("Sorry something went wrong. Please try again");
+    }
   }
 }
