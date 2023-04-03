@@ -8,7 +8,6 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/custom_snackbar.dart';
 import '../../widgets/custom_text_field.dart';
 import '../auth/core_controller.dart';
-import 'home_controller.dart';
 
 class ProfileController extends GetxController {
   TextEditingController previousPasswordController = TextEditingController();

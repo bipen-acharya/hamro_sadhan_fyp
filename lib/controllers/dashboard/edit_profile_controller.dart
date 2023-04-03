@@ -66,17 +66,19 @@ class EditProfileController extends GetxController {
         name: nameController.text,
         phone: phoneController.text,
         onSuccess: (user, message) async {
+          print(user.name);
           loading.hide();
           final box = GetStorage();
           await box.write(StorageKeys.USER, json.encode(user.toJson()));
-          coreController.loadCurrentUser();
+          coreController.currentUser = user;
           profileController.loadUser();
+          // Get.offAll(() => ProfilePage());
           Get.back();
           CustomSnackBar.success(title: "Update Profile", message: message);
         },
         onError: (message) {
           loading.hide();
-          CustomSnackBar.error(title: "Update Profile", message: message);
+          CustomSnackBar.error(title: "error Profile", message: message);
         },
       );
     }

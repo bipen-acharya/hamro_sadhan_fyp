@@ -17,7 +17,7 @@ import '../auth/core_controller.dart';
 class HomePageController extends GetxController {
   RxInt current = RxInt(0);
 
-  var coreController = Get.put(CoreController());
+  // var coreController = Get.put(CoreController());
 
 //start date
   TextEditingController startDateController = TextEditingController();

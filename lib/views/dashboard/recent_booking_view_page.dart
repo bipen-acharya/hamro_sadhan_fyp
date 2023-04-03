@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/models/order.dart';
 
 import '../../utils/colors.dart';
 
 class ViewRecentSinglePage extends StatelessWidget {
-  const ViewRecentSinglePage({super.key});
+  const ViewRecentSinglePage({super.key, required this.recentOrderDetail});
 
+  final Order recentOrderDetail;
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -62,7 +64,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                     ClipRRect(
                       borderRadius: (BorderRadius.circular(10)),
                       child: Image.network(
-                        "https://picsum.photos/100/100",
+                        recentOrderDetail.vehicle!.imageUrl ?? "",
                         fit: BoxFit.fill,
                         height: 100,
                         width: 100,
@@ -75,7 +77,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "asdasdasd",
+                          recentOrderDetail.vehicle!.vehicleName ?? "",
                           style: textTheme.titleLarge!.copyWith(
                               fontSize: 14, color: theme.colorScheme.secondary),
                         ),
@@ -83,7 +85,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                           height: 7,
                         ),
                         Text(
-                          "asdasdasd",
+                          recentOrderDetail.vehicle!.brandName ?? "",
                           style: textTheme.bodyMedium!.copyWith(
                             fontSize: 12,
                             color: AppColors.secondaryColor,
@@ -110,7 +112,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                               color: AppColors.secondaryColor,
                             ),
                             Text(
-                              "asdasd",
+                              recentOrderDetail.startDate ?? "",
                               style: textTheme.bodyMedium!.copyWith(
                                 fontSize: 12,
                                 color: AppColors.secondaryColor,
@@ -126,7 +128,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                             const Icon(Icons.calendar_month,
                                 size: 12, color: Colors.grey),
                             Text(
-                              "asdasd",
+                              recentOrderDetail.endDate ?? "",
                               style: textTheme.bodyMedium!.copyWith(
                                 fontSize: 12,
                                 color: AppColors.secondaryColor,
@@ -199,7 +201,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "c.totalAmount.toString()",
+                          recentOrderDetail.totalPrice.toString(),
                           style: textTheme.bodyLarge!.copyWith(
                             // color: AppColors.primaryColor
                             color: theme.colorScheme.secondary,

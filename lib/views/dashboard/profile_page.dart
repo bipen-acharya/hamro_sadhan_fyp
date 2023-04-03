@@ -16,7 +16,6 @@ class ProfilePage extends StatelessWidget {
   final c = Get.find<ProfileController>();
   final controller = Get.find<CoreController>();
   final controllerHome = Get.find<HomePageController>();
-  // final con = Get.put(SearchController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,29 +26,33 @@ class ProfilePage extends StatelessWidget {
         children: [
           Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10)),
-                child: CachedNetworkImage(
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  fit: BoxFit.fill,
-                  imageUrl: controller.currentUser!.profileImageUrl ?? "",
-                  errorWidget: (context, url, error) => Image.asset(
-                    'assets/logo.png',
+              child: Obx(
+                () => ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10)),
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    fit: BoxFit.fill,
+                    imageUrl: c.user.value?.profileImageUrl ?? "",
+                    errorWidget: (context, url, error) => Image.asset(
+                      'assets/logo.png',
+                      height: 87,
+                      fit: BoxFit.contain,
+                    ),
                     height: 87,
-                    fit: BoxFit.contain,
                   ),
-                  height: 87,
                 ),
               )),
           Padding(
             padding: const EdgeInsets.only(top: 10),
-            child: Text(
-              "${controller.currentUser!.name?.capitalize}",
-              style: theme.textTheme.bodyLarge!.copyWith(
-                color: theme.colorScheme.secondary,
+            child: Obx(
+              () => Text(
+                "${c.user.value?.name!.capitalize}",
+                style: theme.textTheme.bodyLarge!.copyWith(
+                  color: theme.colorScheme.secondary,
+                ),
               ),
             ),
           ),

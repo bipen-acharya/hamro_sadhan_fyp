@@ -17,42 +17,39 @@ class UpdateProfileRepo {
       File? image,
       required Function(User user, String message) onSuccess,
       required Function(String message) onError}) async {
-    try {
-      var token = StorageHelper.getToken();
+    var token = StorageHelper.getToken();
 
-      var headers = {
-        "Content-Type": "multipart/form-data",
-        "Authorization": token.toString()
-      };
+    var headers = {
+      "Content-Type": "multipart/form-data",
+      "Authorization": token.toString()
+    };
 
-      var url = Uri.parse(HamroSadhanApi.updateProfileUrl);
-      http.MultipartRequest request = http.MultipartRequest("POST", url);
-      request.headers.addAll(headers);
-      request.fields['name'] = name;
-      request.fields['phone_number'] = phone;
-      request.fields['email'] = "samir@gmail.com";
-      if (image != null) {
-        request.files.add(
-          http.MultipartFile.fromBytes(
-            "profile_image",
-            await image.readAsBytes(),
-            filename: "user",
-            contentType: MediaType("image", "*"),
-          ),
-        );
-      }
-      http.StreamedResponse response =
-          await HttpRequestHamroSadhan.multiPart(request);
-      var data = json.decode(await response.stream.bytesToString());
-      if (data["status"] as bool) {
-        User user = User.fromJson(data["data"]);
-        onSuccess(user, data['message']);
-      } else {
-        onError(data['message']);
-      }
-    } catch (e) {
-      log(e.toString());
-      onError("Sorry! Something went wrong");
+    var url = Uri.parse(HamroSadhanApi.updateProfileUrl);
+    http.MultipartRequest request = http.MultipartRequest("POST", url);
+    request.headers.addAll(headers);
+    request.fields['name'] = name;
+    request.fields['phone_number'] = phone;
+    request.fields['email'] = "samir@gmail.com";
+    if (image != null) {
+      request.files.add(
+        http.MultipartFile.fromBytes(
+          "profile_image",
+          await image.readAsBytes(),
+          filename: "user",
+          contentType: MediaType("image", "*"),
+        ),
+      );
+    }
+    http.StreamedResponse response =
+        await HttpRequestHamroSadhan.multiPart(request);
+    var data = json.decode(await response.stream.bytesToString());
+    if (data["status"]) {
+      print(data);
+      User user = User.fromJson(data["data"]['user']);
+      print(user.name);
+      onSuccess(user, data['message']);
+    } else {
+      onError(data['message']);
     }
   }
 }

@@ -44,8 +44,8 @@ class CoreController extends GetxController {
 
   void logOut() async {
     final box = GetStorage();
-    await box.write(StorageKeys.ACCESS_TOKEN, null);
-    await box.write(StorageKeys.USER, null);
+    await box.remove(StorageKeys.ACCESS_TOKEN);
+    await box.remove(StorageKeys.USER);
     loadCurrentUser();
     Get.offAllNamed(LogInScreen.routeName);
   }

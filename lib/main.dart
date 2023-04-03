@@ -5,6 +5,7 @@ import 'package:khalti_flutter/khalti_flutter.dart';
 
 import 'controllers/auth/core_controller.dart';
 import 'controllers/dashboard/home_controller.dart';
+import 'controllers/dashboard/profile_controller.dart';
 import 'utils/page.dart';
 import 'utils/theme.dart';
 import 'views/splash_screen.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
                       c.darkTheme.value ? ThemeMode.dark : ThemeMode.light,
                   initialBinding: BindingsBuilder(() {
                     Get.put(CoreController());
+                    // Get.put(ProfileController());
                   }),
                   getPages: [...commonPages, ...userPages],
                 );

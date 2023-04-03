@@ -136,7 +136,7 @@ class RecentOrderScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 6,
                                   ),
                                   Row(
@@ -188,7 +188,9 @@ class RecentOrderScreen extends StatelessWidget {
                               ),
                               CustomElevatedButton(
                                   onTap: () {
-                                    Get.to(() => OrderConfirmPage());
+                                    Get.to(() => ViewRecentSinglePage(
+                                          recentOrderDetail: recentOrders,
+                                        ));
                                   },
                                   buttonText: "View Details")
                             ],

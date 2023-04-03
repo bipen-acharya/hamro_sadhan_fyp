@@ -43,9 +43,10 @@ class StorageHelper {
   static User? getUser() {
     try {
       final box = GetStorage();
-      User user = User.fromJson(box.read(StorageKeys.USER));
 
-      log("--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>${User.fromJson(box.read(StorageKeys.USER))}");
+      User user = User.fromJson(json.decode(box.read(StorageKeys.USER)));
+      // User user = User.fromJson(box.read(StorageKeys.USER));
+      log("-----current user ----->>>>>>.${box.read(StorageKeys.USER)}");
       return user;
     } catch (e, s) {
       log(e.toString());

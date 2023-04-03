@@ -138,8 +138,9 @@ class StatementPage extends StatelessWidget {
                                         bottomLeft: Radius.circular(10),
                                       ),
                                       child: Image.network(
-                                        "https://picsum.photos/600/700",
+                                        orders.vehicle!.imageUrl ?? "",
                                         width: 97,
+                                        height: 105,
                                         fit: BoxFit.fill,
                                       ),
                                     ),
