@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
+import 'package:hamro_sadhan/views/auth/reset_password/email_screen.dart';
+import 'package:hamro_sadhan/views/auth/reset_password/otp_screen.dart';
 import 'package:hamro_sadhan/widgets/custom_text_field.dart';
 import '../../controllers/auth/login_controller.dart';
 import '../../utils/colors.dart';
@@ -109,7 +111,9 @@ class LogInScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => const EmailScreen());
+                        },
                         child: const Text("Forgot Password ?"),
                       ),
                     ),
