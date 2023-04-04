@@ -112,7 +112,7 @@ class LogInScreen extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
-                          Get.to(() => const EmailScreen());
+                          Get.to(() => const ForgotPasswordScreen());
                         },
                         child: const Text("Forgot Password ?"),
                       ),

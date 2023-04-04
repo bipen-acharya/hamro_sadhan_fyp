@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/views/auth/reset_password/header.dart';
 
 import '../../../utils/colors.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_text_field.dart';
-import 'otp_screen.dart';
+import 'header.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
-  static const String routeName = "/forget-password";
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+class ResetPasswordScreen extends StatelessWidget {
+  static const String routeName = "/reset-password";
+  const ResetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       child: Padding(
                     padding: EdgeInsets.only(top: 30),
                     child: Text(
-                      "Enter Your Email Address",
+                      "Enter Your New Password",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
@@ -79,7 +78,18 @@ class ForgotPasswordScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Text(
-                            "Email",
+                            "New Password",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          CustomTextField(),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Confirm new password",
                             style: TextStyle(color: Colors.grey),
                           ),
                           SizedBox(
@@ -90,40 +100,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      "We will send you a One Time Password",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    InkWell(
-                      child: const Text(
-                        "Log in",
-                        style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 15,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                      onTap: () {
-                        Get.back();
-                      },
-                    ),
-                    const SizedBox(
                       height: 40,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: Get.width / 10),
                       child: CustomElevatedButton(
-                          onTap: () {
-                            Get.to(() => const OtpScreen(
-                                  email: '',
-                                ));
-                          },
-                          buttonText: "Verify and Continue"),
+                          onTap: () {}, buttonText: "Reset Password"),
                     )
                   ],
                 ),
