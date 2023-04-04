@@ -1,17 +1,14 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-// import 'package:hamro_sadhan/controllers/home_controller.dart';
 import 'package:hamro_sadhan/views/dashboard/dash_screen.dart';
 import '../controllers/auth/core_controller.dart';
 import 'auth/login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   static const routeName = "/splashScreen";
-  // final controller = Get.put(HomeController());
   const SplashScreen({super.key});
 
   @override

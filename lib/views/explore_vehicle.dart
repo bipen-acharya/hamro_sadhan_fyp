@@ -177,7 +177,10 @@ class RecentVehicleCard extends StatelessWidget {
         Get.to(() => SinglePage(
               vehicle: vehicles,
             ));
+
+        
       },
+      
       child: Container(
         height: 95,
         decoration: BoxDecoration(

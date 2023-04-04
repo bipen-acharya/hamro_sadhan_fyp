@@ -28,9 +28,7 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10),
               child: Obx(
                 () => ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10)),
+                  borderRadius: BorderRadius.circular(100),
                   child: CachedNetworkImage(
                     placeholder: (context, url) =>
                         const Center(child: CircularProgressIndicator()),
@@ -41,7 +39,8 @@ class ProfilePage extends StatelessWidget {
                       height: 87,
                       fit: BoxFit.contain,
                     ),
-                    height: 87,
+                    height: 111,
+                    width: 111,
                   ),
                 ),
               )),
