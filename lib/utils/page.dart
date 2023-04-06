@@ -39,7 +39,7 @@ var commonPages = [
       binding: BindingsBuilder(() => Get.lazyPut(() => LoginController()))),
   GetPage(
     name: ForgotPasswordScreen.routeName,
-    page: () => const ForgotPasswordScreen(),
+    page: () =>  ForgotPasswordScreen(),
     binding: BindingsBuilder(() => Get.lazyPut(
           () => ForgetPasswordController(),
         )),
@@ -57,21 +57,21 @@ var commonPages = [
           () => OTPController(),
         )),
   ),
-  GetPage(
-    name: ResetPasswordScreen.routeName,
-    page: () {
-      var data = Get.arguments;
-      var email = data[0];
-      return ResetPasswordScreen(
-          // email: email,
-          );
-    },
-    binding: BindingsBuilder(
-      () => Get.lazyPut(
-        () => ResetPasswordController(),
-      ),
-    ),
-  ),
+  // GetPage(
+  //   name: ResetPasswordScreen.routeName,
+  //   page: () {
+  //     var data = Get.arguments;
+  //     var email = data[0];
+  //     return ResetPasswordScreen(
+  //         // email: email,
+  //         );
+  //   },
+  //   binding: BindingsBuilder(
+  //     () => Get.lazyPut(
+  //       () => ResetPasswordController(),
+  //     ),
+  //   ),
+  // ),
 ];
 
 var userPages = [

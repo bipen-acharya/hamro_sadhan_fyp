@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/controllers/auth/otp_controller.dart';
+import 'package:hamro_sadhan/models/otp.dart';
+import 'package:hamro_sadhan/views/auth/reset_password/otp_screen.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 
 import '../../repo/forget_password_repo.dart';
-import '../../views/auth/reset_password/reset_password_screen.dart';
 import '../../widgets/custom_snackbar.dart';
 
 class ForgetPasswordController extends GetxController {
@@ -13,15 +17,27 @@ class ForgetPasswordController extends GetxController {
 
   final emailController = TextEditingController();
 
+  OtpMail? otpDetails;
+
+  // var otpController = Get.put(OTPController());
+  // final otpController = Get.find<OTPController>();
   void onSubmit() async {
     if (formKey.currentState!.validate()) {
       loading.show(message: "PLease wiat ..");
       await ForgetPasswordRepo.forgetPassword(
         email: emailController.text,
-        onSuccess: (message) {
+        onSuccess: (userId) {
           loading.hide();
-          Get.offNamed(ResetPasswordScreen.routeName, arguments: [emailController.text]);
-          CustomSnackBar.success(title: "Forget Password", message: message);
+
+          otpDetails = userId;
+
+          // log('on submit ko userId${otpDetails!.otp}');
+          // otpController.id.value = otpDetails!.otp.toString();
+
+          Get.offNamed(OtpScreen.routeName, arguments: [emailController.text]);
+          CustomSnackBar.success(
+              title: "Forget Password",
+              message: "Please Proceed to Reset Password");
         },
         onError: (message) {
           loading.hide();

@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/auth/reset_password/header.dart';
 
+import '../../../controllers/auth/forget_password_controller.dart';
 import '../../../utils/colors.dart';
+import '../../../utils/validators.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_text_field.dart';
-import 'otp_screen.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static const String routeName = "/forget-password";
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+  ForgotPasswordScreen({Key? key}) : super(key: key);
 
+  final c = Get.put(ForgetPasswordController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,13 +62,14 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
             ],
           ),
-          SingleChildScrollView(
-            child: Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
+          Container(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Form(
+                key: c.formKey,
                 child: Column(
-                  children: <Widget>[
+                  children: [
                     const SizedBox(
                       height: 10,
                     ),
@@ -77,15 +80,20 @@ class ForgotPasswordScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: Get.width / 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Email",
                             style: TextStyle(color: Colors.grey),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          CustomTextField(),
+                          CustomTextField(
+                              controller: c.emailController,
+                              hint: "Email",
+                              validator: Validators.checkEmailField,
+                              textInputAction: TextInputAction.next,
+                              textInputType: TextInputType.emailAddress),
                         ],
                       ),
                     ),
@@ -118,12 +126,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: Get.width / 10),
                       child: CustomElevatedButton(
-                          onTap: () {
-                            Get.to(() => const OtpScreen(
-                                  email: '',
-                                ));
-                          },
-                          buttonText: "Verify and Continue"),
+                          onTap: c.onSubmit, buttonText: "Verify and Continue"),
                     )
                   ],
                 ),

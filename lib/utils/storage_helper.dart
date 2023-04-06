@@ -12,8 +12,6 @@ class StorageHelper {
     try {
       final box = GetStorage();
       var fetchedDate = box.read(StorageKeys.APP_LOAD_DATE);
-
-      log("--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>${StorageKeys.APP_LOAD_DATE}");
       if (fetchedDate != null) {
         DateTime dateTime = DateTime.parse(fetchedDate);
         return dateTime;
@@ -32,7 +30,6 @@ class StorageHelper {
       final box = GetStorage();
       Accesstoken token =
           Accesstoken.fromJson(jsonDecode(box.read(StorageKeys.ACCESS_TOKEN)));
-
       return token;
     } catch (e) {
       log(e.toString());
@@ -43,13 +40,11 @@ class StorageHelper {
   static User? getUser() {
     try {
       final box = GetStorage();
-
       User user = User.fromJson(json.decode(box.read(StorageKeys.USER)));
-      // User user = User.fromJson(box.read(StorageKeys.USER));
-      log("-----current user ----->>>>>>.${box.read(StorageKeys.USER)}");
       return user;
     } catch (e, s) {
       log(e.toString());
+      log(s.toString());
       return null;
     }
   }

@@ -1,17 +1,15 @@
 import 'dart:convert';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:hamro_sadhan/models/auth/user_model.dart';
 import 'package:http/http.dart' as http;
-import '../controllers/auth/core_controller.dart';
+import '../models/auth/access_token.dart';
 import '../utils/apis.dart';
-import '../utils/storage_keys.dart';
 
 class AuthRepo {
+  
   static Future<void> loginUser({
     required String email,
     required String password,
-    required Function() onSuccess,
+    required Function(User user, Accesstoken token) onSuccess,
     required Function(String) onError,
   }) async {
     try {
@@ -32,13 +30,9 @@ class AuthRepo {
 
       dynamic data = jsonDecode(response.body);
       if (data["status"]) {
-        final box = GetStorage();
-        await box.write(
-            StorageKeys.ACCESS_TOKEN, json.encode(data["data"]["token"]));
-
-        await box.write(StorageKeys.USER, data["data"]["user"]);
-        Get.find<CoreController>().loadCurrentUser();
-        onSuccess();
+        Accesstoken token = Accesstoken.fromJson(data["data"]["accessToken"]);
+        User user = User.fromJson(data["data"]["user"]);
+        onSuccess(user, token);
       } else {
         onError(data["message"]);
       }

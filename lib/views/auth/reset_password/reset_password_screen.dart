@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/controllers/auth/reset_password_controller.dart';
+import 'package:hamro_sadhan/utils/validators.dart';
 
-import '../../../utils/colors.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_text_field.dart';
 import 'header.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   static const String routeName = "/reset-password";
-  const ResetPasswordScreen({super.key});
+  ResetPasswordScreen({super.key, required this.id});
 
+  final c = Get.put(ResetPasswordController());
+  final String id;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,11 +49,11 @@ class ResetPasswordScreen extends StatelessWidget {
                       topRight: Radius.circular(18.0),
                     ),
                   ),
-                  child: const Align(
+                  child: Align(
                       child: Padding(
                     padding: EdgeInsets.only(top: 30),
                     child: Text(
-                      "Enter Your New Password",
+                      "Enter Your New Password $id",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
@@ -60,54 +63,65 @@ class ResetPasswordScreen extends StatelessWidget {
             ],
           ),
           SingleChildScrollView(
-            child: Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Get.width / 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            "New Password",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          CustomTextField(),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            "Confirm new password",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          CustomTextField(),
-                        ],
+            child: Form(
+              key: c.formKey,
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: <Widget>[
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Get.width / 10),
-                      child: CustomElevatedButton(
-                          onTap: () {}, buttonText: "Reset Password"),
-                    )
-                  ],
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: Get.width / 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "New Password",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomTextField(
+                              controller: c.newPassController,
+                              validator: Validators.checkFieldEmpty,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            const Text(
+                              "Confirm new password",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomTextField(
+                              controller: c.conPassController,
+                              validator: Validators.checkFieldEmpty,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: Get.width / 10),
+                        child: CustomElevatedButton(
+                            onTap: c.onSubmit, buttonText: "Reset Password"),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

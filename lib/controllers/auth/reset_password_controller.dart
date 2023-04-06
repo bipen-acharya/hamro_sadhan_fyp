@@ -1,49 +1,56 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/views/auth/login_screen.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
-
-import '../../repo/forget_password_repo.dart';
-import '../../widgets/custom_snackbar.dart';
 
 class ResetPasswordController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final loading = SimpleFontelicoProgressDialog(
       context: Get.context!, barrierDimisable: false);
-  String? email;
+
+  // ForgetPasswordController fbController = Get.find<ForgetPasswordController>();
+
+  // String? email;
 
   final newPassController = TextEditingController();
+  final emailController = TextEditingController();
   final conPassController = TextEditingController();
   final otpController = TextEditingController();
 
-  RxBool newPassObscure = true.obs;
-  RxBool conPassObscure = true.obs;
+  // RxBool newPassObscure = true.obs;
+  // RxBool conPassObscure = true.obs;
 
-  void onEyeCLick() {
-    newPassObscure.value = !newPassObscure.value;
-  }
+  // void onEyeCLick() {
+  //   newPassObscure.value = !newPassObscure.value;
+  // }
 
-  void onconEyeCLick() {
-    conPassObscure.value = !conPassObscure.value;
-  }
+  // void onconEyeCLick() {
+  //   conPassObscure.value = !conPassObscure.value;
+  // }
 
   void onSubmit() async {
     if (formKey.currentState!.validate()) {
-      loading.show(message: "PLease wiat ..");
-      await ForgetPasswordRepo.resetPassword(
-        email: email!,
-        otp: otpController.text,
-        password: newPassController.text,
-        onSuccess: (message) async {
-          loading.hide();
-          Get.offAllNamed(LogInScreen.routeName);
-          CustomSnackBar.success(title: "Reset Password", message: message);
-        },
-        onError: (message) {
-          loading.hide();
-          CustomSnackBar.error(title: "Reset Password", message: message);
-        },
-      );
+      log("onsubmit pachi ko ");
+      // log("id -------${fbController.otpDetails?.customer.toString()}");
+
+      log("id -------${newPassController.text}");
+      log("id -------${conPassController.text}");
+      // loading.show(message: "PLease wiat ..");
+      // await ForgetPasswordRepo.resetPassword(
+      //   id: int.parse(email!),
+      //   otp: otpController.text,
+      //   password: newPassController.text,
+      //   onSuccess: (message) async {
+      //     loading.hide();
+      //     Get.offAllNamed(LogInScreen.routeName);
+      //     CustomSnackBar.success(title: "Reset Password", message: message);
+      //   },
+      //   onError: (message) {
+      //     loading.hide();
+      //     CustomSnackBar.error(title: "Reset Password", message: message);
+      //   },
+      // );
     }
   }
 }
