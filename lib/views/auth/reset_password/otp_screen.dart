@@ -61,7 +61,7 @@ class OtpScreen extends StatelessWidget {
                       child: Padding(
                     padding: EdgeInsets.only(top: 30),
                     child: Text(
-                      "Enter Verification Code}",
+                      "Enter Verification Code",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
@@ -125,42 +125,42 @@ class OtpScreen extends StatelessWidget {
                       const SizedBox(
                         height: 50,
                       ),
-                      const Text(
-                        "Don't receive the OTP",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      InkWell(
-                        child: const Text(
-                          "Resend OTP",
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 15,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                        onTap: () {
-                          print("OPT resend");
-                        },
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
+                      // const Text(
+                      //   "Don't receive the OTP",
+                      //   style: TextStyle(color: Colors.grey),
+                      // ),
+                      // const SizedBox(
+                      //   height: 10,
+                      // ),
+                      // InkWell(
+                      //   child: const Text(
+                      //     "Resend OTP",
+                      //     style: TextStyle(
+                      //       color: AppColors.primaryColor,
+                      //       fontSize: 15,
+                      //       decoration: TextDecoration.underline,
+                      //     ),
+                      //   ),
+                      //   onTap: () {
+                      //     print("OPT resend");
+                      //   },
+                      // ),
+                      // const SizedBox(
+                      //   height: 40,
+                      // ),
                       // AppButtons(text: "Verify"),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      // const SizedBox(
+                      //   height: 20,
+                      // ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: CustomElevatedButton(
                             onTap: () async {
-
                               if (keys.currentState!.validate()) {
-                                String text =con.otpDetails!.customer.toString();
+                                String text =
+                                    con.otpDetails!.customer.toString();
                                 // log("cust id ${c.id.toString()}");
-                                Get.to(() => ResetPasswordScreen(id: text ));
+                                Get.to(() => ResetPasswordScreen(id: text));
                               }
                             },
                             buttonText: "Verify and Continue"),

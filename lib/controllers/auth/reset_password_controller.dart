@@ -18,6 +18,12 @@ class ResetPasswordController extends GetxController {
 
   // String? email;
 
+    var passwordObscure = true.obs;
+    
+    void onEyeClick() {
+    passwordObscure.value = !passwordObscure.value;
+  }
+
   final newPassController = TextEditingController();
   final emailController = TextEditingController();
   final conPassController = TextEditingController();

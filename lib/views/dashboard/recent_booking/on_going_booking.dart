@@ -6,10 +6,9 @@ import 'package:hamro_sadhan/models/on_going_order.dart';
 import '../../../controllers/history.dart';
 import '../../../utils/image_paths.dart';
 
-
-class PastBookingView extends StatelessWidget {
+class OnGoingBooking extends StatelessWidget {
   final c = Get.find<HistoryController1>();
-  PastBookingView({super.key});
+  OnGoingBooking({super.key});
 
   @override
   Widget build(BuildContext context) {

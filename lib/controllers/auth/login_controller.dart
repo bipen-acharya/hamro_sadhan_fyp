@@ -14,15 +14,16 @@ import '../dashboard/home_controller.dart';
 
 class LoginController extends GetxController {
   var passwordObscure = true.obs;
+    void onEyeClick() {
+    passwordObscure.value = !passwordObscure.value;
+  }
+
   SimpleFontelicoProgressDialog loading = SimpleFontelicoProgressDialog(
       context: Get.context!, barrierDimisable: false);
 
   var emailTextController = TextEditingController();
   var passwordTextController = TextEditingController();
   final homeController = Get.find<HomePageController>();
-  void onEyeClick() {
-    passwordObscure.value = !passwordObscure.value;
-  }
 
   void onSubmit() async {
     print("on submit ma aayo");

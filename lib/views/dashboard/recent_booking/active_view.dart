@@ -8,9 +8,9 @@ import '../../../utils/image_paths.dart';
 import '../../../widgets/custom_button.dart';
 import '../recent_booking_view_page.dart';
 
-class ActiveBookingView extends StatelessWidget {
+class UpCommingBooking extends StatelessWidget {
   final c = Get.find<HistoryController1>();
-  ActiveBookingView({super.key});
+  UpCommingBooking({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +43,7 @@ class ActiveBookingView extends StatelessWidget {
           ],
         );
       } else {
-        return 
-        ListView.builder(
+        return ListView.builder(
           itemCount: c.recentOrderDetails.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {

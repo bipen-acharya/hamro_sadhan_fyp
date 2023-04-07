@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/order.dart';
 
 import '../../utils/colors.dart';
-import 'histroy/history_view.dart';
 
 class ViewRecentSinglePage extends StatelessWidget {
   const ViewRecentSinglePage({super.key, required this.recentOrderDetail});
@@ -218,7 +217,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           )),
                       onPressed: () {
-                        Get.to(() => HistoryView());
+                        print(recentOrderDetail.id.toString());
                       },
                       child: const Text("Cancel Booking"),
                     ),
