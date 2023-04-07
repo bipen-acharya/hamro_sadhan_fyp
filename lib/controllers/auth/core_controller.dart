@@ -10,7 +10,8 @@ import '../../utils/storage_keys.dart';
 
 class CoreController extends GetxController {
   RxBool darkTheme = RxBool(false);
-  User? currentUser;
+
+  Rx<User?> currentUser = Rxn<User>();
   Accesstoken? accesstoken;
 
   bool isFirstTimeUser() {
@@ -25,7 +26,9 @@ class CoreController extends GetxController {
   }
 
   void loadCurrentUser() async {
-    currentUser = StorageHelper.getUser();
+    currentUser.value = StorageHelper.getUser();
+    log("current user----------------------- ${currentUser.value?.email}-");
+    log("current user----------------${currentUser.value}--------");
   }
 
   // void loadUserToken() async {
@@ -34,7 +37,7 @@ class CoreController extends GetxController {
 
   bool isUserLoggedIn() {
     loadCurrentUser();
-    return currentUser != null;
+    return currentUser.value != null;
   }
 
   // bool isUserToken() {

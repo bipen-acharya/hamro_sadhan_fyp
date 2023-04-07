@@ -8,6 +8,7 @@ class HamroSadhanApi {
   static String postOrder = "$baseUrl/order";
   static String viewOrder = "$baseUrl/viewOrder";
   static String recentOrder = "$baseUrl/recent-order";
+  static String onGoing = "$baseUrl/onGoingOrder";
   static String updateProfileUrl = "$baseUrl/update-profile";
   static String resetPasswordUrl = "$baseUrl/resetPassword";
   static String forgotPassword = "$baseUrl/forget-password";

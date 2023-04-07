@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/controllers/auth/otp_controller.dart';
+
 import 'package:hamro_sadhan/models/otp.dart';
 import 'package:hamro_sadhan/views/auth/reset_password/otp_screen.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';

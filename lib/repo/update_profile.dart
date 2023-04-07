@@ -17,6 +17,7 @@ class UpdateProfileRepo {
       File? image,
       required Function(User user, String message) onSuccess,
       required Function(String message) onError}) async {
+    print("update profile ma aayo");
     var token = StorageHelper.getToken();
 
     var headers = {
@@ -29,7 +30,6 @@ class UpdateProfileRepo {
     request.headers.addAll(headers);
     request.fields['name'] = name;
     request.fields['phone_number'] = phone;
-    request.fields['email'] = "samir@gmail.com";
     if (image != null) {
       request.files.add(
         http.MultipartFile.fromBytes(
@@ -43,6 +43,7 @@ class UpdateProfileRepo {
     http.StreamedResponse response =
         await HttpRequestHamroSadhan.multiPart(request);
     var data = json.decode(await response.stream.bytesToString());
+    print(data);
     if (data["status"]) {
       print(data);
       User user = User.fromJson(data["data"]['user']);

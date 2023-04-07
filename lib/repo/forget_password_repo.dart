@@ -34,6 +34,7 @@ class ForgetPasswordRepo {
       // log(response.body);
 
       dynamic data = jsonDecode(response.body);
+      print(data);
       if (data["success"] as bool) {
         OtpMail otpCustomer = OtpMail.fromJson(data["data"]);
 
@@ -51,37 +52,37 @@ class ForgetPasswordRepo {
   static Future<void> resetPassword({
     required String otp,
     required String password,
-    required int id,
+    required String id,
     required Function(String message) onSuccess,
     required Function(String message) onError,
   }) async {
     try {
-      var headers = {
-        "Accept": "application/json",
-        // "Content-Type": "application/json",
-      };
+    var headers = {
+      "Accept": "application/json",
+      // "Content-Type": "application/json",
+    };
+    var body = {
+      "customer_id": id,
+      "otp": otp,
+      "new_password": password,
+    };
+    print(body);
 
-      var body = {
-        "customer_id": id,
-        "otp": otp,
-        "new_password": password,
-      };
+    http.Response response = await http.post(
+      Uri.parse(HamroSadhanApi.resetPasswordUrl),
+      headers: headers,
+      body: body,
+    );
 
-      http.Response response = await HttpRequestHamroSadhan.post(
-        Uri.parse(HamroSadhanApi.resetPasswordUrl),
-        headers: headers,
-        body: body,
-      );
+    print(json.encode(body));
+    print(response.body);
 
-      log(json.encode(body));
-      log(response.body);
-
-      dynamic data = jsonDecode(response.body);
-      if (data["status"]) {
-        onSuccess(data['message']);
-      } else {
-        onError(data["message"]);
-      }
+    dynamic data = jsonDecode(response.body);
+    if (data["success"]) {
+      onSuccess(data['message']);
+    } else {
+      onError(data["message"]);
+    }
     } catch (e, s) {
       log(e.toString());
       log(s.toString());

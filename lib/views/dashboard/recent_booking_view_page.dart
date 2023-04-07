@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/order.dart';
 
 import '../../utils/colors.dart';
+import 'histroy/history_view.dart';
 
 class ViewRecentSinglePage extends StatelessWidget {
   const ViewRecentSinglePage({super.key, required this.recentOrderDetail});
@@ -146,33 +147,29 @@ class ViewRecentSinglePage extends StatelessWidget {
                     const SizedBox(
                       height: 14,
                     ),
-                    SizedBox(
-                      height: 100,
-                      child: ListView.builder(
-                          itemCount: 3,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Amount",
-                                    style: textTheme.bodyMedium!.copyWith(
-                                      color: theme.colorScheme.secondary,
-                                    ),
-                                  ),
-                                  Text("Rs.900.00",
-                                      style: textTheme.bodyMedium!.copyWith(
-                                        color: theme.colorScheme.secondary,
-                                      )),
-                                ],
-                              ),
-                            );
-                          }),
+                    CalculationRow(
+                      textTheme: textTheme,
+                      theme: theme,
+                      title: 'Cost per hour',
+                      calculation:
+                          recentOrderDetail.vehicle!.costPerHour.toString(),
+                    ),
+                    CalculationRow(
+                      textTheme: textTheme,
+                      theme: theme,
+                      title: 'Time',
+                      calculation:
+                          recentOrderDetail.vehicle!.costPerHour.toString(),
+                    ),
+                    CalculationRow(
+                      textTheme: textTheme,
+                      theme: theme,
+                      title: 'Amount',
+                      calculation:
+                          recentOrderDetail.vehicle!.costPerHour.toString(),
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     Row(
                       children: List.generate(
@@ -220,7 +217,9 @@ class ViewRecentSinglePage extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           )),
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => HistoryView());
+                      },
                       child: const Text("Cancel Booking"),
                     ),
                   ],
@@ -256,6 +255,44 @@ class ViewRecentSinglePage extends StatelessWidget {
               ],
             ),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class CalculationRow extends StatelessWidget {
+  const CalculationRow({
+    super.key,
+    required this.textTheme,
+    required this.theme,
+    required this.title,
+    required this.calculation,
+  });
+
+  final TextTheme textTheme;
+  final ThemeData theme;
+
+  final String title;
+  final String calculation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: textTheme.bodyMedium!.copyWith(
+              color: theme.colorScheme.secondary,
+            ),
+          ),
+          Text(calculation,
+              style: textTheme.bodyMedium!.copyWith(
+                color: theme.colorScheme.secondary,
+              )),
         ],
       ),
     );

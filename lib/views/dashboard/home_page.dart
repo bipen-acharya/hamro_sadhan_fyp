@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/controllers/dashboard/search_controller.dart';
 import 'package:hamro_sadhan/views/explore_vehicle.dart';
 import 'package:intl/intl.dart';
 
@@ -13,7 +12,6 @@ class Homepage extends StatelessWidget {
   Homepage({super.key});
 
   final c = Get.find<HomePageController>();
-  final con = Get.put(SearchController());
 
   final coreController = Get.find<CoreController>();
   @override
@@ -44,7 +42,7 @@ class Homepage extends StatelessWidget {
                 style: theme.textTheme.titleMedium!.copyWith(
                   color: theme.colorScheme.secondary,
                 )),
-            Text("${coreController.currentUser!.name?.capitalize}",
+            Text("${coreController.currentUser.value!.name?.capitalize}",
                 style: theme.textTheme.titleLarge!.copyWith(
                   fontSize: 15,
                   color: theme.colorScheme.secondary,

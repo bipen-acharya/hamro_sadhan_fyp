@@ -58,6 +58,7 @@ class EditProfileController extends GetxController {
   }
 
   void submit() async {
+    print("on success ma aayo edit profile");
     if (formKey.currentState!.validate()) {
       loading.show(message: "Please wait ..");
 
@@ -70,7 +71,7 @@ class EditProfileController extends GetxController {
           loading.hide();
           final box = GetStorage();
           await box.write(StorageKeys.USER, json.encode(user.toJson()));
-          coreController.currentUser = user;
+          coreController.currentUser.value = user;
           profileController.loadUser();
           // Get.offAll(() => ProfilePage());
           Get.back();

@@ -9,10 +9,12 @@ import 'header.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   static const String routeName = "/reset-password";
-  ResetPasswordScreen({super.key, required this.id});
+  ResetPasswordScreen({super.key, required this.id,});
 
   final c = Get.put(ResetPasswordController());
   final String id;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +120,10 @@ class ResetPasswordScreen extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: Get.width / 10),
                         child: CustomElevatedButton(
-                            onTap: c.onSubmit, buttonText: "Reset Password"),
+                            onTap: () {
+                              c.onSubmit(int.parse(id));
+                            },
+                            buttonText: "Reset Password"),
                       )
                     ],
                   ),

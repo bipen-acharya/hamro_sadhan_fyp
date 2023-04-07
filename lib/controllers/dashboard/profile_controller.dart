@@ -12,9 +12,7 @@ import '../auth/core_controller.dart';
 class ProfileController extends GetxController {
   TextEditingController previousPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
-
   final coreController  = Get.find<CoreController>();
-
   Rxn<User> user = Rxn<User>(); 
 
   @override
@@ -24,7 +22,7 @@ class ProfileController extends GetxController {
   }
 
   void loadUser(){
-    user.value = coreController.currentUser;
+    user.value = coreController.currentUser.value;
   }
 
   final keys = GlobalKey<FormState>();

@@ -17,12 +17,7 @@ class DashScreen extends StatelessWidget {
   static const routeName = '/dash-screen';
 
   DashScreen({super.key});
-  // final coreController = Get.find<CoreController>();
   final c = Get.put(DashScreenController());
-  final co = Get.put(RecentOrderController());
-  final con = Get.put(ProfileController());
-  final conn = Get.put(HomePageController());
-  final coreController = Get.put(CoreController());
   @override
   Widget build(BuildContext context) {
     final pages = [
