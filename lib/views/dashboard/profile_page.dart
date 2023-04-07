@@ -10,6 +10,8 @@ import '../../controllers/dashboard/profile_controller.dart';
 import '../../utils/image_paths.dart';
 import '../../widgets/custom_profile_menu.dart';
 import '../edit_profile.dart';
+import '../faq.dart';
+import '../privacy_policy.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
@@ -109,14 +111,18 @@ class ProfilePage extends StatelessWidget {
                     label: "Change Password",
                   ),
                   CustomProfileMenu(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => const FAQScreen());
+                    },
                     iocnData: ImagePath.help,
-                    label: "Help Centre",
+                    label: "FAQ",
                   ),
                   CustomProfileMenu(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => const PrivacyPolicyScreen());
+                    },
                     iocnData: ImagePath.star,
-                    label: "Rate our app",
+                    label: "Terms and Conditions",
                   ),
                   CustomProfileMenu(
                     onTap: () {},

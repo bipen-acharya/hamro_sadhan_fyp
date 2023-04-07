@@ -10,7 +10,7 @@ import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
 import '../../controllers/dashboard/dash_screen_controller.dart';
 import '../../controllers/dashboard/recent_controller.dart';
 import '../../utils/colors.dart';
-import 'recent_booking/history_view.dart';
+import 'recent_booking/recent_view.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
 

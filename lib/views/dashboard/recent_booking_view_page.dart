@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/order.dart';
 
+import '../../controllers/dashboard/history_controller.dart';
 import '../../utils/colors.dart';
 
 class ViewRecentSinglePage extends StatelessWidget {
-  const ViewRecentSinglePage({super.key, required this.recentOrderDetail});
+  ViewRecentSinglePage({super.key, required this.recentOrderDetail});
 
   final Order recentOrderDetail;
+  final c = Get.find<HistoryController>();
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -218,6 +220,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                           )),
                       onPressed: () {
                         print(recentOrderDetail.id.toString());
+                        c.cancelBooking(recentOrderDetail.id.toString());
                       },
                       child: const Text("Cancel Booking"),
                     ),

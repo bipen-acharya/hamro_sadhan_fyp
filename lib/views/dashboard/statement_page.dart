@@ -61,7 +61,8 @@ class StatementPage extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: c.orderDetails.length,
                       itemBuilder: (context, index) {
-                        Order orders = c.orderDetails[index];
+                        Order orders =
+                            c.orderDetails[c.orderDetails.length - 1 - index];
 
                         bool isSameDay(String a, String b) {
                           DateTime dateA = DateTime.parse(a);
@@ -81,8 +82,14 @@ class StatementPage extends StatelessWidget {
                           child: Column(
                             children: [
                               if (index == 0 ||
-                                  !isSameDay(orders.createdAt!,
-                                      c.orderDetails[index - 1].createdAt!))
+                                  !isSameDay(
+                                      orders.createdAt!,
+                                      c
+                                          .orderDetails[c.orderDetails.length -
+                                              1 -
+                                              index +
+                                              1]
+                                          .createdAt!))
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       bottom: 15, top: 25),
@@ -219,7 +226,7 @@ class StatementPage extends StatelessWidget {
                                                   theme.colorScheme.secondary,
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           Row(
