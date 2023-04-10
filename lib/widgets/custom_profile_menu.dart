@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hamro_sadhan/utils/colors.dart';
 
 class CustomProfileMenu extends StatelessWidget {
   final String label;
@@ -27,13 +28,14 @@ class CustomProfileMenu extends StatelessWidget {
           iocnData,
           height: 20,
           width: 20,
+          color: AppColors.primaryColor,
         ),
       ),
       title: Text(
         label,
         style: theme.textTheme.bodyLarge!.copyWith(
           fontSize: 15,
-          color:  theme.colorScheme.secondary,
+          color: theme.colorScheme.secondary,
         ),
       ),
       trailing: Padding(

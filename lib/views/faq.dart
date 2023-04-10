@@ -32,59 +32,115 @@ class FAQScreen extends StatelessWidget {
         ),
         centerTitle: false,
       ),
-      body: Text("FAQ"),
+      body: ListView(
+        children: const [
+          // FaqItem(
+          //   question:
+          //       'What is the first screen that appears when I open the app?',
+          //   answer: 'The first screen that appears is the splash screen.',
+          // ),
+          FaqItem(
+            question: 'How can I log in to the app?',
+            answer:
+                'You can log in to the app by entering your email and password on the login screen',
+          ),
+          FaqItem(
+            question: 'What do I need to do to register in the system?',
+            answer:
+                'To register in the system, you need to fill in your name, phone number, email, and password on the registration screen.',
+          ),
+          FaqItem(
+            question: 'How do I search for available vehicles?',
+            answer:
+                'You can search for available vehicles by entering the start date and start time on the home page, or by using the search and advanced search functions to filter by name or category.',
+          ),
+          FaqItem(
+            question: "Can I book multiple vehicles at once?",
+            answer:
+                "No, you can only book one vehicle at a time. You can only view multiple vehicles",
+          ),
+          FaqItem(
+            question:
+                'What personal information do I need to provide when booking a vehicle?',
+            answer: 'You need to provide your name, phone number, and age.',
+          ),
+          FaqItem(
+            question: "How can I pay for my booking?",
+            answer:
+                "You can choose to pay either by cash or using the Khalti online payment system.",
+          ),
+          FaqItem(
+            question: " Can I cancel my booking after it has been placed?",
+            answer:
+                "Yes, you can cancel your booking from the recent vehicle page.",
+          ),
+          FaqItem(
+            question: " How can I update my profile information?",
+            answer:
+                "You can update your profile information from the profile page.",
+          ),
+          FaqItem(
+            question: "How can I change my password?",
+            answer:
+                "You can change your password from the change password page by entering your current password and the new password.",
+          ),
+          FaqItem(
+            question: "How can I reset my password if I forget it?",
+            answer:
+                "You can reset your password by entering your email on the reset password page, and then entering the valid OTP that will be sent to your email.",
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FaqItem extends StatelessWidget {
+  final String question;
+  final String answer;
+
+  const FaqItem({super.key, required this.question, required this.answer});
+
+  final bool expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      title: Text(question),
+      children: [
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    answer,
+                    maxLines: 5,
+                    textAlign: TextAlign.left,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
 
 
-// Q: What is the first screen that appears when I open the app?
-// A: The first screen that appears is the splash screen.
-
-// Q: How can I log in to the app?
-// A: You can log in to the app by entering your email and password on the login screen.
-
-// Q: What do I need to do to register in the system?
-// A: To register in the system, you need to fill in your name, phone number, email, and password on the registration screen.
-
-// Q: How do I search for available vehicles?
-// A: You can search for available vehicles by entering the start date and start time on the home page, or by using the search and advanced search functions to filter by name or category.
-
-// Q: Can I book multiple vehicles at once?
-// A: No, you can only book one vehicle at a time.
-
-// Q: What personal information do I need to provide when booking a vehicle?
-// A: You need to provide your name, phone number, and age.
-
-// Q: How can I pay for my booking?
-// A: You can choose to pay either by cash or using the Khalti online payment system.
-
-// Q: Can I cancel my booking after it has been placed?
-// A: Yes, you can cancel your booking from the recent vehicle page.
-
-// Q: How can I update my profile information?
-// A: You can update your profile information from the profile page.
-
-// Q: How can I change my password?
-// A: You can change your password from the change password page by entering your current password and the new password.
-
-// Q: How can I reset my password if I forget it?
-// A: You can reset your password by entering your email on the reset password page, and then entering the valid OTP that will be sent to your email.
 
 
 
 
-// About Us:
 
-// Our app is designed to provide a seamless experience for users who are looking to book vehicles for their travel needs. Our mission is to simplify the process of finding and booking a vehicle by providing a user-friendly platform that can be easily accessed from anywhere. We understand the importance of reliable transportation, and we aim to provide a solution that is both convenient and affordable.
-
-// Our app allows users to filter through various types of vehicles to find the one that best suits their needs. Whether it's a bike for a quick ride around town or a car for a long road trip, we have a wide selection of vehicles available for booking. Our app also provides users with the option to choose between cash or online payment via Khalti for a hassle-free booking experience.
-
-// In addition to providing a smooth user experience, we also value the security and privacy of our users. Our system ensures that all personal information is kept safe and secure. Users can also rest assured that their transactions are encrypted and protected against any unauthorized access.
-
-// We also understand the importance of partnerships in providing the best service possible. Our app allows vendors to easily post and manage their vehicles on our platform, providing users with a wider selection of vehicles to choose from. Our admin team ensures that all listings are accurate and up-to-date, ensuring a high level of customer satisfaction.
-
-// Overall, we strive to provide an easy and reliable booking experience for our users while maintaining a high standard of security and privacy. We are committed to continuously improving our app and partnering with vendors to provide a wide selection of vehicles for our users. Thank you for choosing our app for your travel needs.
 
 
 

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 
 import 'package:hamro_sadhan/utils/colors.dart';
+import 'package:hamro_sadhan/views/about_us_screen.dart';
 import '../../controllers/auth/core_controller.dart';
 import '../../controllers/dashboard/profile_controller.dart';
 import '../../utils/image_paths.dart';
@@ -37,9 +38,10 @@ class ProfilePage extends StatelessWidget {
                     fit: BoxFit.fill,
                     imageUrl: c.user.value?.profileImageUrl ?? "",
                     errorWidget: (context, url, error) => Image.asset(
-                      'assets/logo.png',
-                      height: 87,
-                      fit: BoxFit.contain,
+                      ImagePath.profilePlaceholder,
+                      fit: BoxFit.cover,
+                      height: 120,
+                      width: 120,
                     ),
                     height: 111,
                     width: 111,
@@ -114,24 +116,38 @@ class ProfilePage extends StatelessWidget {
                     onTap: () {
                       Get.to(() => const FAQScreen());
                     },
-                    iocnData: ImagePath.help,
+                    iocnData: ImagePath.faq,
                     label: "FAQ",
                   ),
                   CustomProfileMenu(
                     onTap: () {
                       Get.to(() => const PrivacyPolicyScreen());
                     },
-                    iocnData: ImagePath.star,
-                    label: "Terms and Conditions",
+                    iocnData: ImagePath.privacy,
+                    label: "Privacy Policy",
                   ),
                   CustomProfileMenu(
-                    onTap: () {},
-                    iocnData: ImagePath.star,
+                    onTap: () {
+                      Get.to(() => const AboutUsScreen());
+                    },
+                    iocnData: ImagePath.aboutUs,
                     label: "About Us",
                   ),
                   CustomProfileMenu(
-                    onTap: () {},
-                    iocnData: ImagePath.star,
+                    onTap: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Version'),
+                        content: const Text('Version 2.1'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    iocnData: ImagePath.version,
                     label: "Version",
                   ),
                   // CustomProfileMenu(

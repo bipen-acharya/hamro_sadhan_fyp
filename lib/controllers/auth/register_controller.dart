@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 
 import '../../models/auth/user_model.dart';
 import '../../repo/auth_repo.dart';
+import '../../utils/storage_keys.dart';
+import '../../views/dashboard/dash_screen.dart';
 import '../../widgets/custom_snackbar.dart';
+import 'core_controller.dart';
 
 class RegisterController extends GetxController {
   var registerFormKey = GlobalKey<FormState>();
@@ -30,7 +36,6 @@ class RegisterController extends GetxController {
   }
 
   void submit() async {
-    print("object");
     if (registerFormKey.currentState!.validate()) {
       if (passwordController.text != confirmPasswordController.text) {
         CustomSnackBar.info(
@@ -45,9 +50,17 @@ class RegisterController extends GetxController {
       await AuthRepo.registerUser(
         user: user,
         password: passwordController.text,
-        onSuccess: () {
+        onSuccess: (user, token) async {
           loading.hide();
-          Get.back();
+          final box = GetStorage();
+          await box.write(
+              StorageKeys.ACCESS_TOKEN, json.encode(token.toJson()));
+          await box.write(StorageKeys.USER, json.encode(user.toJson()));
+          print("on submit ma aayo ${user.name}");
+          Get.find<CoreController>().loadCurrentUser();
+
+          print("on submit ma aayo ${user.email}");
+          Get.offAllNamed(DashScreen.routeName);
           CustomSnackBar.success(title: "Sign up succesful");
         },
         onError: (message) {

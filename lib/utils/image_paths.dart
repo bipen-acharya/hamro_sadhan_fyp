@@ -26,32 +26,21 @@ class ImagePath {
   static const noRecentBooking = "assets/icons/recent_booking.svg";
   static const recent = "assets/icons/recent.svg";
   static const statement = "assets/icons/statement.svg";
+  static const profilePlaceholder = "assets/profile_placeholder.jpeg";
 
   static const esewa = "assets/icons/eshewa.png";
   static const khalti = "assets/icons/khalti.png";
   static const confirm = "assets/icons/confirm.svg";
+  static const aboutUs = "assets/icons/about.svg";
+  static const faq = "assets/icons/faq.svg";
+  static const privacy = "assets/icons/privacy.svg";
+  static const version = "assets/icons/version.svg";
 }
 
 // profile screen icons image path
 class ProfileScreenIcon {
   static const basePath = "assets/users";
 }
-
-// class UserImages {
-//   static const basePath = "assets/users";
-//   static const maskGroup = "assets/users/icon/maskGroup.svg";
-//   static const petrol = "$basePath/icon/petrol.svg";
-//   static const seat = "$basePath/icon/seat.svg";
-//   static const speed = "$basePath/icon/speed.svg";
-//   static const call = "$basePath/icon/call.svg";
-//   static const logo = "assets/logo.png";
-//   static const ime = "$basePath/icon/ime_pay.png";
-//   static const esewa = "$basePath/icon/eshewa.png";
-//   static const khalti = "$basePath/icon/khalti.png";
-//   static const cancel = "$basePath/icon/cross.svg";
-//   static const statement = "$basePath/icon/statement.svg";
-//   static const logo1 = "$basePath/icon/Logo.svg";
-// }
 
 class VehiclesImages {
   static const basePath = "assets/images";

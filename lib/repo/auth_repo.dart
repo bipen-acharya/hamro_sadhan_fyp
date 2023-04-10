@@ -44,7 +44,7 @@ class AuthRepo {
   static Future<void> registerUser({
     required User user,
     required String password,
-    required Function() onSuccess,
+    required Function(User user, Accesstoken token) onSuccess,
     required Function(String) onError,
   }) async {
     print("hello world");
@@ -71,7 +71,9 @@ class AuthRepo {
     dynamic data = jsonDecode(response.body);
     print(data.toString);
     if (data["status"]) {
-      onSuccess();
+      Accesstoken token = Accesstoken.fromJson(data["data"]["token"]);
+      User user = User.fromJson(data["data"]["user"]);
+      onSuccess(user, token);
     } else {
       onError(data['message']);
     }

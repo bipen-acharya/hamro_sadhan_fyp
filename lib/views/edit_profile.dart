@@ -69,7 +69,7 @@ class EditProfile extends StatelessWidget {
                           placeholder: (context, url) =>
                               const CircularProgressIndicator(),
                           errorWidget: (context, url, error) => Image.asset(
-                            ImagePath.khalti,
+                            ImagePath.profilePlaceholder,
                             fit: BoxFit.cover,
                             height: 120,
                             width: 120,
@@ -126,7 +126,6 @@ class EditProfile extends StatelessWidget {
           ),
         ),
       ),
-      
     );
   }
 }
