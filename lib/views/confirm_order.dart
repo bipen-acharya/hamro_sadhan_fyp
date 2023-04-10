@@ -57,6 +57,7 @@ class OrderConfirmPage extends StatelessWidget {
           onPressed: () {
             Get.offAll(() => DashScreen());
             c.orderDetails.clear();
+            // con.getAllRecentOrders();
             c.getAllOrders();
             homeController.endDateController.clear();
             homeController.startDateController.clear();

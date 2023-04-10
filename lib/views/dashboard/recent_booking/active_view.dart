@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/history.dart';
+import '../../../controllers/dashboard/history.dart';
 import '../../../models/order.dart';
 import '../../../utils/image_paths.dart';
 import '../../../widgets/custom_button.dart';
 import '../recent_booking_view_page.dart';
 
 class UpCommingBooking extends StatelessWidget {
-  final c = Get.find<HistoryController1>();
+  final c = Get.find<RecentOrderController>();
   UpCommingBooking({super.key});
 
   @override

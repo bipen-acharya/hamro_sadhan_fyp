@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:hamro_sadhan/controllers/auth/core_controller.dart';
-import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
-import 'package:hamro_sadhan/controllers/dashboard/profile_controller.dart';
 import 'package:hamro_sadhan/utils/image_paths.dart';
-import 'package:hamro_sadhan/views/dashboard/recent_page.dart';
 import 'package:hamro_sadhan/views/dashboard/statement_page.dart';
 import '../../controllers/dashboard/dash_screen_controller.dart';
-import '../../controllers/dashboard/recent_controller.dart';
 import '../../utils/colors.dart';
 import 'recent_booking/recent_view.dart';
 import 'home_page.dart';

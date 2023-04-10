@@ -1,14 +1,14 @@
-import 'dart:developer';
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/on_going_order.dart';
 
-import '../models/order.dart';
-import '../repo/recent_order_repo.dart';
-import '../widgets/custom_snackbar.dart';
+import '../../models/order.dart';
+import '../../repo/recent_order_repo.dart';
+import '../../widgets/custom_snackbar.dart';
 
-class HistoryController1 extends GetxController {
+class RecentOrderController extends GetxController {
   RxList<Order> recentOrderDetails = RxList();
   RxList<OnGoingOrder> onGoing = RxList();
   RxBool loading = false.obs;
@@ -27,11 +27,23 @@ class HistoryController1 extends GetxController {
   final ScrollController activeScrollController = ScrollController();
   final ScrollController pastScrollController = ScrollController();
 
+  late Timer timer;
+
   @override
   void onInit() {
-    getAllRecentOrders();
-    getOnGoingOrder();
+    // timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      getAllRecentOrders();
+      getOnGoingOrder();
+    //   print(onGoing.length);
+    // });
+
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    timer.cancel();
+    super.onClose();
   }
 
   void changeTab(String tab) {
@@ -47,6 +59,7 @@ class HistoryController1 extends GetxController {
   }
 
   getAllRecentOrders() async {
+    recentOrderDetails.clear();
     loading.value = true;
     await RecentOrderRepo.getAllRecentOrder(
       onSuccess: (orders) {

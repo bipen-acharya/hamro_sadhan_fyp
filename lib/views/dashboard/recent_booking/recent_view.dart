@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/dashboard/recent_booking/active_view.dart';
 
-import '../../../controllers/history.dart';
+import '../../../controllers/dashboard/history.dart';
 import '../../../utils/colors.dart';
 import 'on_going_booking.dart';
 
 class HistoryView extends StatelessWidget {
-  final c = Get.put(HistoryController1());
+  final c = Get.put(RecentOrderController());
   HistoryView({super.key});
 
   @override

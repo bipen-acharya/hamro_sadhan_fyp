@@ -7,9 +7,7 @@ import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/views/single_vehicle.dart';
 
 import '../controllers/dashboard/search_controller.dart';
-import '../models/category.dart';
 import '../models/vehicle.dart';
-import '../utils/colors.dart';
 import '../utils/image_paths.dart';
 import '../widgets/search.dart';
 
@@ -146,7 +144,7 @@ class ExplorePage extends StatelessWidget {
                             crossAxisSpacing: 20.0,
                             mainAxisSpacing: 20.0,
                           ),
-                          itemBuilder: (BuildContext context, int index) {
+                          itemBuilder: (context, index) {
                             Vehicle vehicles = c.vehicleList[index];
                             return RecentVehicleCard(
                               vehicles: vehicles,
@@ -174,13 +172,12 @@ class RecentVehicleCard extends StatelessWidget {
     var textTheme = theme.textTheme;
     return InkWell(
       onTap: () {
-        Get.to(() => SinglePage(
-              vehicle: vehicles,
-            ));
-
-        
+        Get.to(
+          () => SinglePage(
+            vehicle: vehicles,
+          ),
+        );
       },
-      
       child: Container(
         height: 95,
         decoration: BoxDecoration(

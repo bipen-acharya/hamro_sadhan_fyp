@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/auth/register_controller.dart';
 import 'package:hamro_sadhan/controllers/dashboard/history_controller.dart';
-import 'package:hamro_sadhan/controllers/dashboard/recent_controller.dart';
 import 'package:hamro_sadhan/controllers/auth/splash_screen_controller.dart';
 import 'package:hamro_sadhan/controllers/dashboard/search_controller.dart';
-import 'package:hamro_sadhan/controllers/history.dart';
+import 'package:hamro_sadhan/controllers/dashboard/history.dart';
 import 'package:hamro_sadhan/views/auth/register_screen.dart';
 import 'package:hamro_sadhan/views/auth/reset_password/email_screen.dart';
 import 'package:hamro_sadhan/views/auth/reset_password/otp_screen.dart';
@@ -83,7 +82,7 @@ var userPages = [
         () {
           Get.lazyPut(() => DashScreenController());
           Get.lazyPut(() => HomePageController());
-          Get.lazyPut(() => HistoryController1());
+          Get.lazyPut(() => RecentOrderController());
           Get.lazyPut(() => HistoryController());
           Get.lazyPut(() => ProfileController());
         },

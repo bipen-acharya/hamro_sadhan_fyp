@@ -38,15 +38,19 @@ class Homepage extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(greeting,
-                style: theme.textTheme.titleMedium!.copyWith(
-                  color: theme.colorScheme.secondary,
-                )),
-            Text("${coreController.currentUser.value!.name?.capitalize}",
-                style: theme.textTheme.titleLarge!.copyWith(
-                  fontSize: 15,
-                  color: theme.colorScheme.secondary,
-                )),
+            Text(
+              greeting,
+              style: theme.textTheme.titleMedium!.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
+            ),
+            Text(
+              "${coreController.currentUser.value!.name?.capitalize}",
+              style: theme.textTheme.titleLarge!.copyWith(
+                fontSize: 15,
+                color: theme.colorScheme.secondary,
+              ),
+            ),
           ],
         ),
         centerTitle: false,

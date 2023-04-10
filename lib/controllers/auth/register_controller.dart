@@ -30,6 +30,7 @@ class RegisterController extends GetxController {
   }
 
   void submit() async {
+    print("object");
     if (registerFormKey.currentState!.validate()) {
       if (passwordController.text != confirmPasswordController.text) {
         CustomSnackBar.info(

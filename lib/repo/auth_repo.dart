@@ -28,7 +28,7 @@ class AuthRepo {
         body: body);
 
     dynamic data = jsonDecode(response.body);
-    print(data);
+
     if (data["status"]) {
       Accesstoken token = Accesstoken.fromJson(data["data"]["token"]);
       User user = User.fromJson(data["data"]["user"]);
@@ -47,32 +47,36 @@ class AuthRepo {
     required Function() onSuccess,
     required Function(String) onError,
   }) async {
-    try {
-      var headers = {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      };
-      var body = json.encode({
-        "email": user.email,
-        "password": password,
-        'phone_number': user.phoneNumber,
-        'name': user.name,
-        'type': 'user',
-      });
-      http.Response response = await http.post(
-          Uri.parse(
-            HamroSadhanApi.register,
-          ),
-          headers: headers,
-          body: body);
-      dynamic data = jsonDecode(response.body);
-      if (data["status"]) {
-        onSuccess();
-      } else {
-        onError(data['message']);
-      }
-    } catch (e) {
-      onError("Something went wrong");
+    print("hello world");
+    // try {
+    var headers = {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    };
+    var body = json.encode({
+      "email": user.email,
+      "password": password,
+      'phone_number': user.phoneNumber,
+      'name': user.name,
+      'type': 'user',
+    });
+
+    http.Response response = await http.post(
+        Uri.parse(
+          HamroSadhanApi.register,
+        ),
+        headers: headers,
+        body: body);
+    print(response.body);
+    dynamic data = jsonDecode(response.body);
+    print(data.toString);
+    if (data["status"]) {
+      onSuccess();
+    } else {
+      onError(data['message']);
     }
+    // } catch (e) {
+    //   onError("Something went wrong");
+    // }
   }
 }
