@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -107,7 +109,7 @@ class SearchController extends GetxController {
                     children: [
                       ExpandablePanel(
                         header: const ListTile(
-                          title: Text('Sort by'),
+                          title: Text('Sort by Price'),
                         ),
                         collapsed: Container(),
                         expanded: Column(
@@ -174,9 +176,11 @@ class SearchController extends GetxController {
                         onTap: () {
                           String sortyBy = selectedOption.value;
                           // homeController.getAllVehicleList(selectedOption.value);
-
+                          log("-------->>>>>>>>>>>>>${selectedIds.toList()}");
                           homeController.getAllVehicleList(
-                              sortyBy, selectedIds.toList());
+                            sortyBy,
+                            selectedIds.toList()
+                          );
                           Navigator.pop(context);
                           print(selectedIds.toList());
                           print('Selected option: ${selectedOption.value}');

@@ -40,21 +40,26 @@ class StatementPage extends StatelessWidget {
         () => (c.loading.value)
             ? const Center(child: CircularProgressIndicator())
             : ((c.orderDetails.isEmpty)
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: SvgPicture.asset(
-                          ImagePath.noHistory,
-                          height: 300,
-                          width: 200,
+                ? RefreshIndicator(
+                    onRefresh: () async {
+                      c.getAllOrders();
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: SvgPicture.asset(
+                            ImagePath.noHistory,
+                            height: 300,
+                            width: 200,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 53,
-                      ),
-                      const Text("No History Available")
-                    ],
+                        const SizedBox(
+                          height: 53,
+                        ),
+                        const Text("No History Available")
+                      ],
+                    ),
                   )
                 : SizedBox(
                     child: ListView.builder(

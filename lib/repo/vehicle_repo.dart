@@ -9,13 +9,13 @@ import '../utils/storage_helper.dart';
 class VehicleRepo {
   static Future<void> getAllVehicle(
       {String? sortType,
-      List<int>? categoryIds,
+      var categoryIds,
       required String startDate,
       required String endDate,
       required Function(List<Vehicle>) onSuccess,
       required Function(String message) onError}) async {
     try {
-      categoryIds = [1];
+      log("--------$categoryIds");
       log("----sort by $sortType");
       var token = StorageHelper.getToken();
       var url = Uri.parse(HamroSadhanApi.availableVehicle);
@@ -29,21 +29,19 @@ class VehicleRepo {
       log("-------start date $startDate");
       log("-------end date $startDate");
       var body;
-      if (sortType == "Any" && categoryIds == null) {
+
+      if (sortType == "Any" || categoryIds == "empty") {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,
         });
-      } else if (sortType != "Any" &&
-          (categoryIds == null || categoryIds.isEmpty)) {
+      } else if (sortType != "Any" && categoryIds == "empty") {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,
           "sort_type": sortType,
         });
-      } else if (categoryIds != null &&
-          categoryIds.isNotEmpty &&
-          sortType == "Any") {
+      } else if (categoryIds != "empty" && sortType == "Any") {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,
@@ -53,8 +51,8 @@ class VehicleRepo {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,
-          "category_id": categoryIds,
           "sort_type": sortType,
+          "category_id": categoryIds,
         });
       }
 

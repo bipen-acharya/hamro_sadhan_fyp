@@ -21,6 +21,7 @@ class HistoryController extends GetxController {
     loading.value = true;
     await OrderRepo.getAllOrders(
       onSuccess: (orders) {
+        orderDetails.clear();
         loading.value = false;
         orderDetails.addAll(orders);
       },
