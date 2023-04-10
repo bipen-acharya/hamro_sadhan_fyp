@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
@@ -155,13 +156,30 @@ class ProfilePage extends StatelessWidget {
                   //   iocnData: ImagePath.setting,
                   //   label: "Settings",
                   // ),
-                  CustomProfileMenu(
+                  ListTile(
+                    minVerticalPadding: 1.0,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                    dense: true,
                     onTap: () {
                       controller.logOut();
                     },
-                    iocnData: ImagePath.logout,
-                    label: "Logout",
-                  ),
+                    leading: Padding(
+                      padding: const EdgeInsets.only(right: 0, left: 17),
+                      child: SvgPicture.asset(
+                        ImagePath.logout,
+                        height: 20,
+                        width: 20,
+                        color: Colors.red,
+                      ),
+                    ),
+                    title: Text(
+                      "Logout",
+                      style: theme.textTheme.bodyLarge!.copyWith(
+                        fontSize: 15,
+                        color: Colors.red,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

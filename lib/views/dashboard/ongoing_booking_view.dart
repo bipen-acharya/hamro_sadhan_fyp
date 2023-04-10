@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hamro_sadhan/models/on_going_order.dart';
 import 'package:hamro_sadhan/models/order.dart';
 
 import '../../controllers/dashboard/history_controller.dart';
 import '../../utils/colors.dart';
 
-class ViewRecentSinglePage extends StatelessWidget {
-  ViewRecentSinglePage({super.key, required this.recentOrderDetail});
+class OnGoingSinglePage extends StatelessWidget {
+  OnGoingSinglePage({super.key, required this.recentOrderDetail});
 
-  final Order recentOrderDetail;
+  final OnGoingOrder recentOrderDetail;
   final c = Get.find<HistoryController>();
   @override
   Widget build(BuildContext context) {
@@ -210,20 +211,20 @@ class ViewRecentSinglePage extends StatelessWidget {
                     const SizedBox(
                       height: 25,
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          maximumSize: const Size(double.infinity, 60),
-                          backgroundColor: AppColors.errorColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          )),
-                      onPressed: () {
-                        print(recentOrderDetail.id.toString());
-                        c.cancelBooking(recentOrderDetail.id.toString());
-                      },
-                      child: const Text("Cancel Booking"),
-                    ),
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //       minimumSize: const Size(double.infinity, 50),
+                    //       maximumSize: const Size(double.infinity, 60),
+                    //       backgroundColor: AppColors.errorColor,
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(8),
+                    //       )),
+                    //   onPressed: () {
+                    //     print(recentOrderDetail.id.toString());
+                    //     c.cancelBooking(recentOrderDetail.id.toString());
+                    //   },
+                    //   child: const Text("Cancel Booking"),
+                    // ),
                   ],
                 ),
               ],
@@ -246,12 +247,14 @@ class ViewRecentSinglePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Icon(Icons.info),
+                SizedBox(
+                  width: 8,
+                ),
                 Flexible(
                   child: Text(
-                    'Please note that you cannot cancel your confirmed booking after 5 minutes of confirmation.',
+                    'Please note that you cannot cancel your booking.',
                     maxLines: 3,
                     softWrap: true,
-                    textAlign: TextAlign.justify,
                   ),
                 ),
               ],

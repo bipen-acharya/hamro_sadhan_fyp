@@ -12,12 +12,8 @@ import '../../repo/vehicle_repo.dart';
 import '../../utils/apis.dart';
 import '../../utils/storage_helper.dart';
 import '../../widgets/custom_snackbar.dart';
-import '../auth/core_controller.dart';
-
 class HomePageController extends GetxController {
   RxInt current = RxInt(0);
-
-  // var coreController = Get.put(CoreController());
 
 //start date
   TextEditingController startDateController = TextEditingController();
@@ -143,7 +139,6 @@ class HomePageController extends GetxController {
   RxList<VehicleCategory> vehicleCategory = RxList();
 
   getAllVehicleList(String? sortBy, var itemList) async {
-
     vehicleList.clear();
     loading.value = true;
     await VehicleRepo.getAllVehicle(
@@ -162,6 +157,7 @@ class HomePageController extends GetxController {
     );
   }
   
+
   getAllCategory() async {
     loading.value = true;
     await VehicleCategoryRepo.getAllVehicleCategory(

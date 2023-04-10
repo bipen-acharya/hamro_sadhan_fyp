@@ -53,10 +53,7 @@ class MySearchDelegate extends SearchDelegate {
                   subtitle: Text(vehicle.vendor!.name ?? ""),
                   leading: CircleAvatar(
                     radius: 22,
-                    // backgroundColor: Colors.orange,
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(vehicle.imageUrl ?? ""),
-                    ),
+                    backgroundImage: NetworkImage(vehicle.imageUrl ?? ""),
                   ),
                   trailing: Text(vehicle.costPerHour.toString()),
                   onTap: () {
@@ -66,17 +63,24 @@ class MySearchDelegate extends SearchDelegate {
               );
             },
             separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                height: 5,
+              return const Center(
+                child: Text(
+                  "No Inventory Found",
+                  style: TextStyle(color: Colors.grey),
+                ),
               );
             },
           );
         } else if (c.fetchVehicleList == []) {
           print("log------->>>>>>> empty product list");
           return const Center(
-            child: Text("No Inventory Found"),
+            child: Text(
+              "No Inventory Found",
+              style: TextStyle(color: Colors.grey),
+            ),
           );
         } else {
+          print("log------->>>>>>> empty product list");
           return const Center(
             child: CircularProgressIndicator(),
           );

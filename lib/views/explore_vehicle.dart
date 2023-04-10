@@ -47,90 +47,92 @@ class ExplorePage extends StatelessWidget {
       ),
       body: Obx(() => (c.loading.value)
           ? const Center(child: CircularProgressIndicator())
-          : (c.vehicleList.isEmpty
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: SvgPicture.asset(
-                        ImagePath.noVehicle,
-                        height: 300,
-                        width: 200,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 53,
-                    ),
-                    const Text("No Available Vehicle")
-                  ],
-                )
-              : SizedBox(
-                  child: Column(
+          : SizedBox(
+              child: Column(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  child: Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 15),
-                        child: Row(
-                          children: [
-                            Container(
-                              width:
-                                  ((MediaQuery.of(context).size.width) * 0.75),
-                              height:
-                                  ((MediaQuery.of(context).size.height) * 0.06),
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(19)),
-                              child: TextButton(
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 8.0),
-                                      child: Icon(
-                                        Icons.search,
-                                        color: Colors.grey.shade600,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Search",
-                                      style: TextStyle(
-                                          color: Colors.grey.shade600,
-                                          fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {
-                                  showSearch(
-                                    context: context,
-                                    delegate: MySearchDelegate(),
-                                  );
-                                },
-                              ),
-                            ),
-                            InkWell(
-                              onTap: con.advanceSearch,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 15.0),
-                                child: Container(
-                                  width: ((MediaQuery.of(context).size.width) *
-                                      0.1),
-                                  height:
-                                      ((MediaQuery.of(context).size.height) *
-                                          0.06),
-                                  decoration: BoxDecoration(
-                                      color: Colors.blueGrey.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(10)
-                                      // shape: BoxShape.rectangle,
-                                      ),
-                                  child: const Icon(
-                                      CupertinoIcons.slider_horizontal_3),
+                      Container(
+                        width: ((MediaQuery.of(context).size.width) * 0.75),
+                        height: ((MediaQuery.of(context).size.height) * 0.06),
+                        decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(19)),
+                        child: TextButton(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: Icon(
+                                  Icons.search,
+                                  color: Colors.grey.shade600,
                                 ),
                               ),
-                            )
-                          ],
+                              Text(
+                                "Search",
+                                style: TextStyle(
+                                    color: Colors.grey.shade600, fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          onPressed: () {
+                            showSearch(
+                              context: context,
+                              delegate: MySearchDelegate(),
+                            );
+                          },
                         ),
                       ),
-                      Container(
+                      InkWell(
+                        onTap: con.advanceSearch,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15.0),
+                          child: Container(
+                            width: ((MediaQuery.of(context).size.width) * 0.1),
+                            height:
+                                ((MediaQuery.of(context).size.height) * 0.06),
+                            decoration: BoxDecoration(
+                                color: Colors.blueGrey.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(10)
+                                // shape: BoxShape.rectangle,
+                                ),
+                            child:
+                                const Icon(CupertinoIcons.slider_horizontal_3),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                c.vehicleList.isEmpty
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          Center(
+                            child: SvgPicture.asset(
+                              ImagePath.noVehicle,
+                              height: 300,
+                              width: 200,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 53,
+                          ),
+                          const Text(
+                            "No Available Vehicle",
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          )
+                        ],
+                      )
+                    : Container(
                         height: Get.height - 210,
                         margin: const EdgeInsets.only(top: 15),
                         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -152,9 +154,8 @@ class ExplorePage extends StatelessWidget {
                           },
                         ),
                       ),
-                    ],
-                  ),
-                ))),
+              ],
+            ))),
     );
   }
 }

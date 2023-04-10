@@ -77,11 +77,11 @@ class StatementPage extends StatelessWidget {
                               dateA.day == dateB.day;
                         }
 
-                        DateTime startDate = DateTime.parse(orders.startDate!);
-                        String formattedDate =
-                            "${startDate.day}/${startDate.month}/${startDate.year}";
-                        String formattedTime =
-                            "${startDate.hour}:${startDate.minute}";
+                        // DateTime startDate = DateTime.parse(orders.createdAt!);
+                        // String formattedDate =
+                        //     "${startDate.day}/${startDate.month}/${startDate.year}";
+                        // String formattedTime =
+                        //     "${startDate.hour}:${startDate.minute}";
                         return Container(
                           margin: const EdgeInsets.symmetric(horizontal: 30),
                           child: Column(
@@ -187,36 +187,17 @@ class StatementPage extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              Text(
-                                                "jkasdjklas",
-                                                style: textTheme.bodyLarge!
-                                                    .copyWith(
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: const Color.fromRGBO(
-                                                    197,
-                                                    197,
-                                                    197,
-                                                    1,
-                                                  ),
-                                                ),
-                                              ),
+                                              // Row(
+                                              //   children: [
+                                              //     Text(
+                                              //       DateFormat.jms().format(DateTime.parse(orders.createdAt!)),
+                                              //       style: const TextStyle(
+                                              //           color: Colors.grey,
+                                              //           fontSize: 12),
+                                              //     ),
+                                              //   ],
+                                              // ),
                                             ],
-                                          ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            orders.vehicle!
-                                                    .vehicleDescription ??
-                                                "",
-                                            style:
-                                                textTheme.bodyLarge!.copyWith(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  theme.colorScheme.secondary,
-                                            ),
                                           ),
                                           const SizedBox(
                                             height: 5,
@@ -231,13 +212,52 @@ class StatementPage extends StatelessWidget {
                                                   theme.colorScheme.secondary,
                                             ),
                                           ),
+
                                           const SizedBox(
                                             height: 5,
                                           ),
+                                          Text(
+                                            orders.vehicle!.brandName ?? "",
+                                            style:
+                                                textTheme.bodyLarge!.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color:
+                                                  theme.colorScheme.secondary,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
+                                            orders.status!.capitalize ?? "",
+                                            style:
+                                                textTheme.bodyLarge!.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color:
+                                                  theme.colorScheme.secondary,
+                                            ),
+                                          ),
+
+                                          // const SizedBox(
+                                          //   height: 5,
+                                          // ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
-                                            children: const [Text("2000/Rs")],
+                                            children: [
+                                              Text(
+                                                'Rs ${orders.totalPrice}',
+                                                style: textTheme.bodyLarge!
+                                                    .copyWith(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600,
+                                                  color:
+                                                      theme.colorScheme.primary,
+                                                ),
+                                              ),
+                                            ],
                                           )
                                         ],
                                       ),

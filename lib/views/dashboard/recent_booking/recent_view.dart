@@ -92,7 +92,7 @@ class HistoryView extends StatelessWidget {
                                     bottomRight: Radius.circular(10),
                                   )),
                               child: Text(
-                                "Past Orders",
+                                "OnGoing Orders",
                                 style: TextStyle(
                                   color: c.selectedTab.value == "past"
                                       ? AppColors.backGroundColor

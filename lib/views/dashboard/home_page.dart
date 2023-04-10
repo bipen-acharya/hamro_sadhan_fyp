@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/explore_vehicle.dart';
@@ -6,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../../controllers/auth/core_controller.dart';
 import '../../controllers/dashboard/home_controller.dart';
 import '../../utils/colors.dart';
+import '../../utils/image_paths.dart';
 import '../../widgets/custom_snackbar.dart';
 
 class Homepage extends StatelessWidget {
@@ -55,21 +57,30 @@ class Homepage extends StatelessWidget {
         ),
         centerTitle: false,
         actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 5,
-              horizontal: 5,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Image.network(
-                "https://picsum.photos/100/100",
-                fit: BoxFit.fill,
-                height: 40,
-                width: 45,
-              ),
-            ),
-          ),
+          Obx(() => CircleAvatar(
+                backgroundColor: Colors.pink,
+                radius: 40,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    fit: BoxFit.fill,
+                    imageUrl:
+                        coreController.currentUser.value?.profileImageUrl ?? "",
+
+                    errorWidget: (context, url, error) => Image.asset(
+                      ImagePath.profilePlaceholder,
+                      fit: BoxFit.fill,
+                      // height: 30,
+                      // width: 55,
+                    ),
+
+                    // height: 40,
+                    // width: 45,
+                  ),
+                ),
+              ))
         ],
       ),
       body: Obx(
@@ -88,12 +99,12 @@ class Homepage extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-                Text(
-                  "Please fill the details below to proceed",
-                  style: textTheme.titleSmall!.copyWith(
-                    color: Colors.red,
-                  ),
-                ),
+                // Text(
+                //   "Please fill the details below to proceed",
+                //   style: textTheme.titleSmall!.copyWith(
+                //     color: Colors.red,
+                //   ),
+                // ),
                 const SizedBox(
                   height: 32,
                 ),
@@ -254,17 +265,36 @@ class Homepage extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "Note: You must fill all the above before you proceed",
-                            style: textTheme.bodySmall!.copyWith(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.red,
+
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 23),
+                        width: double.infinity,
+                        // height: 54,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xffF1F1F1),
+                        ),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Icon(Icons.info),
+                            SizedBox(
+                              width: 8,
                             ),
-                          ),
-                        ],
+                            Flexible(
+                              child: Text(
+                                "Note: You must fill all the above before you proceed",
+                                style: TextStyle(
+                                    fontSize: 13, color: Colors.black),
+                                maxLines: 3,
+                                softWrap: true,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 41,
@@ -328,7 +358,7 @@ class Homepage extends StatelessWidget {
                                   Get.to(() => ExplorePage());
                                   c.vehicleCategory.clear();
                                   c.getAllCategory();
-                                  c.getAllVehicleList("Any","empty");
+                                  c.getAllVehicleList("Any", "empty");
                                 }
                               : null,
                           child: Text(

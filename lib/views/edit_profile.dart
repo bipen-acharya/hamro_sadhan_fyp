@@ -104,6 +104,16 @@ class EditProfile extends StatelessWidget {
                 height: 17,
               ),
               CustomTextField(
+                controller: c.phoneController,
+                hint: "Phone Number",
+                textInputAction: TextInputAction.done,
+                textInputType: TextInputType.number,
+                validator: Validators.checkPhoneField,
+              ),
+              const SizedBox(
+                height: 17,
+              ),
+              CustomTextField(
                 controller: c.emailController,
                 // labelText: "Email",
                 hint: "Email",
@@ -112,16 +122,34 @@ class EditProfile extends StatelessWidget {
                 textInputAction: TextInputAction.none,
                 textInputType: TextInputType.none,
               ),
-              const SizedBox(
-                height: 17,
-              ),
-              CustomTextField(
-                controller: c.phoneController,
-                hint: "Phone Number",
-                textInputAction: TextInputAction.done,
-                textInputType: TextInputType.number,
-                validator: Validators.checkPhoneField,
-              ),
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 23),
+                width: double.infinity,
+                // height: 54,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xffF1F1F1),
+                ),
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Icon(Icons.info),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Flexible(
+                      child: Text(
+                        'Please note that you cannot edit your email',
+                        maxLines: 3,
+                        softWrap: true,
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),

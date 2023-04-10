@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/on_going_order.dart';
+import 'package:intl/intl.dart';
 
 import '../../../controllers/dashboard/history.dart';
 import '../../../utils/image_paths.dart';
+import '../../../widgets/custom_button.dart';
+import '../ongoing_booking_view.dart';
+import '../recent_booking_view_page.dart';
 
 class OnGoingBooking extends StatelessWidget {
   final c = Get.find<RecentOrderController>();
@@ -37,7 +41,12 @@ class OnGoingBooking extends StatelessWidget {
             const SizedBox(
               height: 53,
             ),
-            const Text("No Recent Bookings")
+            const Text(
+              "No Ongoing Bookings",
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+            )
           ],
         );
       } else {
@@ -51,13 +60,13 @@ class OnGoingBooking extends StatelessWidget {
               height: 169,
               margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 26),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: const DecorationImage(
-                  image: NetworkImage(
-                      "https://www.bugatti.com/fileadmin/_processed_/sei/p1/se-image-d37f5243f6ae21dcfb1fbf28dfe261f5.jpg"),
-                  fit: BoxFit.fill,
-                ),
-              ),
+                  borderRadius: BorderRadius.circular(10),
+                  // image: const DecorationImage(
+                  //   image: NetworkImage(
+                  //       "https://www.bugatti.com/fileadmin/_processed_/sei/p1/se-image-d37f5243f6ae21dcfb1fbf28dfe261f5.jpg"),
+                  //   fit: BoxFit.fill,
+                  // ),
+                  color: Colors.blueGrey),
               child: Padding(
                 padding: const EdgeInsets.only(
                     top: 20, bottom: 13, left: 15, right: 15),
@@ -77,41 +86,22 @@ class OnGoingBooking extends StatelessWidget {
                           height: 10,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: const [
-                                Icon(
-                                  Icons.calendar_month,
-                                  size: 14,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 6.5,
-                                ),
-                                Text(
-                                  "12th Jan 2023",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ],
+                            const Text(
+                              "Start Date: ",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 12),
                             ),
-                            Row(
-                              children: const [
-                                Icon(
-                                  Icons.calendar_month,
-                                  size: 14,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 6.5,
-                                ),
-                                Text(
-                                  "12th Jan 2023",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ],
+                            Text(
+                              DateFormat('MMMM d EEEE').format(
+                                  DateTime.parse(onGoingOrder.startDate!)),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12),
+                            ),
+                            Text(
+                              ' ${DateFormat.jms().format(DateTime.parse(onGoingOrder.startDate!))}',
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12),
                             ),
                           ],
                         ),
@@ -119,58 +109,44 @@ class OnGoingBooking extends StatelessWidget {
                           height: 6,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: const [
-                                Icon(
-                                  Icons.watch,
-                                  size: 14,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 6.5,
-                                ),
-                                Text(
-                                  "12th Jan 2023",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ],
+                            const Text(
+                              "End Date: ",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 12),
                             ),
-                            Row(
-                              children: const [
-                                Icon(
-                                  Icons.calendar_month,
-                                  size: 14,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 6.5,
-                                ),
-                                Text(
-                                  "12th Jan 2023",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                ),
-                              ],
+                            Text(
+                              DateFormat('MMMM d EEEE').format(
+                                  DateTime.parse(onGoingOrder.endDate!)),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12),
+                            ),
+                            Text(
+                              ' ${DateFormat.jms().format(DateTime.parse(onGoingOrder.endDate!))}',
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12),
                             ),
                           ],
                         ),
+                        
                         const SizedBox(
                           height: 10,
                         ),
                       ],
                     ),
-                    // CustomElevatedButton(
-                    //     onTap: () {
-                    //       Get.to(() => ViewRecentSinglePage(
-                    //             recentOrderDetail: onGoingOrder,
-                    //           ));
-                    //     },
-                    //     buttonText: "View Details")
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    CustomElevatedButton(
+                    onTap: () {
+                      Get.to(() => OnGoingSinglePage(
+                            recentOrderDetail: onGoingOrder,
+                          ));
+                    },
+                    buttonText: "View Details")
                   ],
                 ),
+                
               ),
             );
           },
