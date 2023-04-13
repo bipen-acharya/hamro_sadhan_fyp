@@ -40,7 +40,12 @@ class UpCommingBooking extends StatelessWidget {
             const SizedBox(
               height: 53,
             ),
-            const Text("No Recent Bookings")
+            const Text(
+              "No Recent Bookings",
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+            )
           ],
         );
       } else {
@@ -90,13 +95,13 @@ class UpCommingBooking extends StatelessWidget {
                             Text(
                               DateFormat('MMMM d EEEE').format(
                                   DateTime.parse(recentOrders.startDate!)),
-                              style:
-                                  const TextStyle(color: Colors.white, fontSize: 12),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12),
                             ),
                             Text(
                               ' ${DateFormat.jms().format(DateTime.parse(recentOrders.startDate!))}',
-                              style:
-                                  const TextStyle(color: Colors.white, fontSize: 12),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12),
                             ),
                           ],
                         ),
@@ -113,13 +118,13 @@ class UpCommingBooking extends StatelessWidget {
                             Text(
                               DateFormat('MMMM d EEEE').format(
                                   DateTime.parse(recentOrders.endDate!)),
-                              style:
-                                  const TextStyle(color: Colors.white, fontSize: 12),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12),
                             ),
                             Text(
                               ' ${DateFormat.jms().format(DateTime.parse(recentOrders.endDate!))}',
-                              style:
-                                  const TextStyle(color: Colors.white, fontSize: 12),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 12),
                             ),
                           ],
                         ),

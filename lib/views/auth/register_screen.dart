@@ -120,30 +120,37 @@ class RegisterPage extends StatelessWidget {
                     const SizedBox(
                       height: 13,
                     ),
-                    Obx(
-                      (() => CustomTextField(
-                            controller: c.confirmPasswordController,
-                            validator: Validators.checkPasswordField,
-                            prefixIcon: const Icon(
-                              Icons.lock_outline,
-                              size: 16,
-                            ),
-                            suffixIcon: InkWell(
-                              onTap: c.onConfirmEyeClick,
-                              child: SvgPicture.asset(
-                                c.confirmPasswordObscure.value
-                                    ? ImagePath.EYE
-                                    : ImagePath.EYE_OFF,
-                                color: AppColors.textColor,
-                                fit: BoxFit.scaleDown,
-                              ),
-                            ),
-                            obscure: c.confirmPasswordObscure.value,
-                            hint: "Confirm Password",
-                            textInputAction: TextInputAction.done,
-                            textInputType: TextInputType.emailAddress,
-                          )),
-                    ),
+                    // Obx(
+                    //   (() => CustomTextField(
+                    //         controller: c.confirmPasswordController,
+                    //         validator: (value) {
+                    //           if (value!.isEmpty) {
+                    //             return 'This field is required';
+                    //           } else if (value != c.passwordController) {
+                    //             return "Password must be at least 8 characters";
+                    //           }
+                    //           return null;
+                    //         },
+                    //         prefixIcon: const Icon(
+                    //           Icons.lock_outline,
+                    //           size: 16,
+                    //         ),
+                    //         suffixIcon: InkWell(
+                    //           onTap: c.onConfirmEyeClick,
+                    //           child: SvgPicture.asset(
+                    //             c.confirmPasswordObscure.value
+                    //                 ? ImagePath.EYE
+                    //                 : ImagePath.EYE_OFF,
+                    //             color: AppColors.textColor,
+                    //             fit: BoxFit.scaleDown,
+                    //           ),
+                    //         ),
+                    //         obscure: c.confirmPasswordObscure.value,
+                    //         hint: "Confirm Password",
+                    //         textInputAction: TextInputAction.done,
+                    //         textInputType: TextInputType.emailAddress,
+                    //       )),
+                    // ),
                     const SizedBox(
                       height: 23,
                     ),

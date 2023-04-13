@@ -57,7 +57,12 @@ class StatementPage extends StatelessWidget {
                         const SizedBox(
                           height: 53,
                         ),
-                        const Text("No History Available")
+                        const Text(
+                          "No History Available",
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        )
                       ],
                     ),
                   )

@@ -94,7 +94,7 @@ class MySearchDelegate extends SearchDelegate {
     c.search.value = query;
     return query == ""
         ? ListView.builder(
-            itemCount: c.vehicleList.length > 3 ? 6 : c.vehicleList.length,
+            itemCount: c.vehicleList.length < 3 ? 6 : c.vehicleList.length,
             itemBuilder: (context, index) {
               Vehicle vehicle = c.vehicleList[index];
               return ListTile(

@@ -27,10 +27,16 @@ class VehicleRepo {
         "Authorization": "${token.tokenType!} ${token.accessToken!}"
       };
       log("-------start date $startDate");
-      log("-------end date $startDate");
+      log("-------end date $endDate");
+
       var body;
 
-      if (sortType == "Any" || categoryIds == "empty") {
+      if (sortType == "Any" && categoryIds == "empty") {
+        body = json.encode({
+          "start_date": startDate,
+          "end_date": endDate,
+        });
+      } else if (categoryIds == []) {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,
@@ -55,17 +61,20 @@ class VehicleRepo {
           "category_id": categoryIds,
         });
       }
-
+      log("body ----->>>>>>>>>>>>>>>>>>>>>${body.toString()}");
       http.Response response = await http.post(
         url,
         headers: headers,
         body: body,
       );
+
       var data = json.decode(response.body);
 
       if (data['status']) {
         log("on sucess ma aayo ");
-        onSuccess(vehicleListFromJson(data['data']));
+        
+        onSuccess(
+          vehicleListFromJson(data['data']));
       } else {
         onError(data['message']);
       }

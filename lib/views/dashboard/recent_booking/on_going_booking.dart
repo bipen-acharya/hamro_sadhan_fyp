@@ -33,7 +33,7 @@ class OnGoingBooking extends StatelessWidget {
                 height: Get.height / 3.2,
                 width: Get.width / 1.3,
                 child: SvgPicture.asset(
-                  ImagePath.noRecentBooking,
+                  "assets/icons/noOnGoing.svg",
                   fit: BoxFit.fill,
                 ),
               ),
@@ -128,7 +128,6 @@ class OnGoingBooking extends StatelessWidget {
                             ),
                           ],
                         ),
-                        
                         const SizedBox(
                           height: 10,
                         ),
@@ -138,15 +137,14 @@ class OnGoingBooking extends StatelessWidget {
                       height: 10,
                     ),
                     CustomElevatedButton(
-                    onTap: () {
-                      Get.to(() => OnGoingSinglePage(
-                            recentOrderDetail: onGoingOrder,
-                          ));
-                    },
-                    buttonText: "View Details")
+                        onTap: () {
+                          Get.to(() => OnGoingSinglePage(
+                                recentOrderDetail: onGoingOrder,
+                              ));
+                        },
+                        buttonText: "View Details")
                   ],
                 ),
-                
               ),
             );
           },

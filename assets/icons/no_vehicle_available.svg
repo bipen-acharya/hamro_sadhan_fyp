@@ -13,7 +13,6 @@
 </g>
 <g filter="url(#filter1_b_414_1330)">
 <rect x="82" y="84" width="56" height="56" rx="28" fill="#DC143C"/>
-<rect x="82" y="84" width="56" height="56" rx="28" fill="url(#paint3_linear_414_1330)"/>
 <path d="M120.5 122.5L115.425 117.425M118.167 110.833C118.167 115.988 113.988 120.167 108.833 120.167C103.679 120.167 99.5 115.988 99.5 110.833C99.5 105.679 103.679 101.5 108.833 101.5C113.988 101.5 118.167 105.679 118.167 110.833Z" stroke="white" stroke-width="2.33333" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <defs>
@@ -50,10 +49,6 @@
 <linearGradient id="paint2_linear_414_1330" x1="136.478" y1="57.6357" x2="198" y2="115.429" gradientUnits="userSpaceOnUse">
 <stop stop-color="#D0D5DD"/>
 <stop offset="0.350715" stop-color="white" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="paint3_linear_414_1330" x1="110" y1="56" x2="54" y2="112" gradientUnits="userSpaceOnUse">
-<stop stop-color="#DC143C"/>
-<stop offset="1" stop-color="#FF62A5"/>
 </linearGradient>
 </defs>
 </svg>

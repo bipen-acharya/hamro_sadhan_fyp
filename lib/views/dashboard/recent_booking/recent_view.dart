@@ -90,7 +90,7 @@ class HistoryView extends StatelessWidget {
                                   borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(10),
                                     bottomRight: Radius.circular(10),
-                                  )),
+                                  ),),
                               child: Text(
                                 "OnGoing Orders",
                                 style: TextStyle(
