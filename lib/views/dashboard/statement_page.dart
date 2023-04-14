@@ -3,11 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/history_controller.dart';
 import 'package:hamro_sadhan/utils/image_paths.dart';
-import 'package:hamro_sadhan/widgets/history_card.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/order.dart';
-import '../../utils/colors.dart';
 
 class StatementPage extends StatelessWidget {
   StatementPage({super.key});

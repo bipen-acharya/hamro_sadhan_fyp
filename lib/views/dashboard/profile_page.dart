@@ -129,7 +129,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   CustomProfileMenu(
                     onTap: () {
-                      Get.to(() => const AboutUsScreen());
+                      Get.to(() =>  AboutUsScreen());
                     },
                     iocnData: ImagePath.aboutUs,
                     label: "About Us",

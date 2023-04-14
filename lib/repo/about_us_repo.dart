@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:hamro_sadhan/models/about_us.dart';
 import 'package:hamro_sadhan/models/category.dart';
 import 'package:hamro_sadhan/utils/apis.dart';
 
@@ -9,14 +10,14 @@ import 'package:http/http.dart' as http;
 
 import '../utils/storage_helper.dart';
 
-class VehicleCategoryRepo {
-  static Future<void> getAllVehicleCategory(
-      {required Function(List<VehicleCategory>) onSuccess,
+class AboutUsrepo {
+  static Future<void> getAllAboutUs(
+      {required Function(AboutUs) onSuccess,
       required Function(String message) onError}) async {
     try {
       log("on sucess ma aayo ");
       var token = StorageHelper.getToken();
-      var url = Uri.parse(HamroSadhanApi.category);
+      var url = Uri.parse(HamroSadhanApi.aboutUs);
       var headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -32,7 +33,7 @@ class VehicleCategoryRepo {
       if (data['status']) {
         log("on sucess ma aayo ");
 
-        onSuccess(categoryListFromJson(data['data']['categories']));
+        onSuccess(AboutUs.fromJson(data["data"]));
       } else {
         onError(data['message']);
       }

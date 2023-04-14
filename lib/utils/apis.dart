@@ -13,4 +13,5 @@ class HamroSadhanApi {
   static String resetPasswordUrl = "$baseUrl/resetPassword";
   static String forgotPassword = "$baseUrl/forget-password";
   static String cancelOrder = "$baseUrl/cancelOrder";
+  static String aboutUs = "$baseUrl/about-us";
 }
