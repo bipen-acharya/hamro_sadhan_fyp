@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/billing_controller.dart';
@@ -204,11 +205,22 @@ class BillingScreen extends StatelessWidget {
                                   children: [
                                     ClipRRect(
                                       borderRadius: (BorderRadius.circular(10)),
-                                      child: Image.network(
-                                        "https://picsum.photos/100/100",
+                                      child: CachedNetworkImage(
+                                        placeholder: (context, url) =>
+                                            const Center(
+                                                child:
+                                                    CircularProgressIndicator()),
                                         fit: BoxFit.fill,
                                         height: 100,
                                         width: 100,
+                                        imageUrl: singleVehicle.imageUrl!,
+                                        errorWidget: (context, url, error) =>
+                                            Image.asset(
+                                          'assets/background.png',
+                                          height: 100,
+                                          width: 100,
+                                          fit: BoxFit.contain,
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(
@@ -239,7 +251,8 @@ class BillingScreen extends StatelessWidget {
                                           height: 7,
                                         ),
                                         Text(
-                                          "Lakeside, Pokhara",
+                                          singleVehicle.vendor!.shopAddress ??
+                                              "",
                                           style: textTheme.bodyMedium!.copyWith(
                                             fontSize: 12,
                                             color: AppColors.secondaryColor,

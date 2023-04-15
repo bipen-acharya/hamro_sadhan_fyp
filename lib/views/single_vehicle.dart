@@ -181,11 +181,20 @@ class SinglePage extends StatelessWidget {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(50),
-                              child: Image.network(
-                                "https://picsum.photos/100/100",
-                                fit: BoxFit.cover,
+                              child: CachedNetworkImage(
+                                placeholder: (context, url) => const Center(
+                                    child: CircularProgressIndicator()),
+                                fit: BoxFit.fill,
                                 height: 40,
                                 width: 40,
+                                imageUrl: vehicle.vendor!.profileImageUrl ?? "",
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
+                                  'assets/profile_placeholder.jpeg',
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.contain,
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -263,6 +272,11 @@ class SinglePage extends StatelessWidget {
           children: [
             Row(
               children: [
+                Text(
+                  "Rs ",
+                  style: theme.textTheme.titleLarge!
+                      .copyWith(color: AppColors.primaryColor),
+                ),
                 Text(
                   vehicle.costPerHour.toString(),
                   style: theme.textTheme.titleLarge!

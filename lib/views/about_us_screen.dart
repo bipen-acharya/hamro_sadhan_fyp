@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:hamro_sadhan/controllers/about_us_controller.dart';
-import 'package:hamro_sadhan/utils/image_paths.dart';
 
 import '../utils/colors.dart';
 

@@ -50,6 +50,7 @@ class BillingController extends GetxController {
   final duration = ''.obs;
   RxDouble totalAmount = 0.0.obs;
   calculateTotal(int cost) {
+    duration.value = '';
     String startDateC =
         '${homeController.startDateController.text} ${homeController.sTController.text}';
     String endDateC =

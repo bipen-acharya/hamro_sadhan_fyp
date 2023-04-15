@@ -100,6 +100,7 @@ class Vendor {
   String? email;
   String? emailVerifiedAt;
   String? type;
+  String? shopAddress;
   String? profileImage;
   String? createdAt;
   String? updatedAt;
@@ -124,6 +125,7 @@ class Vendor {
     email = json['email'];
     emailVerifiedAt = json['email_verified_at'];
     type = json['type'];
+    shopAddress = json['shop_address'];
     profileImage = json['profile_image'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -138,6 +140,7 @@ class Vendor {
     data['email'] = email;
     data['email_verified_at'] = emailVerifiedAt;
     data['type'] = type;
+    data['shop_address'] = shopAddress;
     data['profile_image'] = profileImage;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;

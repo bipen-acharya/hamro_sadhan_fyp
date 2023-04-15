@@ -5,10 +5,8 @@ import 'package:hamro_sadhan/models/on_going_order.dart';
 import 'package:intl/intl.dart';
 
 import '../../../controllers/dashboard/history.dart';
-import '../../../utils/image_paths.dart';
 import '../../../widgets/custom_button.dart';
 import '../ongoing_booking_view.dart';
-import '../recent_booking_view_page.dart';
 
 class OnGoingBooking extends StatelessWidget {
   final c = Get.find<RecentOrderController>();
@@ -61,12 +59,9 @@ class OnGoingBooking extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 26),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  // image: const DecorationImage(
-                  //   image: NetworkImage(
-                  //       "https://www.bugatti.com/fileadmin/_processed_/sei/p1/se-image-d37f5243f6ae21dcfb1fbf28dfe261f5.jpg"),
-                  //   fit: BoxFit.fill,
-                  // ),
-                  color: Colors.blueGrey),
+                  image: const DecorationImage(
+                      image: AssetImage("assets/background.png"),
+                      fit: BoxFit.fill)),
               child: Padding(
                 padding: const EdgeInsets.only(
                     top: 20, bottom: 13, left: 15, right: 15),

@@ -88,26 +88,26 @@ class ProfilePage extends StatelessWidget {
               elevation: 2,
               child: Column(
                 children: [
-                  Obx(() {
-                    return CustomProfileMenu(
-                      onTap: () => myFunction(controller.darkTheme.value),
-                      label: "Dark Mode",
-                      iocnData: ImagePath.moon,
-                      trailing: SizedBox(
-                        width: 55,
-                        height: 30,
-                        child: FlutterSwitch(
-                          width: 50,
-                          value: controller.darkTheme.value,
-                          onToggle: (value) {
-                            controller.darkTheme.value =
-                                !controller.darkTheme.value;
-                            controller.update();
-                          },
-                        ),
-                      ),
-                    );
-                  }),
+                  // Obx(() {
+                  //   return CustomProfileMenu(
+                  //     onTap: () => myFunction(controller.darkTheme.value),
+                  //     label: "Dark Mode",
+                  //     iocnData: ImagePath.moon,
+                  //     trailing: SizedBox(
+                  //       width: 55,
+                  //       height: 30,
+                  //       child: FlutterSwitch(
+                  //         width: 50,
+                  //         value: controller.darkTheme.value,
+                  //         onToggle: (value) {
+                  //           controller.darkTheme.value =
+                  /////               !controller.darkTheme.value;
+                  //           controller.update();
+                  //         },
+                  //       ),
+                  //     ),
+                  //   );
+                  // }),
                   CustomProfileMenu(
                     onTap: c.changePassword,
                     iocnData: ImagePath.password,
@@ -129,7 +129,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   CustomProfileMenu(
                     onTap: () {
-                      Get.to(() =>  AboutUsScreen());
+                      Get.to(() => AboutUsScreen());
                     },
                     iocnData: ImagePath.aboutUs,
                     label: "About Us",

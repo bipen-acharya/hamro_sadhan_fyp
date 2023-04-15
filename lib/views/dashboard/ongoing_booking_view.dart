@@ -212,19 +212,6 @@ class OnGoingSinglePage extends StatelessWidget {
                       height: 25,
                     ),
                     // ElevatedButton(
-                    //   style: ElevatedButton.styleFrom(
-                    //       minimumSize: const Size(double.infinity, 50),
-                    //       maximumSize: const Size(double.infinity, 60),
-                    //       backgroundColor: AppColors.errorColor,
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(8),
-                    //       )),
-                    //   onPressed: () {
-                    //     print(recentOrderDetail.id.toString());
-                    //     c.cancelBooking(recentOrderDetail.id.toString());
-                    //   },
-                    //   child: const Text("Cancel Booking"),
-                    // ),
                   ],
                 ),
               ],
