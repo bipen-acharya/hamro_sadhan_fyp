@@ -182,6 +182,8 @@ class OrderVendor {
   String? updatedAt;
   String? profileImageUrl;
 
+  String? shopAddress;
+
   OrderVendor(
       {this.id,
       this.name,
@@ -192,6 +194,7 @@ class OrderVendor {
       this.profileImage,
       this.createdAt,
       this.updatedAt,
+       this.shopAddress,
       this.profileImageUrl});
 
   OrderVendor.fromJson(Map<String, dynamic> json) {
@@ -201,6 +204,7 @@ class OrderVendor {
     email = json['email'];
     emailVerifiedAt = json['email_verified_at'];
     type = json['type'];
+    shopAddress = json['shop_address'];
     profileImage = json['profile_image'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -215,6 +219,7 @@ class OrderVendor {
     data['email'] = email;
     data['email_verified_at'] = emailVerifiedAt;
     data['type'] = type;
+    data['shop_address'] = shopAddress;
     data['profile_image'] = profileImage;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;

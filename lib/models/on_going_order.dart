@@ -184,6 +184,8 @@ class OnGoingVendor {
   String? updatedAt;
   String? profileImageUrl;
 
+  String? shopAddress;
+
   OnGoingVendor(
       {this.id,
       this.name,
@@ -192,6 +194,7 @@ class OnGoingVendor {
       this.emailVerifiedAt,
       this.otp,
       this.type,
+      this.shopAddress,
       this.profileImage,
       this.createdAt,
       this.updatedAt,
@@ -205,6 +208,8 @@ class OnGoingVendor {
     emailVerifiedAt = json['email_verified_at'];
     otp = json['otp'];
     type = json['type'];
+
+    shopAddress = json['shop_address'];
     profileImage = json['profile_image'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -220,6 +225,7 @@ class OnGoingVendor {
     data['email_verified_at'] = emailVerifiedAt;
     data['otp'] = otp;
     data['type'] = type;
+    data['shop_address'] = shopAddress;
     data['profile_image'] = profileImage;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;

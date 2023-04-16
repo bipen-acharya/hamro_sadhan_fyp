@@ -104,6 +104,7 @@ class Vendor {
   String? profileImage;
   String? createdAt;
   String? updatedAt;
+
   String? profileImageUrl;
 
   Vendor(
@@ -115,6 +116,7 @@ class Vendor {
       this.type,
       this.profileImage,
       this.createdAt,
+      this.shopAddress,
       this.updatedAt,
       this.profileImageUrl});
 
