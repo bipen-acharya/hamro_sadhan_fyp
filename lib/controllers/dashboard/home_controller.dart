@@ -138,7 +138,7 @@ class HomePageController extends GetxController {
   RxList<Vehicle> vehicleList = RxList();
   RxList<VehicleCategory> vehicleCategory = RxList();
 
-  getAllVehicleList(String? sortBy, List<int>? categoryId) async {
+  getAllVehicleList(String? sortBy, var categoryId) async {
     vehicleList.clear();
     loading.value = true;
     await VehicleRepo.getAllVehicle(

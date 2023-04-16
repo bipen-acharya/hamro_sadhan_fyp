@@ -1,8 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:ffi';
-
-import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/vehicle.dart';
 import 'package:http/http.dart' as http;
 import '../utils/apis.dart';
@@ -11,7 +8,7 @@ import '../utils/storage_helper.dart';
 class VehicleRepo {
   static Future<void> getAllVehicle(
       {String? sortType,
-      List<int>? categoryIds,
+      var categoryIds,
       required String startDate,
       required String endDate,
       required Function(List<Vehicle>) onSuccess,
@@ -29,23 +26,24 @@ class VehicleRepo {
         "Authorization": "${token.tokenType!} ${token.accessToken!}"
       };
 
+      if (categoryIds == [] || categoryIds.length == 0 || categoryIds == null) {
+        categoryIds = "all";
+      }
+
       var body;
 
-      if (sortType == "Any" && categoryIds == []) {
+      if (sortType == "Any" && categoryIds == "all") {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,
         });
-      } else if (sortType != "Any" &&
-          (categoryIds == null || categoryIds.isEmpty)) {
+      } else if (sortType != "Any" && categoryIds == "all") {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,
           "sort_type": sortType,
         });
-      } else if (categoryIds != null &&
-          categoryIds.isNotEmpty &&
-          sortType == "Any") {
+      } else if (sortType == "Any" && categoryIds != "all") {
         body = json.encode({
           "start_date": startDate,
           "end_date": endDate,

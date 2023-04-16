@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
 import 'package:hamro_sadhan/models/vehicle.dart';
+import 'package:hamro_sadhan/utils/colors.dart';
 import 'package:hamro_sadhan/views/single_vehicle.dart';
 
 class MySearchDelegate extends SearchDelegate {
@@ -49,13 +50,22 @@ class MySearchDelegate extends SearchDelegate {
                 elevation: 2.0,
                 child: ListTile(
                   tileColor: Colors.white,
-                  title: Text(vehicle.vehicleName!),
+                  title: Text(
+                    vehicle.vehicleName!,
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
                   subtitle: Text(vehicle.vendor!.name ?? ""),
                   leading: CircleAvatar(
                     radius: 22,
                     backgroundImage: NetworkImage(vehicle.imageUrl ?? ""),
                   ),
-                  trailing: Text(vehicle.costPerHour.toString()),
+                  trailing: Text(
+                    "Rs ${vehicle.costPerHour.toString()}",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: AppColors.primaryColor),
+                  ),
                   onTap: () {
                     Get.to(() => SinglePage(vehicle: vehicle));
                   },
@@ -72,15 +82,10 @@ class MySearchDelegate extends SearchDelegate {
             },
           );
         } else if (c.fetchVehicleList == []) {
-          print("log------->>>>>>> empty product list");
-          return const Center(
-            child: Text(
-              "No Inventory Found",
-              style: TextStyle(color: Colors.grey),
-            ),
+          return const SizedBox(
+            height: 2,
           );
         } else {
-          print("log------->>>>>>> empty product list");
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -94,7 +99,7 @@ class MySearchDelegate extends SearchDelegate {
     c.search.value = query;
     return query == ""
         ? ListView.builder(
-            itemCount: c.vehicleList.length < 3 ? 6 : c.vehicleList.length,
+            itemCount: c.vehicleList.length < 3 ? c.vehicleList.length : 4,
             itemBuilder: (context, index) {
               Vehicle vehicle = c.vehicleList[index];
               return ListTile(
