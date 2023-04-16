@@ -9,11 +9,10 @@ class Order {
   String? startDate;
   String? endDate;
   String? status;
-  double? totalPrice;
-  String? orderType;
-  String? paymentStatus;
+  int? totalPrice;
   int? quantity;
-  int? price;
+  String? paymentMethod;
+  String? orderTime;
   String? createdAt;
   String? updatedAt;
   OrderVehicle? vehicle;
@@ -28,10 +27,9 @@ class Order {
       this.endDate,
       this.status,
       this.totalPrice,
-      this.orderType,
-      this.paymentStatus,
       this.quantity,
-      this.price,
+      this.paymentMethod,
+      this.orderTime,
       this.createdAt,
       this.updatedAt,
       this.vehicle,
@@ -45,11 +43,10 @@ class Order {
     startDate = json['start_date'];
     endDate = json['end_date'];
     status = json['status'];
-    totalPrice = double.parse('${json['total_price']}');
-    orderType = json['order_type'];
-    paymentStatus = json['payment_status'];
+    totalPrice = json['total_price'];
     quantity = json['quantity'];
-    price = json['price'];
+    paymentMethod = json['payment_method'];
+    orderTime = json['order_time'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     vehicle =
@@ -68,11 +65,11 @@ class Order {
     data['end_date'] = endDate;
     data['status'] = status;
     data['total_price'] = totalPrice;
-
-    data['order_type'] = orderType;
-    data['payment_status'] = paymentStatus;
     data['quantity'] = quantity;
-    data['price'] = price;
+    data['payment_method'] = paymentMethod;
+    data['order_time'] = orderTime;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     if (vehicle != null) {

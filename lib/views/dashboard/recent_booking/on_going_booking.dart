@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:hamro_sadhan/models/on_going_order.dart';
 import 'package:intl/intl.dart';
 
-import '../../../controllers/dashboard/history.dart';
+import '../../../controllers/dashboard/recent_controller.dart';
 import '../../../widgets/custom_button.dart';
 import '../ongoing_booking_view.dart';
 

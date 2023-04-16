@@ -158,16 +158,8 @@ class ViewRecentSinglePage extends StatelessWidget {
                     CalculationRow(
                       textTheme: textTheme,
                       theme: theme,
-                      title: 'Time',
-                      calculation:
-                          recentOrderDetail.vehicle!.costPerHour.toString(),
-                    ),
-                    CalculationRow(
-                      textTheme: textTheme,
-                      theme: theme,
-                      title: 'Amount',
-                      calculation:
-                          recentOrderDetail.vehicle!.costPerHour.toString(),
+                      title: 'Total Order Time',
+                      calculation: recentOrderDetail.orderTime.toString(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -220,7 +212,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                           )),
                       onPressed: () {
                         print(recentOrderDetail.id.toString());
-                        c.cancelBooking(recentOrderDetail.id.toString());
+                        c.cancelBooking(recentOrderDetail.id!);
                       },
                       child: const Text("Cancel Booking"),
                     ),

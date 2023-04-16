@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/views/dashboard/recent_booking/active_view.dart';
 
-import '../../../controllers/dashboard/history.dart';
+import '../../../controllers/dashboard/recent_controller.dart';
 import '../../../utils/colors.dart';
 import 'on_going_booking.dart';
 

@@ -52,7 +52,7 @@ class MySearchDelegate extends SearchDelegate {
                   tileColor: Colors.white,
                   title: Text(
                     vehicle.vehicleName!,
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                   subtitle: Text(vehicle.vendor!.name ?? ""),
                   leading: CircleAvatar(
@@ -61,7 +61,7 @@ class MySearchDelegate extends SearchDelegate {
                   ),
                   trailing: Text(
                     "Rs ${vehicle.costPerHour.toString()}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                         color: AppColors.primaryColor),

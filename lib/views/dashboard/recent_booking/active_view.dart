@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../controllers/dashboard/history.dart';
+import '../../../controllers/dashboard/recent_controller.dart';
 import '../../../models/order.dart';
 import '../../../utils/image_paths.dart';
 import '../../../widgets/custom_button.dart';
