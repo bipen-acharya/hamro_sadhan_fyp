@@ -194,7 +194,7 @@ class OrderVendor {
       this.profileImage,
       this.createdAt,
       this.updatedAt,
-       this.shopAddress,
+      this.shopAddress,
       this.profileImageUrl});
 
   OrderVendor.fromJson(Map<String, dynamic> json) {

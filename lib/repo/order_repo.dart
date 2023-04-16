@@ -6,20 +6,18 @@ import 'package:http/http.dart' as http;
 import '../utils/apis.dart';
 import '../utils/storage_helper.dart';
 
-
 class OrderRepo {
   static Future<void> addOrder(
       {String? tnxid,
       String? amount,
       required String startDate,
       required String endDate,
-      required String orderType,
-      required String paymentStatus,
+      required String paymentMethod,
+      required String orderTime,
       required int vendorId,
       required int vehicleId,
       required int quantity,
       required int totalPrice,
-      required int price,
       required Function() onSuccess,
       required Function(String message) onError}) async {
     try {
@@ -33,17 +31,17 @@ class OrderRepo {
       var body = json.encode({
         "start_date": startDate,
         "end_date": endDate,
-        "order_type": orderType,
-        "payment_status": paymentStatus,
+        "order_time": orderTime,
         "vendor_id": vendorId,
         "total_price": totalPrice,
-        "price": price,
         "quantity": quantity,
         "vehicle_id": vehicleId,
-        "payment_method": 'khalti',
+        "payment_method": paymentMethod,
         "transaction_id": tnxid,
         "amount": amount,
       });
+
+      // print(body);
 
       http.Response response = await http.post(
         url,
@@ -68,24 +66,24 @@ class OrderRepo {
       {required Function(List<Order>) onSuccess,
       required Function(String message) onError}) async {
     try {
-    var token = StorageHelper.getToken();
-    var url = Uri.parse(HamroSadhanApi.viewOrder);
-    var headers = {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      "Authorization": "${token!.tokenType!} ${token.accessToken!}"
-    };
-    http.Response response = await http.get(
-      url,
-      headers: headers,
-    );
-    var data = json.decode(response.body);
+      var token = StorageHelper.getToken();
+      var url = Uri.parse(HamroSadhanApi.viewOrder);
+      var headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "${token!.tokenType!} ${token.accessToken!}"
+      };
+      http.Response response = await http.get(
+        url,
+        headers: headers,
+      );
+      var data = json.decode(response.body);
 
-    if (data['status']) {
-      onSuccess(orderListFromJson(data['data']['orders']));
-    } else {
-      onError(data['message']);
-    }
+      if (data['status']) {
+        onSuccess(orderListFromJson(data['data']['orders']));
+      } else {
+        onError(data['message']);
+      }
     } catch (e) {
       log("-->>>>$e");
       onError("Sorry something went wrong. Please try again");

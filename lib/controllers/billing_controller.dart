@@ -87,6 +87,8 @@ class BillingController extends GetxController {
     totalAmount.value = totalCost * 1;
   }
 
+  final paymentMethod = 'cash'.obs;
+
   lastPage(context) {
     if (selectedPayment.value == "") {
       return CustomSnackBar.error(
@@ -94,6 +96,7 @@ class BillingController extends GetxController {
     }
     if (selectedPayment.value == "khalti") {
       payWithKhalti(context, totalAmount.value, "prouct", "khalti");
+      paymentMethod.value = "khalti";
     } else {
       postOrder();
     }
@@ -136,28 +139,28 @@ class BillingController extends GetxController {
   postOrder() async {
     loading.value = true;
     await OrderRepo.addOrder(
-        // khaltiResponse: paymentSuccess,
-        amount: paymentController.amount.value.toString(),
-        tnxid: payment,
-        startDate:
-            '${homeController.startDateController.text} ${homeController.sTController.text}',
-        endDate:
-            '${homeController.endDateController.text} ${homeController.eTController.text}',
-        orderType: "khalti",
-        paymentStatus: "false",
-        vendorId: vendorId.value,
-        vehicleId: vehicleId.value,
-        quantity: 1,
-        totalPrice: totalAmount.value.toInt(),
-        price: 0,
-        onSuccess: () {
-          CustomSnackBar.success(
-              title: "Order Successful", message: "Order placed succesfully");
-          Get.off(() => OrderConfirmPage());
-        },
-        onError: (message) {
-          loading.value = false;
-          CustomSnackBar.error(message: message, title: "Order");
-        });
+      // khaltiResponse: paymentSuccess,
+      amount: paymentController.amount.value.toString(),
+      tnxid: payment,
+      startDate:
+          '${homeController.startDateController.text} ${homeController.sTController.text}',
+      endDate:
+          '${homeController.endDateController.text} ${homeController.eTController.text}',
+      paymentMethod: paymentMethod.value.toString(),
+      vendorId: vendorId.value,
+      vehicleId: vehicleId.value,
+      orderTime: duration.value.toString(),
+      quantity: 1,
+      totalPrice: totalAmount.value.toInt(),
+      onSuccess: () {
+        CustomSnackBar.success(
+            title: "Order Successful", message: "Order placed succesfully");
+        Get.off(() => OrderConfirmPage());
+      },
+      onError: (message) {
+        loading.value = false;
+        CustomSnackBar.error(message: message, title: "Order");
+      },
+    );
   }
 }
