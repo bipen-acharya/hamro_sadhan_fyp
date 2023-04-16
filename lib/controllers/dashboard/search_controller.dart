@@ -175,15 +175,12 @@ class SearchController extends GetxController {
                       CustomElevatedButton(
                         onTap: () {
                           String sortyBy = selectedOption.value;
-                          // homeController.getAllVehicleList(selectedOption.value);
-                          log("-------->>>>>>>>>>>>>${selectedIds.toList()}");
                           homeController.getAllVehicleList(
                             sortyBy,
                             selectedIds.toList()
                           );
                           Navigator.pop(context);
-                          print(selectedIds.toList());
-                          print('Selected option: ${selectedOption.value}');
+                        
                         },
                         buttonText: "Done",
                       ),

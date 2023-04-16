@@ -6,8 +6,7 @@ class PaymentController extends GetxController {
   var amount = 0.obs;
 
   void postPayment() async {
-    const String url =
-        "http://hs.test/api/khalti/payment/verify";
+    const String url = "http://hs.test/api/khalti/payment/verify";
     try {
       var response = await http.post(
         Uri.parse(url),

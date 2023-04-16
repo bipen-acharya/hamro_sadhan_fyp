@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hamro_sadhan/controllers/dashboard/home_controller.dart';
-import 'package:hamro_sadhan/controllers/explore_controller.dart';
+import 'package:hamro_sadhan/controllers/payment_controller.dart';
 import 'package:hamro_sadhan/repo/order_repo.dart';
 import 'package:hamro_sadhan/views/confirm_order.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
