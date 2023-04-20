@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -109,7 +107,12 @@ class SearchController extends GetxController {
                     children: [
                       ExpandablePanel(
                         header: const ListTile(
-                          title: Text('Sort by Price'),
+                          title: Text(
+                            'Sort by Price',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.primaryColor),
+                          ),
                         ),
                         collapsed: Container(),
                         expanded: Column(
@@ -145,7 +148,12 @@ class SearchController extends GetxController {
                       ),
                       ExpandablePanel(
                         header: const ListTile(
-                          title: Text('Type'),
+                          title: Text(
+                            'Type',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.primaryColor),
+                          ),
                         ),
                         expanded: ListView.builder(
                           shrinkWrap: true,
@@ -176,11 +184,8 @@ class SearchController extends GetxController {
                         onTap: () {
                           String sortyBy = selectedOption.value;
                           homeController.getAllVehicleList(
-                            sortyBy,
-                            selectedIds.toList()
-                          );
+                              sortyBy, selectedIds.toList());
                           Navigator.pop(context);
-                        
                         },
                         buttonText: "Done",
                       ),

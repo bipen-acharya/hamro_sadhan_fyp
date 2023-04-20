@@ -14,7 +14,7 @@ import '../dashboard/home_controller.dart';
 
 class LoginController extends GetxController {
   var passwordObscure = true.obs;
-    void onEyeClick() {
+  void onEyeClick() {
     passwordObscure.value = !passwordObscure.value;
   }
 
@@ -26,21 +26,16 @@ class LoginController extends GetxController {
   final homeController = Get.find<HomePageController>();
 
   void onSubmit() async {
-    print("on submit ma aayo");
     loading.show(message: "loggin in ..");
     await AuthRepo.loginUser(
       email: emailTextController.text,
       password: passwordTextController.text,
       onSuccess: (user, token) async {
         loading.hide();
-        print("on submit ma aayo123");
         final box = GetStorage();
         await box.write(StorageKeys.ACCESS_TOKEN, json.encode(token.toJson()));
         await box.write(StorageKeys.USER, json.encode(user.toJson()));
-        print("on submit ma aayo ${user.name}");
         Get.find<CoreController>().loadCurrentUser();
-
-        print("on submit ma aayo ${user.email}");
         Get.offAllNamed(DashScreen.routeName);
         CustomSnackBar.success(
             title: "Login Successful", message: "Logged in succesfully");

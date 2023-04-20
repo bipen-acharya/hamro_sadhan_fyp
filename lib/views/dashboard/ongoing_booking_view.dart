@@ -160,16 +160,9 @@ class OnGoingSinglePage extends StatelessWidget {
                       textTheme: textTheme,
                       theme: theme,
                       title: 'Time',
-                      calculation:
-                          recentOrderDetail.vehicle!.costPerHour.toString(),
+                      calculation: recentOrderDetail.orderTime.toString(),
                     ),
-                    CalculationRow(
-                      textTheme: textTheme,
-                      theme: theme,
-                      title: 'Amount',
-                      calculation:
-                          recentOrderDetail.vehicle!.costPerHour.toString(),
-                    ),
+
                     const SizedBox(
                       height: 10,
                     ),

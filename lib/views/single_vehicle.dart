@@ -107,7 +107,7 @@ class SinglePage extends StatelessWidget {
                       top: 18,
                     ),
                     child: Text(
-                      "Overview",
+                      "Document Required",
                       style: theme.textTheme.titleLarge!
                           .copyWith(color: theme.colorScheme.secondary),
                     ),
@@ -121,7 +121,7 @@ class SinglePage extends StatelessWidget {
                       right: 37,
                     ),
                     child: Text(
-                      vehicle.vehicleDescription ?? "",
+                      vehicle.documentRequired ?? "",
                       style: theme.textTheme.bodyMedium!.copyWith(
                         fontSize: 13,
                         color: const Color.fromRGBO(
@@ -242,9 +242,47 @@ class SinglePage extends StatelessWidget {
                   ),
                   const IntrinsicHeight(
                     child: SizedBox(
-                      height: 40,
+                      height: 10,
                     ),
-                  )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 41,
+                      right: 37,
+                      top: 18,
+                    ),
+                    child: Text(
+                      "Overview",
+                      style: theme.textTheme.titleLarge!
+                          .copyWith(color: theme.colorScheme.secondary),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 41,
+                      right: 37,
+                    ),
+                    child: Text(
+                      vehicle.vehicleDescription ?? "",
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        fontSize: 13,
+                        color: const Color.fromRGBO(
+                          161,
+                          161,
+                          161,
+                          1,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const IntrinsicHeight(
+                    child: SizedBox(
+                      height: 10,
+                    ),
+                  ),
                 ],
               ),
             )

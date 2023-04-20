@@ -148,6 +148,61 @@ class BillingScreen extends StatelessWidget {
                             const SizedBox(
                               height: 17,
                             ),
+                            CustomTextField(
+                              hint: "Age",
+                              validator: Validators.checkFieldEmpty,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(
+                              height: 17,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 23),
+                              width: double.infinity,
+                              // height: 54,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: const Color(0xffF1F1F1),
+                              ),
+                              child: Column(
+                                // crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      bottom: 15,
+                                      top: 10,
+                                    ),
+                                    child: Text(
+                                      "Document Required",
+                                      style: theme.textTheme.titleLarge!
+                                          .copyWith(
+                                              color:
+                                                  theme.colorScheme.secondary),
+                                    ),
+                                  ),
+                                  Row(
+                                    // mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+                                          singleVehicle.documentRequired!,
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              color: Colors.black),
+                                          maxLines: 3,
+                                          softWrap: true,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -241,7 +296,7 @@ class BillingScreen extends StatelessWidget {
                                           height: 7,
                                         ),
                                         Text(
-                                          singleVehicle.seat ?? "",
+                                          "${singleVehicle.seat ?? ""} Seat",
                                           style: textTheme.bodyMedium!.copyWith(
                                             fontSize: 12,
                                             color: AppColors.secondaryColor,

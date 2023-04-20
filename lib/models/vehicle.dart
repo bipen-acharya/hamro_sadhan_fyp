@@ -17,6 +17,7 @@ class Vehicle {
   String? status;
   String? fuelType;
   String? vehicleDescription;
+  String? documentRequired;
   int? costPerHour;
   String? createdAt;
   String? updatedAt;
@@ -53,12 +54,13 @@ class Vehicle {
     color = json['color'];
     mileage = json['mileage'];
     image = json['image'];
-    trasmissionType = json['trasmission_type'];
+    trasmissionType = json['transmission_type'];
     seat = json['seat'];
     vehicleNumber = json['vehicle_number'];
     status = json['status'];
     fuelType = json['fuel_type'];
     vehicleDescription = json['vehicle_description'];
+    documentRequired = json['document_required'];
     costPerHour = json['cost_per_hour'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -76,12 +78,13 @@ class Vehicle {
     data['color'] = color;
     data['mileage'] = mileage;
     data['image'] = image;
-    data['trasmission_type'] = trasmissionType;
+    data['transmission_type'] = trasmissionType;
     data['seat'] = seat;
     data['vehicle_number'] = vehicleNumber;
     data['status'] = status;
     data['fuel_type'] = fuelType;
     data['vehicle_description'] = vehicleDescription;
+    data['document_required'] = documentRequired;
     data['cost_per_hour'] = costPerHour;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;

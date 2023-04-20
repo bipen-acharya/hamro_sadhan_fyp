@@ -240,7 +240,7 @@ class ViewRecentSinglePage extends StatelessWidget {
                 Icon(Icons.info),
                 Flexible(
                   child: Text(
-                    'Please note that you cannot cancel your confirmed booking after 5 minutes of confirmation.',
+                    'Please note that you cannot cancel your confirmed booking after 15 minutes of confirmation.',
                     maxLines: 3,
                     softWrap: true,
                     textAlign: TextAlign.justify,
